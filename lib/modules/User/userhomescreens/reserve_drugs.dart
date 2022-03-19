@@ -1,0 +1,137 @@
+import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:rosheta_project/Shared/Components/components.dart';
+import 'package:rosheta_project/modules/User/usermain/order_details.dart';
+
+class ReserveDrugs extends StatelessWidget {
+  late String title;
+  late String branch;
+  ReserveDrugs({Key? key, required this.title, required this.branch})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: HexColor('#022247'),
+      appBar: backappbar(context, title: '$title Pharmacy'),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        padding:
+            const EdgeInsets.only(top: 15, right: 20, left: 20, bottom: 30),
+        decoration: BoxDecoration(
+            color: HexColor('#F8F8F8'),
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30), topRight: Radius.circular(30))),
+        child: Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height / 1.68,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(.5),
+                      spreadRadius: 0,
+                      blurRadius: 7,
+                      offset: Offset(7.0, 6.0),
+                    )
+                  ]),
+              child: Column(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height / 3.6,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15)),
+                      image: DecorationImage(
+                          image: NetworkImage(
+                              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGCYqqCDSE4TaE9vinOBl-w0XhUpnhRqktQRn77wml0XARAsc1cdEXSsJ0tgQYny87R8o&usqp=CAU'),
+                          fit: BoxFit.cover),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 15),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                '$title',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w700,
+                                    color: HexColor('#022247')),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                '($branch branch)',
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w300,
+                                    color: HexColor('#022247')),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 60,
+                          ),
+                          Pharmacyprofile(
+                            show: false,
+                              icon: Icons.phone_in_talk_outlined,
+                              text: '+201015696025'),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 60,
+                          ),
+                          Pharmacyprofile(
+                            show: false,
+                              icon: Icons.location_on_outlined,
+                              text: 'Location details'),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 60,
+                          ),
+                          Pharmacyprofile(
+                              icon: Icons.email_outlined, text: 'mail@gmail.com'),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 60,
+                          ),
+                          Pharmacyprofile(
+                              icon: Icons.event_available_rounded,
+                              text: '9:00 Am : 11:00Pm'),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 60,
+                          ),
+                          Pharmacyprofile(
+                              icon: Icons.pedal_bike,
+                              text: 'Available home delivery'),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 60,
+            ),
+           premiumecard(context,text: 'Upgrade to premium to see all details'),
+            Spacer(),
+            userbutton(context,
+                text: 'Reserve this drugs',
+                imageroute: 'assets/images/reserve.png', onpressed: () {
+              navigateto(context, OrderDetails());
+            })
+          ],
+        ),
+      ),
+    );
+  }
+}
