@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "355745308089",
+    "project_id": "rosheta-scanner",
+    "storage_bucket": "rosheta-scanner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355745308089:android:d9fbbd8716d90a04f9aa68",
+        "android_client_info": {
+          "package_name": "com.example.rosheta_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "355745308089-nhlsfafjdt4ka5ndham72vo2b54a4vt0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rosheta_project",
+            "certificate_hash": "8d114d727e8e7c5bf2ab232edad1bcfc3d126b60"
+          }
+        },
+        {
+          "client_id": "355745308089-r3nvovp051s57l4ktfflo0d419kl36j1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXdCT4I4hH0aYy37dWXRt0EJy0KxO49uY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "355745308089-r3nvovp051s57l4ktfflo0d419kl36j1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
