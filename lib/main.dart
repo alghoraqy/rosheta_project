@@ -12,8 +12,6 @@ import 'package:rosheta_project/modules/splash/splash.dart';
 
 void main(List<String> args) {
   runApp(const MyApp());
-
-  // comment
 }
 
 class MyApp extends StatelessWidget {
