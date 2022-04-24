@@ -3,12 +3,14 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:rosheta_project/Shared/Components/components.dart';
 
 class ArticleView extends StatelessWidget {
-late String imageroute;
-late String title;
-ArticleView({
-  required this.imageroute,
-  required this.title,
-});
+  late String imageroute;
+  late String title;
+  late String body;
+  ArticleView({
+    required this.imageroute,
+    required this.title,
+    required this.body,
+  });
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,8 +40,7 @@ ArticleView({
               height: MediaQuery.of(context).size.height / 3.5,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(
-                      imageroute),
+                  image: NetworkImage(imageroute),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.only(
@@ -66,7 +67,7 @@ ArticleView({
                     height: MediaQuery.of(context).size.height / 80,
                   ),
                   Text(
-                    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type orem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and electronic typesetting, remaining essentially unchanged :',
+                    body,
                     style: TextStyle(
                         height: 1.8,
                         fontSize: 12,
@@ -76,20 +77,27 @@ ArticleView({
                   SizedBox(
                     height: MediaQuery.of(context).size.height / 80,
                   ),
-                 articlerow(context, text: 'There is a proven fact from a long time.'),
-                 articlerow(context, text: 'That the readable content of a page.'),
-                 articlerow(context, text: 'The reader from focusing on the exterm.'),
-                 articlerow(context, text: 'Paragraphs placed on the page he.'),
+                  articlerow(context,
+                      text: 'There is a proven fact from a long time.'),
+                  articlerow(context,
+                      text: 'That the readable content of a page.'),
+                  articlerow(context,
+                      text: 'The reader from focusing on the exterm.'),
+                  articlerow(context,
+                      text: 'Paragraphs placed on the page he.'),
                 ],
               ),
             ),
-             SizedBox(
-                    height: MediaQuery.of(context).size.height / 40,
-                  ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 40,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                userbutton(context, onpressed: (){}, text: 'Nearest Hospital', imageroute: 'assets/images/nearestpharmacy.png'),
+                userbutton(context,
+                    onpressed: () {},
+                    text: 'Nearest Hospital',
+                    imageroute: 'assets/images/nearestpharmacy.png'),
               ],
             )
           ],

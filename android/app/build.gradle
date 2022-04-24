@@ -51,6 +51,8 @@ android {
         applicationId "com.example.rosheta_project"
         minSdkVersion 16
         targetSdkVersion 30
+        minSdkVersion 19  
+        multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

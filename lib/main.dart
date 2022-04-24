@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +11,10 @@ import 'package:rosheta_project/Bloc/register/registercubit.dart';
 import 'package:rosheta_project/modules/Pharmacy/Pharmacymaster/pharmacymaster.dart';
 import 'package:rosheta_project/modules/splash/splash.dart';
 
-void main(List<String> args) {
+void main(List<String> args) async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -28,7 +32,7 @@ class MyApp extends StatelessWidget {
           return RegisterCubit();
         }),
         BlocProvider(create: (context) {
-          return UserCubit();
+          return UserCubit()..getArticles();
         }),
         BlocProvider(create: (context) {
           return PharmacyCubit();

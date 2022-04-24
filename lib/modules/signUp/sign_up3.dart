@@ -15,7 +15,7 @@ class SignUp3 extends StatelessWidget {
     return BlocConsumer<RegisterCubit, RegisterStates>(
       listener: (context, states) {},
       builder: (context, states) {
-        RegisterCubit cubit =RegisterCubit.get(context);
+        RegisterCubit cubit = RegisterCubit.get(context);
         return Scaffold(
           backgroundColor: HexColor('#022247'),
           appBar: AppBar(
@@ -29,75 +29,80 @@ class SignUp3 extends StatelessWidget {
                   Navigator.pop(context);
                 }),
           ),
-          body: Column(
-            children: [
-              Image(
-                  image: AssetImage('assets/images/secondlogo.png'),
-                  width: MediaQuery.of(context).size.width),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        LoginText(text: 'Sign Up'),
-                      ],
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / 20,
-                    ),
-                    Stack(alignment: AlignmentDirectional.bottomEnd, children: [
-                      CircleAvatar(
-                        backgroundColor: HexColor('#465C76'),
-                        radius: MediaQuery.of(context).size.height/9,
-                        child: Icon(
-                          Icons.person,
-                          size: 150,
-                        ),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                Image(
+                    image: AssetImage('assets/images/secondlogo.png'),
+                    width: MediaQuery.of(context).size.width),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          LoginText(text: 'Sign Up'),
+                        ],
                       ),
-                      FloatingActionButton(
-                          backgroundColor: HexColor('#48BC98'),
-                          child: Icon(
-                            Icons.camera_alt,
-                            size: 30,
-                          ),
-                          onPressed: () {}),
-                    ]),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / 11,
-                    ),
-                    LoginButton(context, text: 'Confirm', onpressed: () {
-                      navigateto(context,cubit.isuser? UserMaster():PharmacyMaster());
-                    })
-                  ],
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 20,
+                      ),
+                      Stack(
+                          alignment: AlignmentDirectional.bottomEnd,
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: HexColor('#465C76'),
+                              radius: MediaQuery.of(context).size.height / 9,
+                              child: Icon(
+                                Icons.person,
+                                size: 150,
+                              ),
+                            ),
+                            FloatingActionButton(
+                                backgroundColor: HexColor('#48BC98'),
+                                child: Icon(
+                                  Icons.camera_alt,
+                                  size: 30,
+                                ),
+                                onPressed: () {}),
+                          ]),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 11,
+                      ),
+                      LoginButton(context, text: 'Confirm', onpressed: () {
+                        navigateto(context,
+                            cubit.isuser ? UserMaster() : PharmacyMaster());
+                      })
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 40,
-              ),
-               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  indicatorOn(),
-                   SizedBox(
-                          width: MediaQuery.of(context).size.width / 90,
-                        ),
-                  indicatorOn(),
-                  SizedBox(
-                          width: MediaQuery.of(context).size.width / 90,
-                        ),
-                  indicatorOn(),
-                  SizedBox(
-                          width: MediaQuery.of(context).size.width / 90,
-                        ),
-                  indicatorOn(),
-                  SizedBox(
-                          width: MediaQuery.of(context).size.width / 90,
-                        ),
-                  indicatorOn(),
-                ],
-              )
-            ],
+                SizedBox(
+                  height: MediaQuery.of(context).size.height / 40,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    indicatorOn(),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 90,
+                    ),
+                    indicatorOn(),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 90,
+                    ),
+                    indicatorOn(),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 90,
+                    ),
+                    indicatorOn(),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 90,
+                    ),
+                    indicatorOn(),
+                  ],
+                )
+              ],
+            ),
           ),
         );
       },

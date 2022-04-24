@@ -143,7 +143,7 @@ Widget articleitem(
           height: MediaQuery.of(context).size.height / 8,
           decoration: BoxDecoration(
             image: DecorationImage(
-                fit: BoxFit.cover, image: AssetImage(imageroute)),
+                fit: BoxFit.cover, image: NetworkImage(imageroute)),
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20)),
           ),
@@ -409,7 +409,7 @@ Widget registercomponent(context) {
     children: [
       defaultFormfield(
         hinttext: 'Full Name',
-        controller: RegisterCubit.get(context).fullNamecontroller,
+        controller: RegisterCubit.get(context).userfullNamecontroller,
         inputtype: TextInputType.name,
         secure: false,
       ),
@@ -418,7 +418,7 @@ Widget registercomponent(context) {
       ),
       defaultFormfield(
         hinttext: 'E-mail',
-        controller: RegisterCubit.get(context).emailregistercontroller,
+        controller: RegisterCubit.get(context).useremailregistercontroller,
         inputtype: TextInputType.emailAddress,
         secure: false,
       ),
@@ -427,7 +427,7 @@ Widget registercomponent(context) {
       ),
       defaultFormfield(
         hinttext: 'Password',
-        controller: RegisterCubit.get(context).passwordregistercontroller,
+        controller: RegisterCubit.get(context).userpasswordregistercontroller,
         inputtype: TextInputType.visiblePassword,
         secure: true,
       ),
@@ -436,7 +436,7 @@ Widget registercomponent(context) {
       ),
       defaultFormfield(
         hinttext: 'Confirm Password',
-        controller: RegisterCubit.get(context).passwordconfirmcontroller,
+        controller: RegisterCubit.get(context).userpasswordconfirmcontroller,
         inputtype: TextInputType.name,
         secure: true,
       ),
@@ -496,7 +496,7 @@ Widget addresscompnent(context) {
             child: Container(
               child: defaultFormfield(
                 hinttext: 'Address',
-                controller: RegisterCubit.get(context).addresscontroller,
+                controller: RegisterCubit.get(context).useraddresscontroller,
                 inputtype: TextInputType.name,
                 secure: false,
               ),
@@ -513,7 +513,7 @@ Widget addresscompnent(context) {
       ),
       TextFormField(
         keyboardType: TextInputType.phone,
-        controller: RegisterCubit.get(context).phonecontroller,
+        controller: RegisterCubit.get(context).userphonecontroller,
         onEditingComplete: () {
           RegisterCubit.get(context).startTimer();
         },

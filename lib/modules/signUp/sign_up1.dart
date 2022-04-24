@@ -13,9 +13,13 @@ class SignUp1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterCubit, RegisterStates>(
-      listener: (context, states) {},
+      listener: (context, states) {
+        if (states is CreateSuccessStates) {
+          navigateto(context, SignUp2());
+        }
+      },
       builder: (context, states) {
-        RegisterCubit cubit =RegisterCubit.get(context);
+        RegisterCubit cubit = RegisterCubit.get(context);
         return Scaffold(
           backgroundColor: HexColor('#022247'),
           appBar: AppBar(
@@ -43,45 +47,106 @@ class SignUp1 extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         LoginText(text: 'Sign Up'),
-                         SizedBox(
+                        SizedBox(
                           height: MediaQuery.of(context).size.height / 60,
                         ),
-                        registercomponent(context),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            defaultFormfield(
+                              hinttext: 'Full Name',
+                              controller: cubit.isuser
+                                  ? cubit.userfullNamecontroller
+                                  : cubit.pharmacyfullNamecontroller,
+                              inputtype: TextInputType.name,
+                              secure: false,
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height / 40,
+                            ),
+                            defaultFormfield(
+                              hinttext: 'E-mail',
+                              controller: cubit.isuser
+                                  ? cubit.useremailregistercontroller
+                                  : cubit.pharmacyemailregistercontroller,
+                              inputtype: TextInputType.emailAddress,
+                              secure: false,
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height / 40,
+                            ),
+                            defaultFormfield(
+                              hinttext: 'Password',
+                              controller: cubit.isuser
+                                  ? cubit.userpasswordregistercontroller
+                                  : cubit.pharmacypasswordregistercontroller,
+                              inputtype: TextInputType.visiblePassword,
+                              secure: true,
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height / 40,
+                            ),
+                            defaultFormfield(
+                              hinttext: 'Confirm Password',
+                              controller: cubit.isuser
+                                  ? cubit.userpasswordconfirmcontroller
+                                  : cubit.pharmacypasswordconfirmcontroller,
+                              inputtype: TextInputType.name,
+                              secure: true,
+                            ),
+                          ],
+                        ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height / 40,
                         ),
-                        LoginButton(context, text: 'Next', onpressed: (){
-                          cubit.formkey1.currentState!.validate()?navigateto(context, SignUp2()):null;
+                        LoginButton(context, text: 'Next', onpressed: () {
+                          cubit.formkey1.currentState!.validate()
+                              ? cubit.isuser
+                                  ? cubit.userregister(
+                                      email: cubit
+                                          .useremailregistercontroller.text,
+                                      name: cubit.userfullNamecontroller.text,
+                                      password: cubit
+                                          .userpasswordregistercontroller.text)
+                                  : cubit.pharmacyregister(
+                                      email: cubit
+                                          .pharmacyemailregistercontroller.text,
+                                      name:
+                                          cubit.pharmacyfullNamecontroller.text,
+                                      password: cubit
+                                          .pharmacypasswordregistercontroller
+                                          .text)
+                              : null;
                         })
                       ],
                     ),
                   ),
                 ),
                 SizedBox(
-                          height: MediaQuery.of(context).size.height / 40,
-                        ),
+                  height: MediaQuery.of(context).size.height / 40,
+                ),
                 Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  indicatorOn(),
-                   SizedBox(
-                          width: MediaQuery.of(context).size.width / 90,
-                        ),
-                  indicatorOn(),
-                  SizedBox(
-                          width: MediaQuery.of(context).size.width / 90,
-                        ),
-                  indicatorOff(),
-                  SizedBox(
-                          width: MediaQuery.of(context).size.width / 90,
-                        ),
-                  indicatorOff(),
-                  SizedBox(
-                          width: MediaQuery.of(context).size.width / 90,
-                        ),
-                  indicatorOff(),
-                ],
-              )
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    indicatorOn(),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 90,
+                    ),
+                    indicatorOn(),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 90,
+                    ),
+                    indicatorOff(),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 90,
+                    ),
+                    indicatorOff(),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 90,
+                    ),
+                    indicatorOff(),
+                  ],
+                )
               ],
             ),
           ),

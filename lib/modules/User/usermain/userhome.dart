@@ -15,111 +15,123 @@ class UserHome extends StatelessWidget {
     return BlocConsumer<UserCubit, UserStates>(
       listener: (context, states) {},
       builder: (context, states) {
+        UserCubit cubit = UserCubit.get(context);
+
         return layout(
             context,
             SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      femalecircle(),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 25,
-                      ),
-                      Column(
+                physics: const BouncingScrollPhysics(),
+                child: cubit.articles.isNotEmpty
+                    ? Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Hi, Olivia',
-                            style: TextStyle(
-                                fontSize: 15, color: HexColor('#022247')),
+                          Row(
+                            children: [
+                              femalecircle(),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width / 25,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Hi, Olivia',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: HexColor('#022247')),
+                                  ),
+                                  maintitle(text: 'Welcome Back')
+                                ],
+                              ),
+                            ],
                           ),
-                          maintitle(text: 'Welcome Back')
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 60,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 5,
+                                child: Searchbox(
+                                  context,
+                                  text: 'Search ...',
+                                  width: 0,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height / 16,
+                                  child: MaterialButton(
+                                    padding: EdgeInsets.zero,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
+                                    color: HexColor('#022247'),
+                                    onPressed: () {},
+                                    child: Icon(
+                                      Icons.camera_alt,
+                                      color: Colors.white,
+                                      size: 28,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 40,
+                          ),
+                          maintitle(text: 'Our Services'),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 90,
+                          ),
+                          services(context),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 35,
+                          ),
+                          maintitle(text: 'First aid articles'),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 90,
+                          ),
+                          Row(
+                            children: [
+                              articleitem(context,
+                                  imageroute: cubit.articles[3].image!,
+                                  text: cubit.articles[3].title!,
+                                  onpressed: () {
+                                navigateto(
+                                    context,
+                                    ArticleView(
+                                      imageroute: cubit.articles[3].image!,
+                                      title: cubit.articles[3].title!,
+                                      body: cubit.articles[3].body!,
+                                    ));
+                              }),
+                              Spacer(),
+                              articleitem(context,
+                                  imageroute: cubit.articles[2].image!,
+                                  text: cubit.articles[2].title!,
+                                  onpressed: () {
+                                navigateto(
+                                    context,
+                                    ArticleView(
+                                      imageroute: cubit.articles[2].image!,
+                                      title: cubit.articles[2].title!,
+                                      body: cubit.articles[2].body!,
+                                    ));
+                              })
+                            ],
+                          ),
                         ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 60,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 5,
-                        child: Searchbox(
-                          context,
-                          text: 'Search ...', width: 0,
-                          
-                        ),
-                      ),
-                     SizedBox( width: 5,),
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          height: MediaQuery.of(context).size.height / 16,
-                          child: MaterialButton(
-                            padding: EdgeInsets.zero,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            color: HexColor('#022247'),
-                            onPressed: () {},
-                            child: Icon(
-                              Icons.camera_alt,
-                              color: Colors.white,
-                              size: 28,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 40,
-                  ),
-                  maintitle(text: 'Our Services'),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 90,
-                  ),
-                  services(context),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 35,
-                  ),
-                  maintitle(text: 'First aid articles'),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 90,
-                  ),
-                  Row(
-                    children: [
-                      articleitem(context,
-                          imageroute: 'assets/images/snake.png',
-                          text: 'Snake Bit', onpressed: () {
-                        navigateto(
-                            context,
-                            ArticleView(
-                              imageroute:
-                                  'https://media.istockphoto.com/vectors/first-aid-snake-bite-on-her-arm-vector-id477912330?k=20&m=477912330&s=612x612&w=0&h=K3KO5vpKaoOlcSUKWDl6JenmBCE4oOcxp03_dNWMEas=',
-                              title: 'Snake Bit',
-                            ));
-                      }),
-                      Spacer(),
-                      articleitem(context,
-                          imageroute: 'assets/images/cuts.jpg',
-                          text: 'Cuts and Scrapes', onpressed: () {
-                        navigateto(
-                            context,
-                            ArticleView(
-                              imageroute:
-                                  'https://assets.aboutkidshealth.ca/AKHAssets/cuts_scrapes_children_first_aid.jpg?renditionid=21',
-                              title: 'Cuts and Scropes',
-                            ));
-                      })
-                    ],
-                  ),
-                ],
-              ),
-            ));
+                      )
+                    : Center(
+                        child: CircularProgressIndicator(),
+                      )));
       },
     );
   }
