@@ -16,3 +16,12 @@ class GetArticlesError extends UserStates {
   final String error;
   GetArticlesError(this.error);
 }
+
+class GetUserDataLoading extends UserStates {}
+
+class GetUserDataSuccess extends UserStates {}
+
+class GetUserDataError extends UserStates {
+  final String error;
+  GetUserDataError(this.error);
+}

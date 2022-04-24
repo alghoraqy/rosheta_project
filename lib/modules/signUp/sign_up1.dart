@@ -4,6 +4,8 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:rosheta_project/Bloc/register/registercubit.dart';
 import 'package:rosheta_project/Bloc/register/registerstates.dart';
 import 'package:rosheta_project/Shared/Components/components.dart';
+import 'package:rosheta_project/Shared/Network/Local/cash_helper.dart';
+import 'package:rosheta_project/constant.dart';
 import 'package:rosheta_project/modules/signUp/onboarding.dart';
 import 'package:rosheta_project/modules/signUp/sign_up2.dart';
 
@@ -15,7 +17,10 @@ class SignUp1 extends StatelessWidget {
     return BlocConsumer<RegisterCubit, RegisterStates>(
       listener: (context, states) {
         if (states is CreateSuccessStates) {
-          navigateto(context, SignUp2());
+          CashHelper.saveData(key: 'uId', value: states.uId).then((value) {
+            uId = states.uId;
+            navigateto(context, SignUp2());
+          });
         }
       },
       builder: (context, states) {

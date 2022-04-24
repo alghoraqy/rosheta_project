@@ -18,7 +18,7 @@ class PharmacyMaster extends StatelessWidget {
     return BlocConsumer<PharmacyCubit, PharmacyStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        PharmacyCubit cubit = PharmacyCubit().get(context);
+        PharmacyCubit cubit = PharmacyCubit.get(context);
         return Scaffold(
           key: cubit.scaffoldKey,
           backgroundColor: HexColor('#022247'),

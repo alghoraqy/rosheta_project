@@ -21,13 +21,29 @@ class UserHome extends StatelessWidget {
             context,
             SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
-                child: cubit.articles.isNotEmpty
+                child: cubit.articles.isNotEmpty && cubit.userModel != null
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
-                              femalecircle(),
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey.withOpacity(.5),
+                                          spreadRadius: 0,
+                                          blurRadius: 8,
+                                          offset: Offset(6.0, 6.0))
+                                    ]),
+                                child: CircleAvatar(
+                                    backgroundColor: Colors.white,
+                                    radius: 40,
+                                    backgroundImage:
+                                        NetworkImage(cubit.userModel!.image!)),
+                              ),
                               SizedBox(
                                 width: MediaQuery.of(context).size.width / 25,
                               ),
@@ -35,7 +51,7 @@ class UserHome extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Hi, Olivia',
+                                    'Hi, ${cubit.userModel!.name}',
                                     style: TextStyle(
                                         fontSize: 15,
                                         color: HexColor('#022247')),

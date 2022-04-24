@@ -4,13 +4,34 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:rosheta_project/Bloc/LoginCubit/login_cubit.dart';
 import 'package:rosheta_project/Bloc/LoginStates/login_states.dart';
 import 'package:rosheta_project/Shared/Components/components.dart';
-import 'package:rosheta_project/modules/user/usermaster/usermaster.dart';
+import 'package:rosheta_project/Shared/Network/Local/cash_helper.dart';
+import 'package:rosheta_project/constant.dart';
+import 'package:rosheta_project/modules/Pharmacy/Pharmacymaster/pharmacymaster.dart';
+import 'package:rosheta_project/modules/User/usermaster/usermaster.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginStates>(
-      listener: (context, states) {},
+      listener: (context, states) {
+        if (states is LoginFilterUser) {
+          CashHelper.saveData(key: 'uId', value: states.uId).then((value) {
+            uId = states.uId;
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) {
+              return UserMaster();
+            }));
+          });
+        } else if (states is LoginFilterPharmacy) {
+          CashHelper.saveData(key: 'uId', value: states.uId).then((value) {
+            uId = states.uId;
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) {
+              return PharmacyMaster();
+            }));
+          });
+        }
+      },
       builder: (context, states) {
         var cubit = LoginCubit.get(context);
         return Scaffold(
@@ -63,10 +84,9 @@ class LoginScreen extends StatelessWidget {
                         ),
                         LoginButton(context, text: 'Login', onpressed: () {
                           cubit.formkey.currentState!.validate()
-                              ? Navigator.pushReplacement(context,
-                                  MaterialPageRoute(builder: (context) {
-                                  return UserMaster();
-                                }))
+                              ? cubit.userLogin(context,
+                                  email: cubit.emailcontroller.text,
+                                  password: cubit.passwordcontroller.text)
                               : null;
                         }),
                         Row(

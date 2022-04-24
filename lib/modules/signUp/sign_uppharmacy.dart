@@ -4,6 +4,8 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:rosheta_project/Bloc/register/registercubit.dart';
 import 'package:rosheta_project/Bloc/register/registerstates.dart';
 import 'package:rosheta_project/Shared/Components/components.dart';
+import 'package:rosheta_project/Shared/Network/Local/cash_helper.dart';
+import 'package:rosheta_project/constant.dart';
 import 'package:rosheta_project/modules/signUp/sign_up3.dart';
 
 class SignUpPharmacy extends StatelessWidget {
@@ -14,7 +16,10 @@ class SignUpPharmacy extends StatelessWidget {
     return BlocConsumer<RegisterCubit, RegisterStates>(
       listener: (context, states) {
         if (states is CreateSuccessStates3) {
-          navigateto(context, SignUp3());
+          CashHelper.saveData(key: 'uId', value: states.uId).then((value) {
+            // uId = states.uId;
+            navigateto(context, SignUp3());
+          });
         }
       },
       builder: (context, states) {

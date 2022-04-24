@@ -1,8 +1,12 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rosheta_project/Bloc/States/states.dart';
 import 'package:rosheta_project/Models/articlesmodel.dart';
+import 'package:rosheta_project/Models/usermodel.dart';
+import 'package:rosheta_project/constant.dart';
 import 'package:rosheta_project/modules/User/usermain/userarticles.dart';
 import 'package:rosheta_project/modules/User/usermain/userhome.dart';
 import 'package:rosheta_project/modules/User/usermain/userprofile.dart';
@@ -51,8 +55,19 @@ class UserCubit extends Cubit<UserStates> {
   ];
   var scaffoldkey = GlobalKey<ScaffoldState>();
 
-  List<ArticlesModel> articles = [];
+  UserModel? userModel;
+  void getuserData() {
+    emit(GetUserDataLoading());
+    FirebaseFirestore.instance.collection('users').doc(uId).get().then((value) {
+      userModel = UserModel.fromjson(value.data()!);
+      emit(GetUserDataSuccess());
+    }).catchError((error) {
+      print(error.toString());
+      GetUserDataError(error.toString());
+    });
+  }
 
+  List<ArticlesModel> articles = [];
   void getArticles() {
     print('run--------');
 

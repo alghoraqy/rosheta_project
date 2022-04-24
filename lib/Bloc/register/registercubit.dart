@@ -162,6 +162,8 @@ class RegisterCubit extends Cubit<RegisterStates> {
     FirebaseFirestore.instance.collection('users').doc(uId).set({
       'name': name,
       'email': email,
+      'image':
+          'https://firebasestorage.googleapis.com/v0/b/rosheta-scanner.appspot.com/o/female.png?alt=media&token=a2b02189-ab26-4dfb-ac7b-21ea0a9b4eed',
       'isuser': isuser,
       'uId': uId,
     }).then((value) {

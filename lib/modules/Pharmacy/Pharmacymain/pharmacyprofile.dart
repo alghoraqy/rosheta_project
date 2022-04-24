@@ -16,7 +16,7 @@ class PharmacyProfile extends StatelessWidget {
     return BlocConsumer<PharmacyCubit, PharmacyStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        PharmacyCubit cubit = PharmacyCubit().get(context);
+        PharmacyCubit cubit = PharmacyCubit.get(context);
         return Column(
           children: [
             const SizedBox(
@@ -33,13 +33,11 @@ class PharmacyProfile extends StatelessWidget {
                           blurRadius: 5,
                           offset: const Offset(0, 6))
                     ]),
-                child: const CircleAvatar(
+                child: CircleAvatar(
                   backgroundColor: Colors.white,
                   radius: 70,
-                  child: Image(
-                    image: NetworkImage(
-                        'https://cdn-icons-png.flaticon.com/128/822/822092.png'),
-                  ),
+                  backgroundImage:
+                      NetworkImage('${cubit.pharmacyModel!.image}'),
                 ),
               ),
             ),
@@ -61,27 +59,27 @@ class PharmacyProfile extends StatelessWidget {
                       const SizedBox(
                         height: 15,
                       ),
-                      profileItem(context, text: 'Olivia michel'),
+                      profileItem(context, text: cubit.pharmacyModel!.name!),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 15),
                         child: profileItem(context,
-                            text: 'olivia_michel@gmail.com'),
+                            text: cubit.pharmacyModel!.email!),
                       ),
-                      profileItem(context, text: '+20123456789'),
+                      profileItem(context, text: cubit.pharmacyModel!.phone!),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 15),
                         child: profileItem(context,
-                            text: 'name of street,details'),
+                            text: cubit.pharmacyModel!.address!),
                       ),
                       Row(
                         children: [
                           profileItem(context,
-                              text: '07:00 AM',
+                              text: '${cubit.pharmacyModel!.open!}',
                               width:
                                   MediaQuery.of(context).size.width / 2 - 30),
                           Spacer(),
                           profileItem(context,
-                              text: '11:30 PM',
+                              text: '${cubit.pharmacyModel!.close!}',
                               width:
                                   MediaQuery.of(context).size.width / 2 - 30),
                         ],

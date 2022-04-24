@@ -15,7 +15,7 @@ class PharmacyEditProfile extends StatelessWidget {
     return BlocConsumer<PharmacyCubit, PharmacyStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        PharmacyCubit cubit = PharmacyCubit().get(context);
+        PharmacyCubit cubit = PharmacyCubit.get(context);
         return Scaffold(
             backgroundColor: HexColor('#022247'),
             appBar: backappbar(context, title: 'Edit Profile'),

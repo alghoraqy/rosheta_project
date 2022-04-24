@@ -15,7 +15,7 @@ class MyWalletScreen extends StatelessWidget {
     return BlocConsumer<PharmacyCubit, PharmacyStates>(
       listener: (context, states) {},
       builder: (context, states) {
-        PharmacyCubit cubit = PharmacyCubit().get(context);
+        PharmacyCubit cubit = PharmacyCubit.get(context);
         return Scaffold(
           backgroundColor: HexColor('#022247'),
           appBar: backappbar(context, title: ''),

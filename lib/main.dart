@@ -8,11 +8,13 @@ import 'package:rosheta_project/Bloc/LoginCubit/login_cubit.dart';
 import 'package:rosheta_project/Bloc/Trialcubit/trial_cubit.dart';
 import 'package:rosheta_project/Bloc/pharmacy/pharmacy_cubit.dart';
 import 'package:rosheta_project/Bloc/register/registercubit.dart';
+import 'package:rosheta_project/Shared/Network/Local/cash_helper.dart';
 import 'package:rosheta_project/modules/Pharmacy/Pharmacymaster/pharmacymaster.dart';
 import 'package:rosheta_project/modules/splash/splash.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+  await CashHelper.init();
   await Firebase.initializeApp();
 
   runApp(const MyApp());
@@ -32,10 +34,14 @@ class MyApp extends StatelessWidget {
           return RegisterCubit();
         }),
         BlocProvider(create: (context) {
-          return UserCubit()..getArticles();
+          return UserCubit()
+            ..getuserData()
+            ..getArticles();
         }),
         BlocProvider(create: (context) {
-          return PharmacyCubit();
+          return PharmacyCubit()
+            ..getpharmacydata()
+            ..getAlldrugs();
         }),
         BlocProvider(create: (context) {
           return TrialCubit();
