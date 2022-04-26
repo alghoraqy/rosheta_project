@@ -136,23 +136,23 @@ class PharmacyHome extends StatelessWidget {
                             style: TextStyle(fontSize: 12),
                           )),
                         ],
-                        rows: [
-                          DataRow(cells: [
+                        rows: cubit.alldrugs.map((data) {
+                          return DataRow(cells: [
                             DataCell(Image(
-                              image: NetworkImage(cubit.alldrugs[0].image!),
+                              image: NetworkImage(data.image!),
                               width: 40,
                               height: 30,
                             )),
                             DataCell(Text(
-                              cubit.alldrugs[0].name!,
+                              data.name!,
                               style: TextStyle(fontSize: 10),
                             )),
                             DataCell(Text(
-                              '${cubit.alldrugs[0].price!}',
+                              '${data.price!}',
                               style: TextStyle(fontSize: 10),
                             )),
                             DataCell(Text(
-                              '${cubit.alldrugs[0].quantity!}',
+                              '${data.quantity!}',
                               style: TextStyle(fontSize: 10),
                             )),
                             DataCell(Row(
@@ -176,295 +176,8 @@ class PharmacyHome extends StatelessWidget {
                                 ),
                               ],
                             )),
-                          ]),
-                          DataRow(cells: [
-                            const DataCell(Image(
-                              image: NetworkImage(
-                                  'https://cdn-icons-png.flaticon.com/128/822/822143.png'),
-                              width: 40,
-                              height: 30,
-                            )),
-                            const DataCell(Text(
-                              'panadol',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            const DataCell(Text(
-                              '50',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            const DataCell(Text(
-                              '50',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            DataCell(Row(
-                              children: const [
-                                Image(
-                                  image: AssetImage(
-                                    'assets/images/edit.png',
-                                  ),
-                                  color: Colors.green,
-                                  height: 25,
-                                ),
-                                SizedBox(
-                                  width: 7,
-                                ),
-                                Image(
-                                  image: AssetImage(
-                                    'assets/images/delete.png',
-                                  ),
-                                  color: Colors.red,
-                                  height: 25,
-                                ),
-                              ],
-                            )),
-                          ]),
-                          DataRow(cells: [
-                            const DataCell(Image(
-                              image: NetworkImage(
-                                  'https://cdn-icons-png.flaticon.com/128/822/822143.png'),
-                              width: 40,
-                              height: 30,
-                            )),
-                            const DataCell(Text(
-                              'panadol',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            const DataCell(Text(
-                              '50',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            const DataCell(Text(
-                              '50',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            DataCell(Row(
-                              children: const [
-                                Image(
-                                  image: AssetImage(
-                                    'assets/images/edit.png',
-                                  ),
-                                  color: Colors.green,
-                                  height: 25,
-                                ),
-                                SizedBox(
-                                  width: 7,
-                                ),
-                                Image(
-                                  image: AssetImage(
-                                    'assets/images/delete.png',
-                                  ),
-                                  color: Colors.red,
-                                  height: 25,
-                                ),
-                              ],
-                            )),
-                          ]),
-                          DataRow(cells: [
-                            const DataCell(Image(
-                              image: NetworkImage(
-                                  'https://cdn-icons-png.flaticon.com/128/822/822143.png'),
-                              width: 40,
-                              height: 30,
-                            )),
-                            const DataCell(Text(
-                              'panadol',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            const DataCell(Text(
-                              '50',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            const DataCell(Text(
-                              '50',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            DataCell(Row(
-                              children: const [
-                                Image(
-                                  image: AssetImage(
-                                    'assets/images/edit.png',
-                                  ),
-                                  color: Colors.green,
-                                  height: 25,
-                                ),
-                                SizedBox(
-                                  width: 7,
-                                ),
-                                Image(
-                                  image: AssetImage(
-                                    'assets/images/delete.png',
-                                  ),
-                                  color: Colors.red,
-                                  height: 25,
-                                ),
-                              ],
-                            )),
-                          ]),
-                          DataRow(cells: [
-                            const DataCell(Image(
-                              image: NetworkImage(
-                                  'https://cdn-icons-png.flaticon.com/128/822/822143.png'),
-                              width: 40,
-                              height: 30,
-                            )),
-                            const DataCell(Text(
-                              'panadol',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            const DataCell(Text(
-                              '50',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            const DataCell(Text(
-                              '50',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            DataCell(Row(
-                              children: const [
-                                Image(
-                                  image: AssetImage(
-                                    'assets/images/edit.png',
-                                  ),
-                                  color: Colors.green,
-                                  height: 25,
-                                ),
-                                SizedBox(
-                                  width: 7,
-                                ),
-                                Image(
-                                  image: AssetImage(
-                                    'assets/images/delete.png',
-                                  ),
-                                  color: Colors.red,
-                                  height: 25,
-                                ),
-                              ],
-                            )),
-                          ]),
-                          DataRow(cells: [
-                            const DataCell(Image(
-                              image: NetworkImage(
-                                  'https://cdn-icons-png.flaticon.com/128/822/822143.png'),
-                              width: 40,
-                              height: 30,
-                            )),
-                            const DataCell(Text(
-                              'panadol',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            const DataCell(Text(
-                              '50',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            const DataCell(Text(
-                              '50',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            DataCell(Row(
-                              children: const [
-                                Image(
-                                  image: AssetImage(
-                                    'assets/images/edit.png',
-                                  ),
-                                  color: Colors.green,
-                                  height: 25,
-                                ),
-                                SizedBox(
-                                  width: 7,
-                                ),
-                                Image(
-                                  image: AssetImage(
-                                    'assets/images/delete.png',
-                                  ),
-                                  color: Colors.red,
-                                  height: 25,
-                                ),
-                              ],
-                            )),
-                          ]),
-                          DataRow(cells: [
-                            const DataCell(Image(
-                              image: NetworkImage(
-                                  'https://cdn-icons-png.flaticon.com/128/822/822143.png'),
-                              width: 40,
-                              height: 30,
-                            )),
-                            const DataCell(Text(
-                              'panadol',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            const DataCell(Text(
-                              '50',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            const DataCell(Text(
-                              '50',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            DataCell(Row(
-                              children: const [
-                                Image(
-                                  image: AssetImage(
-                                    'assets/images/edit.png',
-                                  ),
-                                  color: Colors.green,
-                                  height: 25,
-                                ),
-                                SizedBox(
-                                  width: 7,
-                                ),
-                                Image(
-                                  image: AssetImage(
-                                    'assets/images/delete.png',
-                                  ),
-                                  color: Colors.red,
-                                  height: 25,
-                                ),
-                              ],
-                            )),
-                          ]),
-                          DataRow(cells: [
-                            const DataCell(Image(
-                              image: NetworkImage(
-                                  'https://cdn-icons-png.flaticon.com/128/822/822143.png'),
-                              width: 40,
-                              height: 30,
-                            )),
-                            const DataCell(Text(
-                              'panadol',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            const DataCell(Text(
-                              '50',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            const DataCell(Text(
-                              '50',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            DataCell(Row(
-                              children: const [
-                                Image(
-                                  image: AssetImage(
-                                    'assets/images/edit.png',
-                                  ),
-                                  color: Colors.green,
-                                  height: 25,
-                                ),
-                                SizedBox(
-                                  width: 7,
-                                ),
-                                Image(
-                                  image: AssetImage(
-                                    'assets/images/delete.png',
-                                  ),
-                                  color: Colors.red,
-                                  height: 25,
-                                ),
-                              ],
-                            )),
-                          ]),
-                        ],
+                          ]);
+                        }).toList(),
                       ),
                       const SizedBox(
                         height: 20,
