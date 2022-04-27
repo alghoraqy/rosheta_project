@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rosheta_project/Bloc/LoginStates/login_states.dart';
 import 'package:rosheta_project/Bloc/register/registerstates.dart';
+import 'package:rosheta_project/Models/drugsmodel.dart';
 import 'package:rosheta_project/Models/usermodel.dart';
+import 'package:rosheta_project/constant.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class RegisterCubit extends Cubit<RegisterStates> {
@@ -181,6 +183,8 @@ class RegisterCubit extends Cubit<RegisterStates> {
     FirebaseFirestore.instance.collection('pharmacy').doc(uId).set({
       'name': name,
       'email': email,
+      'image':
+          'https://firebasestorage.googleapis.com/v0/b/rosheta-scanner.appspot.com/o/female.png?alt=media&token=a2b02189-ab26-4dfb-ac7b-21ea0a9b4eed',
       'isuser': isuser,
       'uId': uId,
     }).then((value) {
@@ -226,12 +230,59 @@ class RegisterCubit extends Cubit<RegisterStates> {
     required String uId,
   }) {
     FirebaseFirestore.instance.collection('pharmacy').doc(uid).update({
-      'open at': open,
-      'close at': close,
+      'open': open,
+      'close': close,
     }).then((value) {
       emit(CreateSuccessStates3(uId));
     }).catchError((error) {
       emit(CreateErrorStates());
     });
   }
+
+  List<DrugsModel> alldrugs = [];
+  Future<void> getAlldrugs() {
+    emit(GetAllDrugsLoading());
+    return FirebaseFirestore.instance
+        .collection('AllDrugs')
+        .get()
+        .then((value) {
+      value.docs.forEach(
+        (element) {
+          alldrugs.add(DrugsModel.fromjson(element.data()));
+        },
+      );
+      print('Alldrugs ${alldrugs[0].name}');
+      emit(GetAllDrugsSuccess());
+    }).catchError((error) {
+      print('Get All Drugs error : ${error.toString()}');
+      emit(GetAllDrugsError(error.toString()));
+    });
+  }
+
+  Future<void> putdrugs() async {
+    emit(PutDrugsLoading());
+    for (var i = 0; i < alldrugs.length; i++) {
+      FirebaseFirestore.instance
+          .collection('pharmacy')
+          .doc(uId)
+          .collection('MyDrugs')
+          .doc()
+          .set(alldrugs[i].tomap())
+          .then((value) {
+        print('Doneee');
+      }).catchError((error) {
+        emit(PutDrugsError());
+      });
+    }
+  }
+
+  // static List<Map> convertMyDrugToMap({required List<DrugsModel> drugs}) {
+  //   List<Map> mydrugs = [];
+  //   drugs.forEach((DrugsModel drug) {
+  //     Map drugs = drug.tomap();
+  //     mydrugs.add(drugs);
+  //   });
+  //   return mydrugs;
+  // }
+
 }

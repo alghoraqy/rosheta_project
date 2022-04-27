@@ -13,7 +13,13 @@ class SignUp3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterCubit, RegisterStates>(
-      listener: (context, states) {},
+      listener: (context, states) {
+        if (states is GetAllDrugsSuccess) {
+          RegisterCubit.get(context).putdrugs().then((value) {
+            navigateto(context, PharmacyMaster());
+          });
+        }
+      },
       builder: (context, states) {
         RegisterCubit cubit = RegisterCubit.get(context);
         return Scaffold(
@@ -70,8 +76,9 @@ class SignUp3 extends StatelessWidget {
                         height: MediaQuery.of(context).size.height / 11,
                       ),
                       LoginButton(context, text: 'Confirm', onpressed: () {
-                        navigateto(context,
-                            cubit.isuser ? UserMaster() : PharmacyMaster());
+                        cubit.isuser
+                            ? navigateto(context, UserMaster())
+                            : cubit.getAlldrugs();
                       })
                     ],
                   ),

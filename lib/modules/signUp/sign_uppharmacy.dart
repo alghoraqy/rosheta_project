@@ -16,10 +16,7 @@ class SignUpPharmacy extends StatelessWidget {
     return BlocConsumer<RegisterCubit, RegisterStates>(
       listener: (context, states) {
         if (states is CreateSuccessStates3) {
-          CashHelper.saveData(key: 'uId', value: states.uId).then((value) {
-            // uId = states.uId;
-            navigateto(context, SignUp3());
-          });
+          navigateto(context, SignUp3());
         }
       },
       builder: (context, states) {

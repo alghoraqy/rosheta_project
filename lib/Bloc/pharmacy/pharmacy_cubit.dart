@@ -65,6 +65,7 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
         .get()
         .then((value) {
       pharmacyModel = PharmacyModel.fromjson(value.data()!);
+      print('get pharrmacy data');
       emit(GetPharmacyDataSuccess());
     }).catchError((error) {
       print(error.toString());
@@ -72,26 +73,59 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
     });
   }
 
-  List<DrugsModel> alldrugs = [];
-  void getAlldrugs() {
-    emit(GetAllDrugsLoading());
+  // List<DrugsModel> alldrugs = [];
+  // void getAlldrugs() {
+  //   emit(GetAllDrugsLoading());
+  //   FirebaseFirestore.instance.collection('AllDrugs').get().then((value) {
+  //     value.docs.forEach(
+  //       (element) {
+  //         alldrugs.add(DrugsModel.fromjson(element.data()));
+  //         emit(GetAllDrugsSuccess());
+  //       },
+  //     );
+  //     print('Alldrugs ${alldrugs[0].name}');
+  //     emit(GetAllDrugsSuccess());
+  //   }).catchError((error) {
+  //     print('Get All Drugs error : ${error.toString()}');
+  //     emit(GetAllDrugsError(error.toString()));
+  //   });
+  // }
+
+  // void putdrugs() {
+  //   emit(PutDrugsLoading());
+  //   for (var i = 0; i <= alldrugs.length; i++) {
+  //     FirebaseFirestore.instance
+  //         .collection('pharmacy')
+  //         .doc(uId)
+  //         .collection('MyDrugs')
+  //         .doc()
+  //         .set(alldrugs[i].tomap())
+  //         .then((value) {
+  //       print('Doneee');
+  //       emit(PutDrugsSuccess());
+  //     }).catchError((error) {
+  //       emit(PutDrugsError());
+  //     });
+  //   }
+  // }
+
+  List<DrugsModel> myDrugs = [];
+  void getMydrugs() {
+    emit(GetMyDrugsLoading());
     FirebaseFirestore.instance
         .collection('pharmacy')
         .doc(uId)
-        .collection('drugs')
+        .collection('MyDrugs')
         .get()
         .then((value) {
-      value.docs.forEach(
-        (element) {
-          alldrugs.add(DrugsModel.fromjson(element.data()));
-          emit(GetAllDrugsSuccess());
-        },
-      );
-      print('Alldrugs ${alldrugs[0].name}');
-      emit(GetAllDrugsSuccess());
+      value.docs.forEach((element) {
+        myDrugs.add(DrugsModel.fromjson(element.data()));
+      });
+      print('Get Drugs success');
+      emit(GetMyDrugsSuccess());
     }).catchError((error) {
-      print('Get All Drugs error : ${error.toString()}');
-      emit(GetAllDrugsError(error.toString()));
+      print(error.toString());
+      emit(GetMyDrugsError(error.toString()));
     });
   }
 }

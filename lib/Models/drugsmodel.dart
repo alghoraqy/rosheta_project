@@ -19,4 +19,14 @@ class DrugsModel {
     image = json['image'];
     usage = json['usage'];
   }
+
+  Map<String, dynamic> tomap() {
+    return {
+      'name': name,
+      'price': price,
+      'quantity': quantity,
+      'image': image,
+      'usage': usage,
+    };
+  }
 }

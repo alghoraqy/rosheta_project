@@ -19,178 +19,191 @@ class PharmacyMaster extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         PharmacyCubit cubit = PharmacyCubit.get(context);
-        return Scaffold(
-          key: cubit.scaffoldKey,
-          backgroundColor: HexColor('#022247'),
-          appBar: AppBar(
-            title: Image(
-              image: AssetImage(
-                'assets/images/secondlogo.png',
-              ),
-              width: MediaQuery.of(context).size.width / 3.8,
-            ),
-            actions: [
-              Padding(
-                padding: const EdgeInsetsDirectional.only(end: 10),
-                child: Row(
-                  children: [
-                    actionbutton(
-                        icon: Icons.notifications_active_outlined,
-                        onpressed: () {
-                          navigateto(context, Notifications());
-                        }),
-                    SizedBox(width: MediaQuery.of(context).size.width / 100),
-                    actionbutton(
-                        icon: Icons.menu_outlined,
-                        onpressed: () {
-                          cubit.scaffoldKey.currentState!.openEndDrawer();
-                        }),
+        return cubit.myDrugs.isEmpty && cubit.pharmacyModel == null
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : Scaffold(
+                key: cubit.scaffoldKey,
+                backgroundColor: HexColor('#022247'),
+                appBar: AppBar(
+                  title: Image(
+                    image: AssetImage(
+                      'assets/images/secondlogo.png',
+                    ),
+                    width: MediaQuery.of(context).size.width / 3.8,
+                  ),
+                  actions: [
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(end: 10),
+                      child: Row(
+                        children: [
+                          actionbutton(
+                              icon: Icons.notifications_active_outlined,
+                              onpressed: () {
+                                navigateto(context, Notifications());
+                              }),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width / 100),
+                          actionbutton(
+                              icon: Icons.menu_outlined,
+                              onpressed: () {
+                                cubit.scaffoldKey.currentState!.openEndDrawer();
+                              }),
+                        ],
+                      ),
+                    )
                   ],
                 ),
-              )
-            ],
-          ),
-          body: cubit.screens[cubit.currentIndex],
-          endDrawer: Drawer(
-            child: Container(
-              padding: EdgeInsetsDirectional.only(top: 20),
-              color: HexColor('#022247'),
-              child: Column(
-                children: [
-                  Expanded(
-                    flex: 1,
+                body: cubit.screens[cubit.currentIndex],
+                endDrawer: Drawer(
+                  child: Container(
+                    padding: EdgeInsetsDirectional.only(top: 20),
+                    color: HexColor('#022247'),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Row(
+                        Expanded(
+                          flex: 1,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              actionbutton(
-                                  icon: Icons.arrow_back_outlined,
-                                  onpressed: () {
-                                    Navigator.pop(context);
-                                  })
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
+                                child: Row(
+                                  children: [
+                                    actionbutton(
+                                        icon: Icons.arrow_back_outlined,
+                                        onpressed: () {
+                                          Navigator.pop(context);
+                                        })
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height / 70,
+                              ),
+                              CircleAvatar(
+                                backgroundColor: Colors.white,
+                                radius: 40,
+                                backgroundImage:
+                                    NetworkImage(cubit.pharmacyModel!.image!),
+                              ),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height / 60,
+                              ),
+                              Text(
+                                cubit.pharmacyModel!.name!,
+                                style: TextStyle(
+                                    fontSize: 28,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                cubit.pharmacyModel!.phone!,
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.white),
+                              ),
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height / 70,
-                        ),
-                        CircleAvatar(
-                          radius: 40,
-                          backgroundImage: NetworkImage(
-                              'https://s3-eu-west-1.amazonaws.com/forasna/uploads/logos/clogo_2018-08-02-13-32-50_b7tjXmVP4Tt4ZIiZnqD8wgXX.jpg'),
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height / 60,
-                        ),
-                        Text(
-                          'ElTarshoby',
-                          style: TextStyle(
-                              fontSize: 28,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          '19582',
-                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        Expanded(
+                          flex: 2,
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(20),
+                                    topLeft: Radius.circular(20))),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    drawitem(
+                                        text: 'Reservations',
+                                        icon: Icons.person,
+                                        onpressed: () {}),
+                                    drawitem(
+                                        text: 'My wallet',
+                                        icon: Icons.wallet_travel,
+                                        onpressed: () {
+                                          navigateTo(context, MyWalletScreen());
+                                        }),
+                                    drawitem(
+                                        text: 'Language',
+                                        icon: Icons.translate,
+                                        onpressed: () {}),
+                                    drawitem(
+                                        text: 'Invite Friends',
+                                        icon: Icons.person_add,
+                                        onpressed: () {}),
+                                    drawitem(
+                                        text: 'Contact Us',
+                                        icon: Icons.headset_mic_outlined,
+                                        onpressed: () {
+                                          navigateto(context, ContactUs());
+                                        }),
+                                    myDivider(context),
+                                    socialdrawitem(context,
+                                        text: 'Facebook',
+                                        imageroute:
+                                            'assets/images/facebook.png',
+                                        onpressed: () {}),
+                                    MaterialButton(
+                                      padding: EdgeInsets.zero,
+                                      onPressed: () {},
+                                      child: ListTile(
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        leading: Image(
+                                          image: AssetImage(
+                                              'assets/images/twitter.png'),
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              9,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              9,
+                                        ),
+                                        title: Text(
+                                          'Twitter',
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.black),
+                                        ),
+                                      ),
+                                    ),
+                                    socialdrawitem(context,
+                                        text: 'Google',
+                                        imageroute: 'assets/images/google.png',
+                                        onpressed: () {}),
+                                    myDivider(context),
+                                    drawitem(
+                                        text: 'Logout',
+                                        icon: Icons.logout_outlined,
+                                        onpressed: () {})
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),
                   ),
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(20),
-                              topLeft: Radius.circular(20))),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              drawitem(
-                                  text: 'Reservations',
-                                  icon: Icons.person,
-                                  onpressed: () {}),
-                              drawitem(
-                                  text: 'My wallet',
-                                  icon: Icons.wallet_travel,
-                                  onpressed: () {
-                                    navigateTo(context, MyWalletScreen());
-                                  }),
-                              drawitem(
-                                  text: 'Language',
-                                  icon: Icons.translate,
-                                  onpressed: () {}),
-                              drawitem(
-                                  text: 'Invite Friends',
-                                  icon: Icons.person_add,
-                                  onpressed: () {}),
-                              drawitem(
-                                  text: 'Contact Us',
-                                  icon: Icons.headset_mic_outlined,
-                                  onpressed: () {
-                                    navigateto(context, ContactUs());
-                                  }),
-                              myDivider(context),
-                              socialdrawitem(context,
-                                  text: 'Facebook',
-                                  imageroute: 'assets/images/facebook.png',
-                                  onpressed: () {}),
-                              MaterialButton(
-                                padding: EdgeInsets.zero,
-                                onPressed: () {},
-                                child: ListTile(
-                                  contentPadding:
-                                      EdgeInsets.symmetric(horizontal: 10),
-                                  leading: Image(
-                                    image:
-                                        AssetImage('assets/images/twitter.png'),
-                                    height:
-                                        MediaQuery.of(context).size.height / 9,
-                                    width:
-                                        MediaQuery.of(context).size.width / 9,
-                                  ),
-                                  title: Text(
-                                    'Twitter',
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.black),
-                                  ),
-                                ),
-                              ),
-                              socialdrawitem(context,
-                                  text: 'Google',
-                                  imageroute: 'assets/images/google.png',
-                                  onpressed: () {}),
-                              myDivider(context),
-                              drawitem(
-                                  text: 'Logout',
-                                  icon: Icons.logout_outlined,
-                                  onpressed: () {})
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          bottomNavigationBar: BottomNavigationBar(
-            items: cubit.items,
-            currentIndex: cubit.currentIndex,
-            onTap: (index) {
-              cubit.changeBotNav(index);
-            },
-          ),
-        );
+                ),
+                bottomNavigationBar: BottomNavigationBar(
+                  items: cubit.items,
+                  currentIndex: cubit.currentIndex,
+                  onTap: (index) {
+                    cubit.changeBotNav(index);
+                  },
+                ),
+              );
       },
     );
   }

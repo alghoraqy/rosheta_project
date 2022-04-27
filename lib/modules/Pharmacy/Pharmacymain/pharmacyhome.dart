@@ -20,7 +20,7 @@ class PharmacyHome extends StatelessWidget {
           decoration: BoxDecoration(
               color: HexColor('F8F8F8'),
               borderRadius: BorderRadius.circular(20)),
-          child: cubit.alldrugs.isEmpty && cubit.pharmacyModel == null
+          child: cubit.myDrugs.isEmpty && cubit.pharmacyModel == null
               ? Center(
                   child: CircularProgressIndicator(),
                 )
@@ -33,6 +33,7 @@ class PharmacyHome extends StatelessWidget {
                         child: Row(
                           children: [
                             CircleAvatar(
+                              backgroundColor: Colors.white,
                               radius: 23,
                               backgroundImage: NetworkImage(
                                 '${cubit.pharmacyModel!.image}',
@@ -84,7 +85,9 @@ class PharmacyHome extends StatelessWidget {
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(15)),
                                   color: HexColor('#022247'),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    // cubit.putdrugs();
+                                  },
                                   child: const Icon(
                                     Icons.camera_alt,
                                     color: Colors.white,
@@ -136,7 +139,7 @@ class PharmacyHome extends StatelessWidget {
                             style: TextStyle(fontSize: 12),
                           )),
                         ],
-                        rows: cubit.alldrugs.map((data) {
+                        rows: cubit.myDrugs.map((data) {
                           return DataRow(cells: [
                             DataCell(Image(
                               image: NetworkImage(data.image!),

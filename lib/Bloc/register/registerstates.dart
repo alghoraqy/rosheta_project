@@ -37,3 +37,18 @@ class CreateSuccessStates3 extends RegisterStates {
 }
 
 class CreateErrorStates extends RegisterStates {}
+
+class GetAllDrugsSuccess extends RegisterStates {}
+
+class GetAllDrugsLoading extends RegisterStates {}
+
+class GetAllDrugsError extends RegisterStates {
+  final String error;
+  GetAllDrugsError(this.error);
+}
+
+class PutDrugsLoading extends RegisterStates {}
+
+class PutDrugsSuccess extends RegisterStates {}
+
+class PutDrugsError extends RegisterStates {}

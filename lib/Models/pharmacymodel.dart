@@ -4,8 +4,8 @@ class PharmacyModel {
   String? email;
   String? phone;
   String? image;
-  dynamic open;
-  dynamic close;
+  String? open;
+  String? close;
   String? uId;
 
   PharmacyModel({
