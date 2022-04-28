@@ -259,22 +259,22 @@ class RegisterCubit extends Cubit<RegisterStates> {
     });
   }
 
-  Future<void> putdrugs() async {
-    emit(PutDrugsLoading());
-    for (var i = 0; i < alldrugs.length; i++) {
-      FirebaseFirestore.instance
-          .collection('pharmacy')
-          .doc(uId)
-          .collection('MyDrugs')
-          .doc()
-          .set(alldrugs[i].tomap())
-          .then((value) {
-        print('Doneee');
-      }).catchError((error) {
-        emit(PutDrugsError());
-      });
-    }
-  }
+  // Future<void> putdrugs() async {
+  //   emit(PutDrugsLoading());
+  //   for (var i = 0; i < alldrugs.length; i++) {
+  //     FirebaseFirestore.instance
+  //         .collection('pharmacy')
+  //         .doc(uId)
+  //         .collection('MyDrugs')
+  //         .doc()
+  //         .set(alldrugs[i].tomap())
+  //         .then((value) {
+  //       print('Doneee');
+  //     }).catchError((error) {
+  //       emit(PutDrugsError());
+  //     });
+  //   }
+  // }
 
   // static List<Map> convertMyDrugToMap({required List<DrugsModel> drugs}) {
   //   List<Map> mydrugs = [];
@@ -285,4 +285,26 @@ class RegisterCubit extends Cubit<RegisterStates> {
   //   return mydrugs;
   // }
 
+  Future<void> putdrugs() async {
+    emit(PutDrugsLoading());
+    for (var i = 0; i < alldrugs.length; i++) {
+      FirebaseFirestore.instance
+          .collection('pharmacy')
+          .doc(uId)
+          .collection('MyDrugs')
+          .doc()
+          .set({
+        'name': alldrugs[i].name,
+        'price': alldrugs[i].price,
+        'quantity': alldrugs[i].quantity,
+        'usage': alldrugs[i].usage,
+        'image': alldrugs[i].image,
+        'uid': i
+      }).then((value) {
+        print('Doneee');
+      }).catchError((error) {
+        emit(PutDrugsError());
+      });
+    }
+  }
 }

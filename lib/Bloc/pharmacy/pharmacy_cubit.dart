@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -110,15 +112,21 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
   // }
 
   List<DrugsModel> myDrugs = [];
+  List<String> drugsid = [];
   void getMydrugs() {
     emit(GetMyDrugsLoading());
     FirebaseFirestore.instance
         .collection('pharmacy')
         .doc(uId)
         .collection('MyDrugs')
+        .orderBy(
+          'uid',
+          descending: false,
+        )
         .get()
         .then((value) {
       value.docs.forEach((element) {
+        drugsid.add(element.id);
         myDrugs.add(DrugsModel.fromjson(element.data()));
       });
       print('Get Drugs success');
@@ -126,6 +134,48 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
     }).catchError((error) {
       print(error.toString());
       emit(GetMyDrugsError(error.toString()));
+    });
+  }
+
+  void updatedrugs({
+    required String uid,
+    required dynamic quantity,
+  }) {
+    emit(UpdateDrugsLoading());
+    FirebaseFirestore.instance
+        .collection('pharmacy')
+        .doc(uId)
+        .collection('MyDrugs')
+        .doc(uid)
+        .update({'quantity': quantity}).then((value) {
+      myDrugs = [];
+      getMydrugs();
+      print('Updated success');
+      print(uid);
+    }).catchError((error) {
+      print('Update Drugs Error : ${error.toString()}');
+      emit(UpdateDrugsError(error.toString()));
+    });
+  }
+
+  void deletedrug({
+    required String uid,
+  }) {
+    emit(UpdateDrugsLoading());
+    FirebaseFirestore.instance
+        .collection('pharmacy')
+        .doc(uId)
+        .collection('MyDrugs')
+        .doc(uid)
+        .delete()
+        .then((value) {
+      myDrugs = [];
+      getMydrugs();
+      print('deleted success');
+      print(uid);
+    }).catchError((error) {
+      print('Update Drugs Error : ${error.toString()}');
+      emit(UpdateDrugsError(error.toString()));
     });
   }
 }

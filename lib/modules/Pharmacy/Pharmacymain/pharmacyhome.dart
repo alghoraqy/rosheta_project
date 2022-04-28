@@ -85,9 +85,7 @@ class PharmacyHome extends StatelessWidget {
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(15)),
                                   color: HexColor('#022247'),
-                                  onPressed: () {
-                                    // cubit.putdrugs();
-                                  },
+                                  onPressed: () {},
                                   child: const Icon(
                                     Icons.camera_alt,
                                     color: Colors.white,
@@ -102,86 +100,103 @@ class PharmacyHome extends StatelessWidget {
                       const SizedBox(
                         height: 17,
                       ),
-                      DataTable(
-                        border: TableBorder.all(
-                            color: Colors.grey.withOpacity(.1),
-                            style: BorderStyle.solid,
-                            width: 1,
-                            borderRadius: BorderRadius.circular(20)),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20)),
-                        columnSpacing: 25,
-                        columns: [
-                          DataColumn(
-                              label: Text(
-                            'Img',
-                            style: TextStyle(fontSize: 12),
-                          )),
-                          DataColumn(
-                              label: Text(
-                            'Name',
-                            style: TextStyle(fontSize: 12),
-                          )),
-                          DataColumn(
-                              label: Text(
-                            'Price',
-                            style: TextStyle(fontSize: 12),
-                          )),
-                          DataColumn(
-                              label: Text(
-                            'Quantity',
-                            style: TextStyle(fontSize: 12),
-                          )),
-                          DataColumn(
-                              label: Text(
-                            'Other',
-                            style: TextStyle(fontSize: 12),
-                          )),
-                        ],
-                        rows: cubit.myDrugs.map((data) {
-                          return DataRow(cells: [
-                            DataCell(Image(
-                              image: NetworkImage(data.image!),
-                              width: 40,
-                              height: 30,
-                            )),
-                            DataCell(Text(
-                              data.name!,
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            DataCell(Text(
-                              '${data.price!}',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            DataCell(Text(
-                              '${data.quantity!}',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            DataCell(Row(
-                              children: [
-                                Image(
-                                  image: AssetImage(
-                                    'assets/images/edit.png',
-                                  ),
-                                  color: Colors.green,
-                                  height: 25,
-                                ),
-                                SizedBox(
-                                  width: 7,
-                                ),
-                                Image(
-                                  image: AssetImage(
-                                    'assets/images/delete.png',
-                                  ),
-                                  color: Colors.red,
-                                  height: 25,
-                                ),
+                      state is GetMyDrugsLoading
+                          ? Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : DataTable(
+                              border: TableBorder.all(
+                                  color: Colors.grey.withOpacity(.1),
+                                  style: BorderStyle.solid,
+                                  width: 1,
+                                  borderRadius: BorderRadius.circular(20)),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20)),
+                              columnSpacing: 25,
+                              columns: [
+                                DataColumn(
+                                    label: Text(
+                                  'Img',
+                                  style: TextStyle(fontSize: 12),
+                                )),
+                                DataColumn(
+                                    label: Text(
+                                  'Name',
+                                  style: TextStyle(fontSize: 12),
+                                )),
+                                DataColumn(
+                                    label: Text(
+                                  'Price',
+                                  style: TextStyle(fontSize: 12),
+                                )),
+                                DataColumn(
+                                    label: Text(
+                                  'Quantity',
+                                  style: TextStyle(fontSize: 12),
+                                )),
+                                DataColumn(
+                                    label: Text(
+                                  'Other',
+                                  style: TextStyle(fontSize: 12),
+                                )),
                               ],
-                            )),
-                          ]);
-                        }).toList(),
-                      ),
+                              rows: cubit.myDrugs.map((data) {
+                                return DataRow(cells: [
+                                  DataCell(Image(
+                                    image: NetworkImage(data.image!),
+                                    width: 40,
+                                    height: 30,
+                                  )),
+                                  DataCell(Text(
+                                    data.name!,
+                                    style: TextStyle(fontSize: 10),
+                                  )),
+                                  DataCell(Text(
+                                    '${data.price!}',
+                                    style: TextStyle(fontSize: 10),
+                                  )),
+                                  DataCell(Text(
+                                    '${data.quantity!}',
+                                    style: TextStyle(fontSize: 10),
+                                  )),
+                                  DataCell(Row(
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          cubit.updatedrugs(
+                                              uid: cubit.drugsid[data.uid!],
+                                              quantity: 5);
+                                        },
+                                        child: Image(
+                                          image: AssetImage(
+                                            'assets/images/edit.png',
+                                          ),
+                                          color: Colors.green,
+                                          height: 25,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 7,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          cubit.deletedrug(
+                                              uid: cubit.drugsid[data.uid!]);
+                                        },
+                                        child: Image(
+                                          image: AssetImage(
+                                            'assets/images/delete.png',
+                                          ),
+                                          color: Colors.red,
+                                          height: 25,
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                                ]);
+                              }).toList(),
+                            ),
                       const SizedBox(
                         height: 20,
                       ),
