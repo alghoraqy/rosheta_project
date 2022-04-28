@@ -183,8 +183,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
     FirebaseFirestore.instance.collection('pharmacy').doc(uId).set({
       'name': name,
       'email': email,
-      'image':
-          'https://firebasestorage.googleapis.com/v0/b/rosheta-scanner.appspot.com/o/female.png?alt=media&token=a2b02189-ab26-4dfb-ac7b-21ea0a9b4eed',
+      'image': 'https://en.pimg.jp/065/798/123/1/65798123.jpg',
       'isuser': isuser,
       'uId': uId,
     }).then((value) {
@@ -306,5 +305,38 @@ class RegisterCubit extends Cubit<RegisterStates> {
         emit(PutDrugsError());
       });
     }
+  }
+
+  Future<void> getdruguid() {
+    return FirebaseFirestore.instance
+        .collection('pharmacy')
+        .doc(uId)
+        .collection('MyDrugs')
+        .orderBy(
+          'uid',
+          descending: false,
+        )
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        drugsuid.add(element.id);
+      });
+      uploadedruguid();
+      print('Get Drugs success');
+    }).catchError((error) {
+      print(error.toString());
+      emit(GetDrugUidError());
+    });
+  }
+
+  void uploadedruguid() {
+    FirebaseFirestore.instance
+        .collection('pharmacy')
+        .doc(uId)
+        .set({'drugsuid': drugsuid}, SetOptions(merge: true)).then((value) {
+      emit(UploadeDrugsUidSuccess());
+    }).catchError((error) {
+      emit(UploadeDrugsUidError());
+    });
   }
 }

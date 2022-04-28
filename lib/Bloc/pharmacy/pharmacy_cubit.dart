@@ -67,10 +67,11 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
         .get()
         .then((value) {
       pharmacyModel = PharmacyModel.fromjson(value.data()!);
-      print('get pharrmacy data');
+      print('get pharmacy data');
+      drugsid.addAll(value.data()!['drugsuid']);
       emit(GetPharmacyDataSuccess());
     }).catchError((error) {
-      print(error.toString());
+      print('get pharmacy error ${error.toString()}');
       emit(GetPharmacyDataError(error.toString()));
     });
   }
@@ -112,10 +113,10 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
   // }
 
   List<DrugsModel> myDrugs = [];
-  List<String> drugsid = [];
-  void getMydrugs() {
+  List drugsid = [];
+  Future<void> getMydrugs() {
     emit(GetMyDrugsLoading());
-    FirebaseFirestore.instance
+    return FirebaseFirestore.instance
         .collection('pharmacy')
         .doc(uId)
         .collection('MyDrugs')
@@ -126,7 +127,6 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
         .get()
         .then((value) {
       value.docs.forEach((element) {
-        drugsid.add(element.id);
         myDrugs.add(DrugsModel.fromjson(element.data()));
       });
       print('Get Drugs success');
@@ -149,8 +149,12 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
         .doc(uid)
         .update({'quantity': quantity}).then((value) {
       myDrugs = [];
-      getMydrugs();
+      drugsuid = [];
+      getMydrugs().then((value) {
+        updateindex = 0;
+      });
       print('Updated success');
+      print(drugsuid.length);
       print(uid);
     }).catchError((error) {
       print('Update Drugs Error : ${error.toString()}');
@@ -170,6 +174,7 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
         .delete()
         .then((value) {
       myDrugs = [];
+      drugsuid = [];
       getMydrugs();
       print('deleted success');
       print(uid);
@@ -177,5 +182,24 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
       print('Update Drugs Error : ${error.toString()}');
       emit(UpdateDrugsError(error.toString()));
     });
+  }
+
+  TextEditingController updatedrugpricecontroller = TextEditingController();
+  int updateindex = 0;
+  void increaseupdate() {
+    updateindex++;
+    print('increase');
+    print(updateindex);
+    emit(IncreaseUpdate());
+  }
+
+  void decreaseupdate() {
+    updateindex--;
+    if (updateindex < 0) {
+      updateindex = 0;
+    }
+    print('decrease');
+    print(updateindex);
+    emit(DecreaseUpdate());
   }
 }

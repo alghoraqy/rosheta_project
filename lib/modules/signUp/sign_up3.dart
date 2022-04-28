@@ -16,7 +16,9 @@ class SignUp3 extends StatelessWidget {
       listener: (context, states) {
         if (states is GetAllDrugsSuccess) {
           RegisterCubit.get(context).putdrugs().then((value) {
-            navigateto(context, PharmacyMaster());
+            RegisterCubit.get(context).getdruguid().then((value) {
+              navigateto(context, PharmacyMaster());
+            });
           });
         }
       },

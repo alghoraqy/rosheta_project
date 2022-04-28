@@ -19,9 +19,7 @@ class PharmacyMaster extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         PharmacyCubit cubit = PharmacyCubit.get(context);
-        return cubit.myDrugs.isEmpty &&
-                cubit.pharmacyModel == null &&
-                cubit.drugsid.isEmpty
+        return cubit.myDrugs.isEmpty && cubit.pharmacyModel == null
             ? Center(
                 child: CircularProgressIndicator(),
               )

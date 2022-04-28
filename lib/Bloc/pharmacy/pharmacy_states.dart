@@ -56,3 +56,7 @@ class PutuIdErrror extends PharmacyStates {
   final String error;
   PutuIdErrror(this.error);
 }
+
+class IncreaseUpdate extends PharmacyStates {}
+
+class DecreaseUpdate extends PharmacyStates {}

@@ -1988,3 +1988,24 @@ Widget ratebutton(context,
     ),
   );
 }
+
+Widget addbutton(
+    {required IconData icon,
+    required Color color,
+    required VoidCallback onpressed}) {
+  return Container(
+    width: 30,
+    child: MaterialButton(
+      padding: EdgeInsets.zero,
+      height: 25,
+      onPressed: onpressed,
+      color: color,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      child: Icon(
+        icon,
+        color: Colors.white,
+        size: 20,
+      ),
+    ),
+  );
+}

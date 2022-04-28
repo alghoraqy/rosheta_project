@@ -52,3 +52,11 @@ class PutDrugsLoading extends RegisterStates {}
 class PutDrugsSuccess extends RegisterStates {}
 
 class PutDrugsError extends RegisterStates {}
+
+class GetDrugUidSuccess extends RegisterStates {}
+
+class GetDrugUidError extends RegisterStates {}
+
+class UploadeDrugsUidSuccess extends RegisterStates {}
+
+class UploadeDrugsUidError extends RegisterStates {}

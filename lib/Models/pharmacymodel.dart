@@ -7,6 +7,7 @@ class PharmacyModel {
   String? open;
   String? close;
   String? uId;
+  dynamic drugsuid;
 
   PharmacyModel({
     required this.name,
@@ -17,6 +18,7 @@ class PharmacyModel {
     required this.open,
     required this.close,
     required this.uId,
+    required this.drugsuid,
   });
   PharmacyModel.fromjson(Map<String, dynamic> json) {
     name = json['name'];
@@ -27,5 +29,6 @@ class PharmacyModel {
     open = json['open'];
     close = json['close'];
     uId = json['uId'];
+    drugsuid = json['drugsuid'];
   }
 }
