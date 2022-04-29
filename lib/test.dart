@@ -415,3 +415,47 @@
 //                             )),
 //                           ]),
 //                         ],
+// .
+
+////////////////////////////////////
+///
+///
+///GridView.count(
+                                    // crossAxisCount: 2,
+                                    // childAspectRatio: 1.1,
+                                    // crossAxisSpacing: 5,
+                                    // mainAxisSpacing: 15,
+                                  //   children: [
+                                  //     pharmacycard(context, onpressed: () {
+                                  //       navigateto(
+                                  //           context,
+                                  //           ReserveDrugs(
+                                  //             title: 'Al Azaby',
+                                  //             branch: 'Gehan',
+                                  //           ));
+                                  //     },
+                                  //         imageroute:
+                                  //             'https://1.bp.blogspot.com/-ocKAl4fI-y8/Xz6ifYTrcjI/AAAAAAAAAV0/LhbaTb5ihGIOMmudMitpHcGfm97CDyzsQCLcBGAsYHQ/s330/elezaby.png',
+                                  //         title: 'Al zaby',
+                                  //         branch: 'Gehan'),
+                                  //     pharmacycard(context, onpressed: () {
+                                  //       navigateto(
+                                  //           context,
+                                  //           ReserveDrugs(
+                                  //             title: 'El Tarshoby',
+                                  //             branch: 'Gehan',
+                                  //           ));
+                                  //     },
+                                  //         imageroute:
+                                  //             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGCYqqCDSE4TaE9vinOBl-w0XhUpnhRqktQRn77wml0XARAsc1cdEXSsJ0tgQYny87R8o&usqp=CAU',
+                                  //         title: 'El tarshoby',
+                                  //         branch: 'Gehan'),
+                                  //     pharmacycard(context,
+                                  //         onpressed: () {},
+                                  //         imageroute:
+                                  //             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGCYqqCDSE4TaE9vinOBl-w0XhUpnhRqktQRn77wml0XARAsc1cdEXSsJ0tgQYny87R8o&usqp=CAU',
+                                  //         title: 'El tarshoby',
+                                  //         branch: 'Gehan'),
+                                  //   ],
+                                  // ),
+

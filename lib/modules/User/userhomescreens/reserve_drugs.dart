@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:rosheta_project/Models/pharmacymodel.dart';
 import 'package:rosheta_project/Shared/Components/components.dart';
 import 'package:rosheta_project/modules/User/usermain/order_details.dart';
 
 class ReserveDrugs extends StatelessWidget {
-  late String title;
-  late String branch;
-  ReserveDrugs({Key? key, required this.title, required this.branch})
-      : super(key: key);
+  PharmacyModel? pharmacydata;
+  ReserveDrugs({Key? key, required this.pharmacydata}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: HexColor('#022247'),
-      appBar: backappbar(context, title: '$title Pharmacy'),
+      appBar: backappbar(context, title: '${pharmacydata!.name} Pharmacy'),
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -49,8 +48,7 @@ class ReserveDrugs extends StatelessWidget {
                           topLeft: Radius.circular(15),
                           topRight: Radius.circular(15)),
                       image: DecorationImage(
-                          image: NetworkImage(
-                              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGCYqqCDSE4TaE9vinOBl-w0XhUpnhRqktQRn77wml0XARAsc1cdEXSsJ0tgQYny87R8o&usqp=CAU'),
+                          image: NetworkImage('${pharmacydata!.image}'),
                           fit: BoxFit.cover),
                     ),
                   ),
@@ -63,7 +61,7 @@ class ReserveDrugs extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                '$title',
+                                '${pharmacydata!.name}',
                                 style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w700,
@@ -73,7 +71,7 @@ class ReserveDrugs extends StatelessWidget {
                                 width: 5,
                               ),
                               Text(
-                                '($branch branch)',
+                                '(mansoura branch)',
                                 style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w300,
@@ -85,27 +83,29 @@ class ReserveDrugs extends StatelessWidget {
                             height: MediaQuery.of(context).size.height / 60,
                           ),
                           Pharmacyprofile(
-                            show: false,
+                              show: false,
                               icon: Icons.phone_in_talk_outlined,
-                              text: '+201015696025'),
+                              text: pharmacydata!.phone!),
                           SizedBox(
                             height: MediaQuery.of(context).size.height / 60,
                           ),
                           Pharmacyprofile(
-                            show: false,
+                              show: false,
                               icon: Icons.location_on_outlined,
-                              text: 'Location details'),
+                              text: pharmacydata!.address!),
                           SizedBox(
                             height: MediaQuery.of(context).size.height / 60,
                           ),
                           Pharmacyprofile(
-                              icon: Icons.email_outlined, text: 'mail@gmail.com'),
+                              icon: Icons.email_outlined,
+                              text: pharmacydata!.email!),
                           SizedBox(
                             height: MediaQuery.of(context).size.height / 60,
                           ),
                           Pharmacyprofile(
                               icon: Icons.event_available_rounded,
-                              text: '9:00 Am : 11:00Pm'),
+                              text:
+                                  '${pharmacydata!.open!} Am : ${pharmacydata!.close!} Pm'),
                           SizedBox(
                             height: MediaQuery.of(context).size.height / 60,
                           ),
@@ -122,7 +122,8 @@ class ReserveDrugs extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height / 60,
             ),
-           premiumecard(context,text: 'Upgrade to premium to see all details'),
+            premiumecard(context,
+                text: 'Upgrade to premium to see all details'),
             Spacer(),
             userbutton(context,
                 text: 'Reserve this drugs',

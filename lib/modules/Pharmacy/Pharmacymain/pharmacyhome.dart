@@ -74,6 +74,7 @@ class PharmacyHome extends StatelessWidget {
                                     context,
                                     text: 'Search in drugs...',
                                     width: 0,
+                                    onPressed: () {},
                                   ),
                                 ),
                                 const SizedBox(

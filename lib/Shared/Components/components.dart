@@ -284,6 +284,9 @@ Widget Searchbox(
   context, {
   required String text,
   required double width,
+  VoidCallback? onPressed,
+  ValueChanged<String>? onchange,
+  TextEditingController? controller,
 }) {
   return Container(
     decoration: BoxDecoration(boxShadow: [
@@ -296,6 +299,9 @@ Widget Searchbox(
     ]),
     width: width,
     child: TextFormField(
+      controller: controller,
+      onTap: onPressed,
+      onChanged: onchange,
       decoration: InputDecoration(
         fillColor: Colors.white,
         filled: true,
@@ -913,7 +919,7 @@ Widget pharmacycard(
   required VoidCallback onpressed,
   required String imageroute,
   required String title,
-  required String branch,
+  String branch = 'mansoura',
 }) {
   return Container(
     width: MediaQuery.of(context).size.width / 2.35,

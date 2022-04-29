@@ -27,7 +27,8 @@ class TrialSearch extends StatelessWidget {
               children: [
                 Searchbox(context,
                     text: 'Search for drugs ...',
-                    width: MediaQuery.of(context).size.width),
+                    width: MediaQuery.of(context).size.width,
+                    onPressed: () {}),
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 70,
                 ),

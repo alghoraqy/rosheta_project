@@ -29,6 +29,7 @@ class TrialHome extends StatelessWidget {
                       context,
                       text: 'Search ...',
                       width: 0,
+                      onPressed: () {},
                     ),
                   ),
                   SizedBox(

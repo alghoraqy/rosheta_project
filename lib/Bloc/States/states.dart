@@ -25,3 +25,27 @@ class GetUserDataError extends UserStates {
   final String error;
   GetUserDataError(this.error);
 }
+
+class GetSearchDrugSuccess extends UserStates {}
+
+class GetSearchDrugLoading extends UserStates {}
+
+class GetSearchDrugError extends UserStates {
+  final String error;
+  GetSearchDrugError(this.error);
+}
+
+class GetAllPharmacyIdLoading extends UserStates {}
+
+class GetAllPharmacyIdSuccess extends UserStates {}
+
+class GetAllPharmacyIdError extends UserStates {
+  final String error;
+  GetAllPharmacyIdError(this.error);
+}
+
+class GetPharmacyDrugInDataLoading extends UserStates {}
+
+class GetPharmacyDrugInDataSuccess extends UserStates {}
+
+class GetPharmacyDrugInDataError extends UserStates {}

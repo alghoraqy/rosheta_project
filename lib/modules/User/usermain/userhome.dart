@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:rosheta_project/Bloc/Cubit/cubit.dart';
 import 'package:rosheta_project/Bloc/States/states.dart';
 import 'package:rosheta_project/Shared/Components/components.dart';
+import 'package:rosheta_project/modules/User/userhomescreens/search.dart';
 import 'package:rosheta_project/modules/User/usermain/articleview.dart';
 
 class UserHome extends StatelessWidget {
@@ -72,6 +73,10 @@ class UserHome extends StatelessWidget {
                                   context,
                                   text: 'Search ...',
                                   width: 0,
+                                  onPressed: () {
+                                    navigateto(context, SearchForDrugs());
+                                  },
+                                  controller: null,
                                 ),
                               ),
                               SizedBox(

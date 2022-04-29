@@ -36,7 +36,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) {
           return UserCubit()
             ..getuserData()
-            ..getArticles();
+            ..getArticles()
+            ..getallPharmacyId();
         }),
         BlocProvider(create: (context) {
           return PharmacyCubit()
