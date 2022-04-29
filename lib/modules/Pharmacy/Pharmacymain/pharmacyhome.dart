@@ -169,6 +169,9 @@ class PharmacyHome extends StatelessWidget {
                                         children: [
                                           InkWell(
                                             onTap: () {
+                                              cubit.updatedrugpricecontroller
+                                                  .text = '${data.price}';
+                                              cubit.updateindex = data.quantity;
                                               showModalBottomSheet(
                                                   isScrollControlled: true,
                                                   shape: RoundedRectangleBorder(
@@ -322,7 +325,8 @@ class PharmacyHome extends StatelessWidget {
                                                                               context);
                                                                           cubit.updatedrugs(
                                                                               uid: cubit.drugsid[data.uid!],
-                                                                              quantity: cubit.updateindex);
+                                                                              quantity: cubit.updateindex,
+                                                                              price: cubit.updatedrugpricecontroller.text);
                                                                         }),
                                                                       ),
                                                                     ],

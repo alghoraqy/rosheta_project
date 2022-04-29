@@ -140,6 +140,7 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
   void updatedrugs({
     required String uid,
     required dynamic quantity,
+    dynamic price,
   }) {
     emit(UpdateDrugsLoading());
     FirebaseFirestore.instance
@@ -147,11 +148,12 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
         .doc(uId)
         .collection('MyDrugs')
         .doc(uid)
-        .update({'quantity': quantity}).then((value) {
+        .update({'quantity': quantity, 'price': price}).then((value) {
       myDrugs = [];
       drugsuid = [];
       getMydrugs().then((value) {
         updateindex = 0;
+        updatedrugpricecontroller.text = '';
       });
       print('Updated success');
       print(drugsuid.length);
