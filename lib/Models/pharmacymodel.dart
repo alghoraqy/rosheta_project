@@ -31,4 +31,18 @@ class PharmacyModel {
     uId = json['uId'];
     drugsuid = json['drugsuid'];
   }
+
+  Map<String, dynamic> tomap() {
+    return {
+      'name': name,
+      'email': email,
+      'phone': phone,
+      'address': address,
+      'image': image,
+      'open': open,
+      'close': close,
+      'drugsuid': drugsuid,
+      'uId': uId,
+    };
+  }
 }

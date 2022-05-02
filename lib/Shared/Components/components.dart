@@ -860,8 +860,9 @@ Widget profileitem(context, {required String text}) {
 
 Widget editprofileform(
   context, {
-  required String text,
+  String? text,
   required TextEditingController controller,
+  bool secure = false,
 }) {
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 20),
@@ -876,8 +877,14 @@ Widget editprofileform(
       )
     ], color: HexColor('#FFFFFF'), borderRadius: BorderRadius.circular(10)),
     child: TextFormField(
+      obscureText: secure,
+      style: TextStyle(
+          fontSize: 17,
+          fontWeight: FontWeight.w300,
+          color: HexColor('#022247')),
       controller: controller,
       decoration: InputDecoration(
+          contentPadding: EdgeInsets.zero,
           border: InputBorder.none,
           hintStyle: TextStyle(
               fontSize: 17,
@@ -2014,4 +2021,43 @@ Widget addbutton(
       ),
     ),
   );
+}
+
+class FormFieldItem extends StatelessWidget {
+  TextInputType inputtype;
+  String name;
+  String validatemessage;
+  TextEditingController controller;
+  bool secure;
+  Widget? suffix;
+  FormFieldItem(
+      {required this.controller,
+      required this.inputtype,
+      required this.name,
+      required this.validatemessage,
+      required this.secure,
+      this.suffix});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      keyboardType: inputtype,
+      obscureText: secure,
+      controller: controller,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return validatemessage;
+        } else {
+          return null;
+        }
+      },
+      decoration: InputDecoration(
+          suffixIcon: suffix,
+          labelText: name,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(color: Colors.black, width: 2),
+          )),
+    );
+  }
 }

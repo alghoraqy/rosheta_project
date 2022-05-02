@@ -49,3 +49,9 @@ class GetPharmacyDrugInDataLoading extends UserStates {}
 class GetPharmacyDrugInDataSuccess extends UserStates {}
 
 class GetPharmacyDrugInDataError extends UserStates {}
+
+class UpdateUserDataSuccess extends UserStates {}
+
+class UpdateUserDataError extends UserStates {}
+
+class UpdateUserDataLoading extends UserStates {}

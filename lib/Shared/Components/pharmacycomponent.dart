@@ -22,7 +22,7 @@ Widget buildIcon({
 Widget searchBox(context,
     {IconData? icon, String text = 'Search', VoidCallback? onTap}) {
   return Padding(
-    padding: const EdgeInsets.only(left: 20,right: 20),
+    padding: const EdgeInsets.only(left: 20, right: 20),
     child: Container(
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
@@ -34,7 +34,6 @@ Widget searchBox(context,
       ]),
       width: MediaQuery.of(context).size.width,
       child: TextFormField(
-
         onTap: onTap,
         decoration: InputDecoration(
           fillColor: Colors.white,
@@ -56,9 +55,13 @@ Widget searchBox(context,
 }
 
 Widget buildTextFormField(context,
-    {required String text, var style, double? width}) {
+    {String? text,
+    var style,
+    double? width,
+    TextEditingController? controller,
+    double? padding = 20}) {
   return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 20),
+    padding: EdgeInsets.symmetric(horizontal: padding!),
     child: Container(
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
@@ -70,6 +73,7 @@ Widget buildTextFormField(context,
       ]),
       width: width,
       child: TextFormField(
+        controller: controller,
         decoration: InputDecoration(
           fillColor: Colors.white,
           filled: true,
@@ -148,7 +152,8 @@ Widget buildBottom(
   context, {
   required VoidCallback onPressed,
   IconData icon = Icons.add,
-  required String text, Color color=Colors.lightBlueAccent,
+  required String text,
+  Color color = Colors.lightBlueAccent,
   double width = 152,
 }) {
   return SizedBox(
@@ -200,22 +205,21 @@ void navigateTo(context, widget) {
 
 Widget buildOrderItem(context, {required String title}) {
   return Padding(
-    padding: const EdgeInsets.only(left: 20,right: 20,bottom: 10),
+    padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
     child: Container(
       width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(.5),
-              spreadRadius: 0,
-              blurRadius: 7,
-              offset: const Offset(0, 6.0),
-            )
-          ]
-      ),
-      child: ExpansionTileCard(title: Text(title),
-        contentPadding: const EdgeInsets.only(left: 5,right: 10),
+      decoration:
+          BoxDecoration(borderRadius: BorderRadius.circular(10), boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(.5),
+          spreadRadius: 0,
+          blurRadius: 7,
+          offset: const Offset(0, 6.0),
+        )
+      ]),
+      child: ExpansionTileCard(
+        title: Text(title),
+        contentPadding: const EdgeInsets.only(left: 5, right: 10),
         borderRadius: BorderRadius.circular(10),
         initialPadding: EdgeInsets.zero,
         baseColor: Colors.white,
@@ -246,10 +250,9 @@ Widget buildOrderItem(context, {required String title}) {
                     Expanded(
                       child: Text(
                         '+201020337979',
-                        style: Theme.of(context)
-                            .textTheme
-                            .caption!
-                            .copyWith(fontWeight: FontWeight.bold,overflow: TextOverflow.ellipsis),
+                        style: Theme.of(context).textTheme.caption!.copyWith(
+                            fontWeight: FontWeight.bold,
+                            overflow: TextOverflow.ellipsis),
                       ),
                     ),
                   ],
@@ -278,10 +281,10 @@ Widget buildOrderItem(context, {required String title}) {
                     Expanded(
                       child: Text(
                         'name of street, 25',
-                        style: Theme.of(context)
-                            .textTheme
-                            .caption!
-                            .copyWith(fontWeight: FontWeight.bold,overflow: TextOverflow.ellipsis,),
+                        style: Theme.of(context).textTheme.caption!.copyWith(
+                              fontWeight: FontWeight.bold,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                       ),
                     ),
                   ],
@@ -317,7 +320,8 @@ Widget buildOrderItem(context, {required String title}) {
                           style: Theme.of(context)
                               .textTheme
                               .bodyText1!
-                              .copyWith(fontWeight: FontWeight.bold, fontSize: 13),
+                              .copyWith(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
                         ),
                         Text(
                           'Item Name',
@@ -342,7 +346,8 @@ Widget buildOrderItem(context, {required String title}) {
                           style: Theme.of(context)
                               .textTheme
                               .bodyText1!
-                              .copyWith(fontWeight: FontWeight.bold, fontSize: 13),
+                              .copyWith(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
                         ),
                         Text(
                           'Item Price',
@@ -367,7 +372,8 @@ Widget buildOrderItem(context, {required String title}) {
                           style: Theme.of(context)
                               .textTheme
                               .bodyText1!
-                              .copyWith(fontWeight: FontWeight.bold, fontSize: 13),
+                              .copyWith(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
                         ),
                         Text(
                           'Item Quantity',
@@ -392,7 +398,8 @@ Widget buildOrderItem(context, {required String title}) {
                           style: Theme.of(context)
                               .textTheme
                               .bodyText1!
-                              .copyWith(fontWeight: FontWeight.bold, fontSize: 13),
+                              .copyWith(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
                         ),
                         Text(
                           'total ',
@@ -415,7 +422,8 @@ Widget buildOrderItem(context, {required String title}) {
               ],
             ),
           ),
-        ],),
+        ],
+      ),
     ),
   );
 }

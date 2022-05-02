@@ -15,6 +15,28 @@ class PharmacyEditProfile extends StatelessWidget {
     return BlocConsumer<PharmacyCubit, PharmacyStates>(
       listener: (context, state) {},
       builder: (context, state) {
+        TextEditingController editnamecontroller = TextEditingController();
+        TextEditingController editemailcontroller = TextEditingController();
+        TextEditingController editphonecontroller = TextEditingController();
+        TextEditingController editopencontroller = TextEditingController();
+        TextEditingController editclosecontroller = TextEditingController();
+        TextEditingController editaddresscontroller = TextEditingController();
+        TextEditingController editpasswordcontroller = TextEditingController();
+        TextEditingController confirmeditpasswordcontroller =
+            TextEditingController();
+
+        editnamecontroller.text =
+            PharmacyCubit.get(context).pharmacyModel!.name!;
+        editemailcontroller.text =
+            PharmacyCubit.get(context).pharmacyModel!.email!;
+        editphonecontroller.text =
+            PharmacyCubit.get(context).pharmacyModel!.phone!;
+        editaddresscontroller.text =
+            PharmacyCubit.get(context).pharmacyModel!.address!;
+        editopencontroller.text =
+            PharmacyCubit.get(context).pharmacyModel!.open!;
+        editclosecontroller.text =
+            PharmacyCubit.get(context).pharmacyModel!.close!;
         PharmacyCubit cubit = PharmacyCubit.get(context);
         return Scaffold(
             backgroundColor: HexColor('#022247'),
@@ -38,24 +60,25 @@ class PharmacyEditProfile extends StatelessWidget {
                     child: Stack(
                       alignment: Alignment.bottomRight,
                       children: [
-                        const CircleAvatar(
+                        CircleAvatar(
+                          backgroundColor: Colors.white,
                           radius: 70,
-                          backgroundImage: NetworkImage(
-                              'https://s3-eu-west-1.amazonaws.com/forasna/uploads/logos/clogo_2018-08-02-13-32-50_b7tjXmVP4Tt4ZIiZnqD8wgXX.jpg'),
+                          backgroundImage:
+                              NetworkImage('${cubit.pharmacyModel!.image}'),
                         ),
-                        SizedBox(
-                          width: 40,
-                          height: 40,
-                          child: FloatingActionButton(
-                            heroTag: null,
-                            onPressed: () {},
-                            child: const Icon(
-                              Icons.camera_alt,
-                              color: Colors.white,
-                            ),
-                            backgroundColor: HexColor('48BC98'),
-                          ),
-                        ),
+                        // SizedBox(
+                        //   width: 40,
+                        //   height: 40,
+                        //   child: FloatingActionButton(
+                        //     heroTag: null,
+                        //     onPressed: () {},
+                        //     child: const Icon(
+                        //       Icons.camera_alt,
+                        //       color: Colors.white,
+                        //     ),
+                        //     backgroundColor: HexColor('48BC98'),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
@@ -64,8 +87,11 @@ class PharmacyEditProfile extends StatelessWidget {
                   height: 20,
                 ),
                 Expanded(
+                  flex: 3,
                   child: Container(
                     width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 20),
                     decoration: BoxDecoration(
                       color: HexColor('F8F8F8'),
                       borderRadius: BorderRadius.circular(20),
@@ -75,102 +101,89 @@ class PharmacyEditProfile extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(
-                            height: 20,
+                          editprofileform(context,
+                              controller: editnamecontroller),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 60,
                           ),
-                          buildTextFormField(
-                            context,
-                            text: 'Olivia Michel',
-                            style:
-                                Theme.of(context).textTheme.overline!.copyWith(
-                                      color: HexColor('022247'),
-                                    ),
+                          editprofileform(context,
+                              controller: editemailcontroller),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 60,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 15),
-                            child: buildTextFormField(
-                              context,
-                              text: 'olivia_michel@gmail.com',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .overline!
-                                  .copyWith(
-                                    color: HexColor('022247'),
-                                  ),
-                            ),
+                          editprofileform(context,
+                              controller: editphonecontroller),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 60,
                           ),
-                          buildTextFormField(
-                            context,
-                            text: '+201234567891',
-                            style:
-                                Theme.of(context).textTheme.overline!.copyWith(
-                                      color: HexColor('022247'),
-                                    ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 15),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 4,
-                                  child: Container(
-                                      child: profileitem(context,
-                                          text: 'name of street, details ')),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 4,
+                                child: Container(
+                                  child: editprofileform(context,
+                                      controller: editaddresscontroller),
                                 ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Expanded(
-                                    flex: 1,
-                                    child: locatonmap(context,
-                                        hexcolor: '#35C2DD'))
-                              ],
-                            ),
+                              ),
+                              SizedBox(
+                                width: 3,
+                              ),
+                              Expanded(
+                                  flex: 1,
+                                  child:
+                                      locatonmap(context, hexcolor: '#35C2DD'))
+                            ],
                           ),
-                          buildTextFormField(context,
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 60,
+                          ),
+                          editprofileform(context,
                               text: 'New Password',
-                              style: Theme.of(context).textTheme.overline),
-                          const SizedBox(
-                            height: 15,
+                              secure: true,
+                              controller: editpasswordcontroller),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 60,
                           ),
-                          buildTextFormField(context,
-                              text: 'Confirm Password',
-                              style: Theme.of(context).textTheme.overline),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 15),
-                            child: Row(
-                              children: [
-                                buildTextFormField(
-                                  context,
-                                  text: '07:00 AM',
-                                  width: MediaQuery.of(context).size.width / 2 -
-                                      40,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .overline!
-                                      .copyWith(
-                                        color: HexColor('#022247'),
-                                      ),
-                                ),
-                                const Spacer(),
-                                buildTextFormField(
-                                  context,
-                                  text: '11:30 PM',
-                                  width: MediaQuery.of(context).size.width / 2 -
-                                      40,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .overline!
-                                      .copyWith(
-                                        color: HexColor('022247'),
-                                      ),
-                                ),
-                              ],
-                            ),
+                          editprofileform(context,
+                              text: 'New Password',
+                              secure: true,
+                              controller: confirmeditpasswordcontroller),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 60,
                           ),
-                          const SizedBox(
-                            height: 10,
+                          Row(
+                            children: [
+                              buildTextFormField(
+                                context,
+                                padding: 2,
+                                controller: editopencontroller,
+                                width:
+                                    MediaQuery.of(context).size.width / 2 - 30,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .overline!
+                                    .copyWith(
+                                      color: HexColor('#022247'),
+                                    ),
+                              ),
+                              const Spacer(),
+                              buildTextFormField(
+                                context,
+                                padding: 2,
+                                controller: editclosecontroller,
+                                width:
+                                    MediaQuery.of(context).size.width / 2 - 30,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .overline!
+                                    .copyWith(
+                                      color: HexColor('022247'),
+                                    ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 60,
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -257,7 +270,15 @@ class PharmacyEditProfile extends StatelessWidget {
                               child: userbutton(context,
                                   text: 'Save Changes',
                                   imageroute: 'assets/images/save.png',
-                                  onpressed: () {}),
+                                  onpressed: () {
+                                cubit.updatephamacy(
+                                    name: editnamecontroller.text,
+                                    email: editemailcontroller.text,
+                                    phone: editphonecontroller.text,
+                                    address: editaddresscontroller.text,
+                                    open: editopencontroller.text,
+                                    close: editclosecontroller.text);
+                              }),
                             ),
                           ),
                         ],

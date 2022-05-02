@@ -1,8 +1,10 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:rosheta_project/Bloc/States/states.dart';
 import 'package:rosheta_project/Models/articlesmodel.dart';
 import 'package:rosheta_project/Models/drugsmodel.dart';
@@ -153,6 +155,31 @@ class UserCubit extends Cubit<UserStates> {
     }).catchError((error) {
       print('Get Pharmacy Drug In Data Error : ${error.toString()}');
       emit(GetPharmacyDrugInDataError());
+    });
+  }
+
+  void updateUser({
+    required String name,
+    required String email,
+    required String phone,
+    required String address,
+  }) {
+    UserModel model = UserModel(
+        name: name,
+        email: email,
+        phone: phone,
+        uId: userModel!.uId,
+        address: address,
+        image: userModel!.image);
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(model.uId)
+        .update(model.tomap())
+        .then((value) {
+      getuserData();
+      emit(UpdateUserDataSuccess());
+    }).catchError((error) {
+      emit(UpdateUserDataError());
     });
   }
 }

@@ -12,7 +12,7 @@ class UserProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserCubit, UserStates>(
-        listener: ((context, state) {}),
+        listener: (context, state) {},
         builder: (context, states) {
           UserCubit cubit = UserCubit.get(context);
           return Scaffold(
@@ -22,20 +22,22 @@ class UserProfile extends StatelessWidget {
                 children: [
                   Expanded(
                     flex: 1,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.white,
-                              radius: MediaQuery.of(context).size.height / 12,
-                              backgroundImage:
-                                  NetworkImage(cubit.userModel!.image!),
-                            ),
-                          ],
+                    child: SingleChildScrollView(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: Colors.white,
+                                radius: MediaQuery.of(context).size.height / 12,
+                                backgroundImage:
+                                    NetworkImage(cubit.userModel!.image!),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

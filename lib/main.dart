@@ -9,7 +9,12 @@ import 'package:rosheta_project/Bloc/Trialcubit/trial_cubit.dart';
 import 'package:rosheta_project/Bloc/pharmacy/pharmacy_cubit.dart';
 import 'package:rosheta_project/Bloc/register/registercubit.dart';
 import 'package:rosheta_project/Shared/Network/Local/cash_helper.dart';
+import 'package:rosheta_project/modules/Pharmacy/Pharmacymain/pharmacy_editprofile.dart';
 import 'package:rosheta_project/modules/Pharmacy/Pharmacymaster/pharmacymaster.dart';
+import 'package:rosheta_project/modules/User/usermain/edit_profile.dart';
+import 'package:rosheta_project/modules/login/login.dart';
+import 'package:rosheta_project/modules/signUp/sign_up3.dart';
+import 'package:rosheta_project/modules/signUp/sign_uppharmacy.dart';
 import 'package:rosheta_project/modules/splash/splash.dart';
 
 void main(List<String> args) async {
@@ -98,7 +103,7 @@ class MyApp extends StatelessWidget {
                 color: HexColor('#022247'),
               ),
             )),
-        home: SplashScreen(),
+        home: LoginScreen(),
         builder: (context, widget) {
           return MediaQuery(
             data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),

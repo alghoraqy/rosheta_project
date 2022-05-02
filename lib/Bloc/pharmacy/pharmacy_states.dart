@@ -60,3 +60,7 @@ class PutuIdErrror extends PharmacyStates {
 class IncreaseUpdate extends PharmacyStates {}
 
 class DecreaseUpdate extends PharmacyStates {}
+
+class UpdatePharmacyDataSuccess extends PharmacyStates {}
+
+class UpdatePharmacyDataError extends PharmacyStates {}

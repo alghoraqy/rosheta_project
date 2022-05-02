@@ -11,6 +11,15 @@ class EditProfile extends StatelessWidget {
     return BlocConsumer<UserCubit, UserStates>(
       listener: (context, states) {},
       builder: (context, states) {
+        TextEditingController editnamecontroller = TextEditingController();
+        TextEditingController editemailcontroller = TextEditingController();
+        TextEditingController editphonecontroller = TextEditingController();
+        TextEditingController editaddresscontroller = TextEditingController();
+
+        editnamecontroller.text = UserCubit.get(context).userModel!.name!;
+        editemailcontroller.text = UserCubit.get(context).userModel!.email!;
+        editphonecontroller.text = UserCubit.get(context).userModel!.phone!;
+        editaddresscontroller.text = UserCubit.get(context).userModel!.address!;
         UserCubit cubit = UserCubit.get(context);
         return Scaffold(
           backgroundColor: HexColor('#022247'),
@@ -30,11 +39,9 @@ class EditProfile extends StatelessWidget {
                           CircleAvatar(
                             backgroundColor: Colors.white,
                             radius: MediaQuery.of(context).size.height / 12,
-                            child: Image(
-                              image: AssetImage('assets/images/female.png'),
-                              height: 100,
-                            ),
-                          ),
+                            backgroundImage:
+                                NetworkImage(cubit.userModel!.image!),
+                          )
                         ],
                       ),
                     ),
@@ -57,15 +64,18 @@ class EditProfile extends StatelessWidget {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          profileitem(context, text: 'Olivia Michael'),
+                          editprofileform(context,
+                              controller: editnamecontroller),
                           SizedBox(
                             height: MediaQuery.of(context).size.height / 60,
                           ),
-                          profileitem(context, text: 'olivia_michel@gmail.com'),
+                          editprofileform(context,
+                              controller: editemailcontroller),
                           SizedBox(
                             height: MediaQuery.of(context).size.height / 60,
                           ),
-                          profileitem(context, text: '+20123456789'),
+                          editprofileform(context,
+                              controller: editphonecontroller),
                           SizedBox(
                             height: MediaQuery.of(context).size.height / 60,
                           ),
@@ -74,8 +84,9 @@ class EditProfile extends StatelessWidget {
                               Expanded(
                                 flex: 4,
                                 child: Container(
-                                    child: profileitem(context,
-                                        text: 'name of street, details ')),
+                                  child: editprofileform(context,
+                                      controller: editaddresscontroller),
+                                ),
                               ),
                               SizedBox(
                                 width: 3,
@@ -91,12 +102,14 @@ class EditProfile extends StatelessWidget {
                           ),
                           editprofileform(context,
                               text: 'New Password',
+                              secure: true,
                               controller: cubit.editpasswordcontroller),
                           SizedBox(
                             height: MediaQuery.of(context).size.height / 60,
                           ),
                           editprofileform(context,
                               text: 'Confirm Password',
+                              secure: true,
                               controller: cubit.confirmeditpasswordcontroller),
                           SizedBox(
                             height: MediaQuery.of(context).size.height / 30,
@@ -104,7 +117,13 @@ class EditProfile extends StatelessWidget {
                           userbutton(context,
                               text: 'Save Changes',
                               imageroute: 'assets/images/save.png',
-                              onpressed: () {})
+                              onpressed: () {
+                            cubit.updateUser(
+                                name: editnamecontroller.text,
+                                email: editemailcontroller.text,
+                                phone: editphonecontroller.text,
+                                address: editaddresscontroller.text);
+                          })
                         ],
                       ),
                     ),

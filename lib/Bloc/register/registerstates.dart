@@ -60,3 +60,19 @@ class GetDrugUidError extends RegisterStates {}
 class UploadeDrugsUidSuccess extends RegisterStates {}
 
 class UploadeDrugsUidError extends RegisterStates {}
+
+class Getprofileimagesuccess extends RegisterStates {}
+
+class GetprofileimageLoading extends RegisterStates {}
+
+class GetprofileimageError extends RegisterStates {}
+
+class UploadeProfileImageSuccess extends RegisterStates {}
+
+class UploadeProfileImageLoading extends RegisterStates {}
+
+class UploadeProfileImageError extends RegisterStates {}
+
+class UpdateimageSuccess extends RegisterStates {}
+
+class UpdateimageError extends RegisterStates {}

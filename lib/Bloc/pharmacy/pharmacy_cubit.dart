@@ -204,4 +204,34 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
     print(updateindex);
     emit(DecreaseUpdate());
   }
+
+  void updatephamacy({
+    required String name,
+    required String email,
+    required String phone,
+    required String address,
+    required String open,
+    required String close,
+  }) {
+    PharmacyModel model = PharmacyModel(
+        name: name,
+        address: address,
+        email: email,
+        phone: phone,
+        image: pharmacyModel!.image,
+        open: open,
+        close: close,
+        uId: pharmacyModel!.uId,
+        drugsuid: pharmacyModel!.drugsuid);
+    FirebaseFirestore.instance
+        .collection('pharmacy')
+        .doc(model.uId)
+        .update(model.tomap())
+        .then((value) {
+      getpharmacydata();
+      emit(UpdatePharmacyDataSuccess());
+    }).catchError((error) {
+      emit(UpdatePharmacyDataError());
+    });
+  }
 }

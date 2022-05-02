@@ -1,15 +1,18 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:rosheta_project/Bloc/LoginStates/login_states.dart';
 import 'package:rosheta_project/Bloc/register/registerstates.dart';
 import 'package:rosheta_project/Models/drugsmodel.dart';
 import 'package:rosheta_project/Models/usermodel.dart';
 import 'package:rosheta_project/constant.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class RegisterCubit extends Cubit<RegisterStates> {
   RegisterCubit() : super(InitRegisterStates());
@@ -337,6 +340,58 @@ class RegisterCubit extends Cubit<RegisterStates> {
       emit(UploadeDrugsUidSuccess());
     }).catchError((error) {
       emit(UploadeDrugsUidError());
+    });
+  }
+
+  File? profileimage;
+
+  Future<void> getimage() async {
+    final pickedFile =
+        await ImagePicker.platform.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      profileimage = File(pickedFile.path);
+      emit(Getprofileimagesuccess());
+    } else {
+      print('nothing selected');
+      emit(GetprofileimageError());
+    }
+  }
+
+  void updateimage(
+      {required String collection,
+      required String uid,
+      required String image}) {
+    FirebaseFirestore.instance
+        .collection(collection)
+        .doc(uid)
+        .update({'image': image}).then((value) {
+      emit(UploadeProfileImageSuccess());
+    }).catchError((error) {
+      emit(UpdateimageError());
+    });
+  }
+
+  void uploadeimage({
+    required String storage,
+    required String collection,
+    required String uid,
+  }) {
+    emit(UploadeProfileImageLoading());
+    firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child('$storage/${Uri.file(profileimage!.path).pathSegments.last}')
+        .putFile(profileimage!)
+        .then((value) {
+      value.ref.getDownloadURL().then(
+        (value) {
+          updateimage(collection: collection, uid: uid, image: value);
+        },
+      ).catchError((error) {
+        emit(UploadeProfileImageError());
+      });
+    }).catchError((error) {
+      emit(UploadeProfileImageError());
     });
   }
 }

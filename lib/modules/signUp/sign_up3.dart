@@ -4,6 +4,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:rosheta_project/Bloc/register/registercubit.dart';
 import 'package:rosheta_project/Bloc/register/registerstates.dart';
 import 'package:rosheta_project/Shared/Components/components.dart';
+import 'package:rosheta_project/constant.dart';
 import 'package:rosheta_project/modules/Pharmacy/Pharmacymaster/pharmacymaster.dart';
 import 'package:rosheta_project/modules/User/usermaster/usermaster.dart';
 
@@ -58,30 +59,72 @@ class SignUp3 extends StatelessWidget {
                       Stack(
                           alignment: AlignmentDirectional.bottomEnd,
                           children: [
-                            CircleAvatar(
-                              backgroundColor: HexColor('#465C76'),
-                              radius: MediaQuery.of(context).size.height / 9,
-                              child: Icon(
-                                Icons.person,
-                                size: 150,
-                              ),
-                            ),
+                            cubit.profileimage == null
+                                ? CircleAvatar(
+                                    radius:
+                                        MediaQuery.of(context).size.height / 9,
+                                    backgroundColor: Colors.white,
+                                    backgroundImage: cubit.isuser
+                                        ? NetworkImage(
+                                            'https://firebasestorage.googleapis.com/v0/b/rosheta-scanner.appspot.com/o/female.png?alt=media&token=a2b02189-ab26-4dfb-ac7b-21ea0a9b4eed')
+                                        : NetworkImage(
+                                            'https://en.pimg.jp/065/798/123/1/65798123.jpg'),
+                                  )
+                                : CircleAvatar(
+                                    radius:
+                                        MediaQuery.of(context).size.height / 9,
+                                    backgroundColor: Colors.white,
+                                    backgroundImage:
+                                        FileImage(cubit.profileimage!)),
                             FloatingActionButton(
                                 backgroundColor: HexColor('#48BC98'),
                                 child: Icon(
                                   Icons.camera_alt,
                                   size: 30,
                                 ),
-                                onPressed: () {}),
+                                onPressed: () {
+                                  cubit.getimage().then((value) {
+                                    cubit.uploadeimage(
+                                        storage:
+                                            cubit.isuser ? 'users' : 'pharmacy',
+                                        collection:
+                                            cubit.isuser ? 'users' : 'pharmacy',
+                                        uid: uId!);
+                                  });
+                                }),
                           ]),
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 11,
                       ),
-                      LoginButton(context, text: 'Confirm', onpressed: () {
-                        cubit.isuser
-                            ? navigateto(context, UserMaster())
-                            : cubit.getAlldrugs();
-                      })
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: MaterialButton(
+                          padding: EdgeInsets.zero,
+                          height: 55,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(13)),
+                          color: HexColor('#48BC98'),
+                          textColor: Colors.white,
+                          onPressed: () {
+                            cubit.isuser
+                                ? navigateto(context, UserMaster())
+                                : cubit.getAlldrugs();
+                          },
+                          child: states is UploadeProfileImageLoading
+                              ? Center(
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : Text(
+                                  'Confirm',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
