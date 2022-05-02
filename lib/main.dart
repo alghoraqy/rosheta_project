@@ -103,7 +103,7 @@ class MyApp extends StatelessWidget {
                 color: HexColor('#022247'),
               ),
             )),
-        home: LoginScreen(),
+        home: SplashScreen(),
         builder: (context, widget) {
           return MediaQuery(
             data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
