@@ -17,8 +17,9 @@ class LoginCubit extends Cubit<LoginStates> {
   var formkey = GlobalKey<FormState>();
   bool isuser = true;
 
-  void userLogin(context, {required String email, required String password}) {
-    FirebaseAuth.instance
+  Future<void> userLogin(context,
+      {required String email, required String password}) {
+    return FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password)
         .then((value) {
       print(value.user!.email);

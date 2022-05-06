@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -8,6 +9,8 @@ import 'package:rosheta_project/Shared/Network/Local/cash_helper.dart';
 import 'package:rosheta_project/constant.dart';
 import 'package:rosheta_project/modules/Pharmacy/Pharmacymaster/pharmacymaster.dart';
 import 'package:rosheta_project/modules/User/usermaster/usermaster.dart';
+import 'package:rosheta_project/modules/login/joinus.dart';
+import 'package:rosheta_project/modules/signUp/sign_up0.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -16,19 +19,23 @@ class LoginScreen extends StatelessWidget {
       listener: (context, states) {
         if (states is LoginFilterUser) {
           CashHelper.saveData(key: 'uId', value: states.uId).then((value) {
-            uId = states.uId;
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) {
-              return UserMaster();
-            }));
+            CashHelper.saveData(key: 'isuser', value: true).then((value) {
+              uId = states.uId;
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) {
+                return UserMaster();
+              }));
+            });
           });
         } else if (states is LoginFilterPharmacy) {
           CashHelper.saveData(key: 'uId', value: states.uId).then((value) {
-            uId = states.uId;
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) {
-              return PharmacyMaster();
-            }));
+            CashHelper.saveData(key: 'isuser', value: false).then((value) {
+              uId = states.uId;
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) {
+                return PharmacyMaster();
+              }));
+            });
           });
         }
       },
@@ -44,7 +51,10 @@ class LoginScreen extends StatelessWidget {
             title: actionbutton(
                 icon: Icons.arrow_back_outlined,
                 onpressed: () {
-                  Navigator.pop(context);
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) {
+                    return JoinUs();
+                  }));
                 }),
           ),
           body: SingleChildScrollView(

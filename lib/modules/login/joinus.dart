@@ -14,7 +14,13 @@ class JoinUs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        leadingWidth: 0,
+        leading: Icon(
+          Icons.abc,
+          color: HexColor('#022247'),
+        ),
+      ),
       backgroundColor: HexColor('#022247'),
       body: SingleChildScrollView(
         child: Column(

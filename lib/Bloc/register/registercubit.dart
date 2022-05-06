@@ -40,9 +40,9 @@ class RegisterCubit extends Cubit<RegisterStates> {
   var openincontroller = TextEditingController();
   var closeincontroller = TextEditingController();
 
-  var formkey1 = GlobalKey<FormState>();
-  var formkey2 = GlobalKey<FormState>();
-  var formkey3 = GlobalKey<FormState>();
+  // GlobalKey<FormState> formkey1 = GlobalKey<FormState>();
+  // GlobalKey<FormState> formkey2 = GlobalKey<FormState>();
+  // GlobalKey<FormState> formkey3 = GlobalKey<FormState>();
 
   var val = 1;
   void onchangeradio(value) {
@@ -127,12 +127,12 @@ class RegisterCubit extends Cubit<RegisterStates> {
 
   String? uid;
 
-  void userregister({
+  Future<void> userregister({
     required String email,
     required String name,
     required String password,
   }) {
-    FirebaseAuth.instance
+    return FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {
       uid = value.user!.uid;
@@ -143,12 +143,12 @@ class RegisterCubit extends Cubit<RegisterStates> {
     });
   }
 
-  void pharmacyregister({
+  Future<void> pharmacyregister({
     required String email,
     required String name,
     required String password,
   }) {
-    FirebaseAuth.instance
+    return FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {
       uid = value.user!.uid;
@@ -159,12 +159,12 @@ class RegisterCubit extends Cubit<RegisterStates> {
     });
   }
 
-  void createuser1({
+  Future<void> createuser1({
     required String name,
     required String email,
     required String uId,
   }) {
-    FirebaseFirestore.instance.collection('users').doc(uId).set({
+    return FirebaseFirestore.instance.collection('users').doc(uId).set({
       'name': name,
       'email': email,
       'image':
@@ -178,12 +178,12 @@ class RegisterCubit extends Cubit<RegisterStates> {
     });
   }
 
-  void createpharmacy1({
+  Future<void> createpharmacy1({
     required String name,
     required String email,
     required String uId,
   }) {
-    FirebaseFirestore.instance.collection('pharmacy').doc(uId).set({
+    return FirebaseFirestore.instance.collection('pharmacy').doc(uId).set({
       'name': name,
       'email': email,
       'image': 'https://en.pimg.jp/065/798/123/1/65798123.jpg',
@@ -196,12 +196,12 @@ class RegisterCubit extends Cubit<RegisterStates> {
     });
   }
 
-  void createuser2({
+  Future<void> createuser2({
     required String address,
     required String phone,
     required String uId,
   }) {
-    FirebaseFirestore.instance.collection('users').doc(uid).update({
+    return FirebaseFirestore.instance.collection('users').doc(uid).update({
       'address': address,
       'phone': phone,
     }).then((value) {
@@ -211,12 +211,12 @@ class RegisterCubit extends Cubit<RegisterStates> {
     });
   }
 
-  void createpharmacy2({
+  Future<void> createpharmacy2({
     required String address,
     required String phone,
     required String uId,
   }) {
-    FirebaseFirestore.instance.collection('pharmacy').doc(uid).update({
+    return FirebaseFirestore.instance.collection('pharmacy').doc(uid).update({
       'address': address,
       'phone': phone,
     }).then((value) {
@@ -226,12 +226,12 @@ class RegisterCubit extends Cubit<RegisterStates> {
     });
   }
 
-  void createpharmacy3({
+  Future<void> createpharmacy3({
     required String open,
     required String close,
     required String uId,
   }) {
-    FirebaseFirestore.instance.collection('pharmacy').doc(uid).update({
+    return FirebaseFirestore.instance.collection('pharmacy').doc(uid).update({
       'open': open,
       'close': close,
     }).then((value) {

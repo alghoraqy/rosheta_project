@@ -7,7 +7,8 @@ import 'package:rosheta_project/Shared/Components/components.dart';
 import 'package:rosheta_project/modules/signUp/sign_up3.dart';
 
 class SignUpUser extends StatelessWidget {
-  const SignUpUser({Key? key}) : super(key: key);
+  SignUpUser({Key? key}) : super(key: key);
+  GlobalKey<FormState> formkey3 = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class SignUpUser extends StatelessWidget {
           ),
           body: SingleChildScrollView(
             child: Form(
-              key: cubit.formkey3,
+              key: formkey3,
               child: Column(
                 children: [
                   Image(
@@ -100,7 +101,7 @@ class SignUpUser extends StatelessWidget {
                           ],
                         ),
                         LoginButton(context, text: 'Next', onpressed: () {
-                          cubit.formkey3.currentState!.validate()
+                          formkey3.currentState!.validate()
                               ? navigateto(context, SignUp3())
                               : null;
                         })

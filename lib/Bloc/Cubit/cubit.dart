@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,10 +11,12 @@ import 'package:rosheta_project/Models/articlesmodel.dart';
 import 'package:rosheta_project/Models/drugsmodel.dart';
 import 'package:rosheta_project/Models/pharmacymodel.dart';
 import 'package:rosheta_project/Models/usermodel.dart';
+import 'package:rosheta_project/Shared/Network/Local/cash_helper.dart';
 import 'package:rosheta_project/constant.dart';
 import 'package:rosheta_project/modules/User/usermain/userarticles.dart';
 import 'package:rosheta_project/modules/User/usermain/userhome.dart';
 import 'package:rosheta_project/modules/User/usermain/userprofile.dart';
+import 'package:rosheta_project/modules/login/login.dart';
 
 class UserCubit extends Cubit<UserStates> {
   UserCubit() : super(InitStates());
@@ -63,6 +66,7 @@ class UserCubit extends Cubit<UserStates> {
   void getuserData() {
     emit(GetUserDataLoading());
     FirebaseFirestore.instance.collection('users').doc(uId).get().then((value) {
+      print('get user data success');
       userModel = UserModel.fromjson(value.data()!);
       emit(GetUserDataSuccess());
     }).catchError((error) {
@@ -181,5 +185,14 @@ class UserCubit extends Cubit<UserStates> {
     }).catchError((error) {
       emit(UpdateUserDataError());
     });
+  }
+
+  Future<void> signOut(context) {
+    return FirebaseAuth.instance.signOut().then((value) {
+      CashHelper.removeData().then((value) {
+        uId = null;
+        emit(SignOutSuccessUser());
+      });
+    }).catchError((error) {});
   }
 }

@@ -30,7 +30,7 @@ class CashHelper {
     return prefs!.get(key);
   }
 
-  static Future<bool> removeData(String key) {
-    return prefs!.remove(key);
+  static Future<bool> removeData() async {
+    return await prefs!.clear();
   }
 }

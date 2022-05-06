@@ -1,13 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:rosheta_project/Bloc/pharmacy/pharmacy_cubit.dart';
 import 'package:rosheta_project/Bloc/pharmacy/pharmacy_states.dart';
 import 'package:rosheta_project/Shared/Components/components.dart';
 import 'package:rosheta_project/Shared/Components/pharmacycomponent.dart';
+import 'package:rosheta_project/Shared/Network/Local/cash_helper.dart';
+import 'package:rosheta_project/constant.dart';
 import 'package:rosheta_project/modules/User/contactus.dart';
 import 'package:rosheta_project/modules/User/upgrade.dart';
 import 'package:rosheta_project/modules/User/usermaster/notifications.dart';
+import 'package:rosheta_project/modules/login/login.dart';
 import 'package:rosheta_project/modules/mywallet.dart';
 
 class PharmacyMaster extends StatelessWidget {
@@ -16,12 +21,23 @@ class PharmacyMaster extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PharmacyCubit, PharmacyStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is SignOutSuccessPharmacy) {
+          Phoenix.rebirth(context);
+        }
+      },
       builder: (context, state) {
         PharmacyCubit cubit = PharmacyCubit.get(context);
         return cubit.myDrugs.isEmpty && cubit.pharmacyModel == null
-            ? Center(
-                child: CircularProgressIndicator(),
+            ? Container(
+                width: double.infinity,
+                height: double.infinity,
+                color: HexColor('#022247'),
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                ),
               )
             : Scaffold(
                 key: cubit.scaffoldKey,
@@ -185,7 +201,15 @@ class PharmacyMaster extends StatelessWidget {
                                     drawitem(
                                         text: 'Logout',
                                         icon: Icons.logout_outlined,
-                                        onpressed: () {})
+                                        onpressed: () {
+                                          cubit.signOut(context).then((value) {
+                                            Navigator.pushReplacement(context,
+                                                MaterialPageRoute(
+                                                    builder: (context) {
+                                              return LoginScreen();
+                                            }));
+                                          });
+                                        })
                                   ],
                                 ),
                               ),

@@ -10,7 +10,8 @@ import 'package:rosheta_project/modules/signUp/onboarding.dart';
 import 'package:rosheta_project/modules/signUp/sign_up2.dart';
 
 class SignUp1 extends StatelessWidget {
-  const SignUp1({Key? key}) : super(key: key);
+  SignUp1({Key? key}) : super(key: key);
+  GlobalKey<FormState> formkey1 = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +19,9 @@ class SignUp1 extends StatelessWidget {
       listener: (context, states) {
         if (states is CreateSuccessStates) {
           CashHelper.saveData(key: 'uId', value: states.uId).then((value) {
+            CashHelper.saveData(
+                key: 'isuser',
+                value: RegisterCubit.get(context).isuser ? true : false);
             uId = states.uId;
             navigateto(context, SignUp2());
           });
@@ -47,7 +51,7 @@ class SignUp1 extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Form(
-                    key: cubit.formkey1,
+                    key: formkey1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -105,7 +109,7 @@ class SignUp1 extends StatelessWidget {
                           height: MediaQuery.of(context).size.height / 40,
                         ),
                         LoginButton(context, text: 'Next', onpressed: () {
-                          cubit.formkey1.currentState!.validate()
+                          formkey1.currentState!.validate()
                               ? cubit.isuser
                                   ? cubit.userregister(
                                       email: cubit

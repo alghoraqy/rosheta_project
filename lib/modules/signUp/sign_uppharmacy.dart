@@ -9,7 +9,8 @@ import 'package:rosheta_project/constant.dart';
 import 'package:rosheta_project/modules/signUp/sign_up3.dart';
 
 class SignUpPharmacy extends StatelessWidget {
-  const SignUpPharmacy({Key? key}) : super(key: key);
+  SignUpPharmacy({Key? key}) : super(key: key);
+  GlobalKey<FormState> formkey3 = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class SignUpPharmacy extends StatelessWidget {
           ),
           body: SingleChildScrollView(
             child: Form(
-              key: cubit.formkey3,
+              key: formkey3,
               child: Column(
                 children: [
                   Image(
@@ -56,7 +57,7 @@ class SignUpPharmacy extends StatelessWidget {
                           height: MediaQuery.of(context).size.height / 7.45,
                         ),
                         LoginButton(context, text: 'Next', onpressed: () {
-                          cubit.formkey3.currentState!.validate()
+                          formkey3.currentState!.validate()
                               ? cubit.createpharmacy3(
                                   open: cubit.openincontroller.text,
                                   close: cubit.closeincontroller.text,

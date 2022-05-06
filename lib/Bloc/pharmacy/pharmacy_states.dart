@@ -64,3 +64,5 @@ class DecreaseUpdate extends PharmacyStates {}
 class UpdatePharmacyDataSuccess extends PharmacyStates {}
 
 class UpdatePharmacyDataError extends PharmacyStates {}
+
+class SignOutSuccessPharmacy extends PharmacyStates {}

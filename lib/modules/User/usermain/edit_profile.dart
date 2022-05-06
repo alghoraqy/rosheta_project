@@ -6,16 +6,15 @@ import 'package:rosheta_project/Bloc/States/states.dart';
 import 'package:rosheta_project/Shared/Components/components.dart';
 
 class EditProfile extends StatelessWidget {
+  TextEditingController editnamecontroller = TextEditingController();
+  TextEditingController editemailcontroller = TextEditingController();
+  TextEditingController editphonecontroller = TextEditingController();
+  TextEditingController editaddresscontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserCubit, UserStates>(
       listener: (context, states) {},
       builder: (context, states) {
-        TextEditingController editnamecontroller = TextEditingController();
-        TextEditingController editemailcontroller = TextEditingController();
-        TextEditingController editphonecontroller = TextEditingController();
-        TextEditingController editaddresscontroller = TextEditingController();
-
         editnamecontroller.text = UserCubit.get(context).userModel!.name!;
         editemailcontroller.text = UserCubit.get(context).userModel!.email!;
         editphonecontroller.text = UserCubit.get(context).userModel!.phone!;

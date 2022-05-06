@@ -80,7 +80,10 @@ class UserProfile extends StatelessWidget {
                                   text: 'Edit Profile',
                                   imageroute: 'assets/images/edit.png',
                                   onpressed: () {
-                                navigateto(context, EditProfile());
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return EditProfile();
+                                }));
                               })
                             ],
                           ),

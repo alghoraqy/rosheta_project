@@ -55,3 +55,5 @@ class UpdateUserDataSuccess extends UserStates {}
 class UpdateUserDataError extends UserStates {}
 
 class UpdateUserDataLoading extends UserStates {}
+
+class SignOutSuccessUser extends UserStates {}

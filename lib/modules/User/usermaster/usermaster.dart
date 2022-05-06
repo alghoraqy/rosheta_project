@@ -1,16 +1,22 @@
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:rosheta_project/Bloc/Cubit/cubit.dart';
 import 'package:rosheta_project/Bloc/States/states.dart';
 import 'package:rosheta_project/Shared/Components/components.dart';
 import 'package:rosheta_project/Shared/Components/pharmacycomponent.dart';
+import 'package:rosheta_project/Shared/Network/Local/cash_helper.dart';
+import 'package:rosheta_project/constant.dart';
 import 'package:rosheta_project/modules/User/contactus.dart';
 import 'package:rosheta_project/modules/User/upgrade.dart';
 import 'package:rosheta_project/modules/User/usermaster/notifications.dart';
 import 'package:rosheta_project/modules/User/yourorders.dart';
+import 'package:rosheta_project/modules/login/joinus.dart';
+import 'package:rosheta_project/modules/login/login.dart';
 
 class UserMaster extends StatelessWidget {
   const UserMaster({Key? key}) : super(key: key);
@@ -18,7 +24,11 @@ class UserMaster extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserCubit, UserStates>(
-      listener: (context, states) {},
+      listener: (context, states) {
+        if (states is SignOutSuccessUser) {
+          Phoenix.rebirth(context);
+        }
+      },
       builder: (context, states) {
         UserCubit cubit = UserCubit.get(context);
         return cubit.articles.isNotEmpty && cubit.userModel != null
@@ -182,7 +192,9 @@ class UserMaster extends StatelessWidget {
                                     drawitem(
                                         text: 'Logout',
                                         icon: Icons.logout_outlined,
-                                        onpressed: () {})
+                                        onpressed: () {
+                                          cubit.signOut(context);
+                                        })
                                   ],
                                 ),
                               ),
@@ -201,8 +213,15 @@ class UserMaster extends StatelessWidget {
                   },
                 ),
               )
-            : Center(
-                child: CircularProgressIndicator(),
+            : Container(
+                width: double.infinity,
+                height: double.infinity,
+                color: HexColor('#022247'),
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                ),
               );
       },
     );

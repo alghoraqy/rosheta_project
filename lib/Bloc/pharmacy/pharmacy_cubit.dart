@@ -1,16 +1,19 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rosheta_project/Bloc/pharmacy/pharmacy_states.dart';
 import 'package:rosheta_project/Models/drugsmodel.dart';
 import 'package:rosheta_project/Models/pharmacymodel.dart';
+import 'package:rosheta_project/Shared/Network/Local/cash_helper.dart';
 import 'package:rosheta_project/constant.dart';
 import 'package:rosheta_project/modules/Pharmacy/Pharmacymain/pharmacyhome.dart';
 import 'package:rosheta_project/modules/Pharmacy/Pharmacymain/pharmacyprofile.dart';
 import 'package:rosheta_project/modules/Pharmacy/Pharmacymain/pharmacyreservation.dart';
+import 'package:rosheta_project/modules/login/login.dart';
 
 class PharmacyCubit extends Cubit<PharmacyStates> {
   PharmacyCubit() : super(PharmacyInitialStates());
@@ -233,5 +236,18 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
     }).catchError((error) {
       emit(UpdatePharmacyDataError());
     });
+  }
+
+  Future<void> signOut(context) {
+    return FirebaseAuth.instance.signOut().then((value) {
+      CashHelper.removeData().then((value) {
+        uId = null;
+        Navigator.pushAndRemoveUntil(context,
+            MaterialPageRoute(builder: (context) {
+          return LoginScreen();
+        }), (route) => false);
+        emit(SignOutSuccessPharmacy());
+      });
+    }).catchError((error) {});
   }
 }
