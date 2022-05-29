@@ -5,11 +5,15 @@ import 'package:rosheta_project/Bloc/Cubit/cubit.dart';
 import 'package:rosheta_project/Bloc/States/states.dart';
 import 'package:rosheta_project/Shared/Components/components.dart';
 
+import '../../../Shared/variable.dart';
+import '../../map/map_screen.dart';
+
 class EditProfile extends StatelessWidget {
   TextEditingController editnamecontroller = TextEditingController();
   TextEditingController editemailcontroller = TextEditingController();
   TextEditingController editphonecontroller = TextEditingController();
   TextEditingController editaddresscontroller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserCubit, UserStates>(
@@ -91,9 +95,9 @@ class EditProfile extends StatelessWidget {
                                 width: 3,
                               ),
                               Expanded(
-                                  flex: 1,
-                                  child:
-                                      locatonmap(context, hexcolor: '#35C2DD'))
+                                flex: 1,
+                                child: locatonmap(context, hexcolor: '#35C2DD',onPressed: (){navigateto(context, MapScreen());}),
+                              )
                             ],
                           ),
                           SizedBox(
@@ -121,7 +125,10 @@ class EditProfile extends StatelessWidget {
                                 name: editnamecontroller.text,
                                 email: editemailcontroller.text,
                                 phone: editphonecontroller.text,
-                                address: editaddresscontroller.text);
+                                address: editaddresscontroller.text,
+                              latitude: position!.latitude,
+                              longitude:position!.longitude,
+                            );
                           })
                         ],
                       ),

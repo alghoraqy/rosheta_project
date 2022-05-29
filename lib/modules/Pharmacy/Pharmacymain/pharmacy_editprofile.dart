@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -6,6 +6,8 @@ import 'package:rosheta_project/Bloc/pharmacy/pharmacy_cubit.dart';
 import 'package:rosheta_project/Bloc/pharmacy/pharmacy_states.dart';
 import 'package:rosheta_project/Shared/Components/components.dart';
 import 'package:rosheta_project/Shared/Components/pharmacycomponent.dart';
+import 'package:rosheta_project/Shared/variable.dart';
+import 'package:rosheta_project/modules/map/map_screen.dart';
 
 class PharmacyEditProfile extends StatelessWidget {
   const PharmacyEditProfile({Key? key}) : super(key: key);
@@ -125,13 +127,15 @@ class PharmacyEditProfile extends StatelessWidget {
                                       controller: editaddresscontroller),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 3,
                               ),
                               Expanded(
                                   flex: 1,
                                   child:
-                                      locatonmap(context, hexcolor: '#35C2DD'))
+                                      locatonmap(context, hexcolor: '#35C2DD',onPressed: (){
+                                        navigateto(context, const MapScreen());
+                                      }))
                             ],
                           ),
                           SizedBox(
@@ -277,7 +281,9 @@ class PharmacyEditProfile extends StatelessWidget {
                                     phone: editphonecontroller.text,
                                     address: editaddresscontroller.text,
                                     open: editopencontroller.text,
-                                    close: editclosecontroller.text);
+                                    close: editclosecontroller.text,
+                                longitude: position!.longitude,
+                                latitude: position!.latitude);
                               }),
                             ),
                           ),

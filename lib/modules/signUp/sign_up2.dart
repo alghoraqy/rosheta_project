@@ -4,6 +4,8 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:rosheta_project/Bloc/register/registercubit.dart';
 import 'package:rosheta_project/Bloc/register/registerstates.dart';
 import 'package:rosheta_project/Shared/Components/components.dart';
+import 'package:rosheta_project/Shared/variable.dart';
+import 'package:rosheta_project/modules/map/map_screen.dart';
 import 'package:rosheta_project/modules/signUp/%D9%8Dsign_upuser.dart';
 import 'package:rosheta_project/modules/signUp/sign_up0.dart';
 import 'package:rosheta_project/modules/signUp/sign_up3.dart';
@@ -79,7 +81,9 @@ class SignUp2 extends StatelessWidget {
                                 Expanded(
                                     flex: 1,
                                     child: locatonmap(context,
-                                        hexcolor: '#48BC98'))
+                                        hexcolor: '#48BC98', onPressed: () {
+                                      navigateto(context, MapScreen());
+                                    }))
                               ],
                             ),
                             SizedBox(
@@ -171,12 +175,20 @@ class SignUp2 extends StatelessWidget {
                               cubit.createuser2(
                                   address: cubit.useraddresscontroller.text,
                                   phone: cubit.userphonecontroller.text,
-                                  uId: cubit.uid!);
+                                  uId: cubit.uid!,
+                                  lat: position == null
+                                      ? 30.033333
+                                      : position!.latitude,
+                                  lng: position == null
+                                      ? 31.233334
+                                      : position!.longitude);
                             } else {
                               cubit.createpharmacy2(
                                   address: cubit.pharmacyaddresscontroller.text,
                                   phone: cubit.pharmacyphonecontroller.text,
-                                  uId: cubit.uid!);
+                                  uId: cubit.uid!,
+                                  lat: position!.latitude,
+                                  lng: position!.longitude);
                             }
                           }
                           //   cubit.formkey2.currentState!.validate()? cubit.isuser?navigateto(context, SignUpUser()):navigateto(context, SignUpPharmacy()) :null;

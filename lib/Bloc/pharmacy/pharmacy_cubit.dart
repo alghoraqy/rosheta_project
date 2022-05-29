@@ -9,6 +9,7 @@ import 'package:rosheta_project/Bloc/pharmacy/pharmacy_states.dart';
 import 'package:rosheta_project/Models/drugsmodel.dart';
 import 'package:rosheta_project/Models/pharmacymodel.dart';
 import 'package:rosheta_project/Shared/Network/Local/cash_helper.dart';
+import 'package:rosheta_project/Shared/variable.dart';
 import 'package:rosheta_project/constant.dart';
 import 'package:rosheta_project/modules/Pharmacy/Pharmacymain/pharmacyhome.dart';
 import 'package:rosheta_project/modules/Pharmacy/Pharmacymain/pharmacyprofile.dart';
@@ -215,12 +216,16 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
     required String address,
     required String open,
     required String close,
+    required double latitude,
+    required double longitude,
   }) {
     PharmacyModel model = PharmacyModel(
         name: name,
         address: address,
         email: email,
         phone: phone,
+        longitude:latitude ,
+        latitude:latitude ,
         image: pharmacyModel!.image,
         open: open,
         close: close,
@@ -242,6 +247,7 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
     return FirebaseAuth.instance.signOut().then((value) {
       CashHelper.removeData().then((value) {
         uId = null;
+        position=null;
         Navigator.pushAndRemoveUntil(context,
             MaterialPageRoute(builder: (context) {
           return LoginScreen();

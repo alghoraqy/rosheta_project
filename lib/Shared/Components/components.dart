@@ -511,7 +511,7 @@ Widget addresscompnent(context) {
           SizedBox(
             width: 3,
           ),
-          Expanded(flex: 1, child: locatonmap(context, hexcolor: '#48BC98'))
+          Expanded(flex: 1, child: locatonmap(context, hexcolor: '#48BC98',onPressed: (){}))
         ],
       ),
       SizedBox(
@@ -590,14 +590,14 @@ Widget addresscompnent(context) {
   );
 }
 
-Widget locatonmap(context, {required String hexcolor}) {
+Widget locatonmap(context, {required String hexcolor,required VoidCallback onPressed}) {
   return Container(
     height: MediaQuery.of(context).size.height / 15,
     child: MaterialButton(
         padding: EdgeInsets.zero,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(13)),
         color: HexColor(hexcolor),
-        onPressed: () {},
+        onPressed: onPressed,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

@@ -200,10 +200,14 @@ class RegisterCubit extends Cubit<RegisterStates> {
     required String address,
     required String phone,
     required String uId,
+    required dynamic lat,
+    required dynamic lng,
   }) {
     return FirebaseFirestore.instance.collection('users').doc(uid).update({
       'address': address,
       'phone': phone,
+      'latitude': lat,
+      'longitude': lng,
     }).then((value) {
       emit(CreateSuccessStates2(uId));
     }).catchError((error) {
@@ -215,10 +219,14 @@ class RegisterCubit extends Cubit<RegisterStates> {
     required String address,
     required String phone,
     required String uId,
+    required dynamic lat,
+    required dynamic lng,
   }) {
     return FirebaseFirestore.instance.collection('pharmacy').doc(uid).update({
       'address': address,
       'phone': phone,
+      'latitude': lat,
+      'longitude': lng,
     }).then((value) {
       emit(CreateSuccessStates2(uId));
     }).catchError((error) {

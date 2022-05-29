@@ -7,6 +7,8 @@ class UserModel {
   String? address;
   String? image;
   String? uId;
+  dynamic latitude;
+  dynamic longitude;
 
   UserModel({
     required this.name,
@@ -15,15 +17,19 @@ class UserModel {
     required this.address,
     required this.image,
     required this.uId,
+    required this.longitude,
+    required this.latitude
   });
 
-  UserModel.fromjson(Map<String, dynamic> json) {
+  UserModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     email = json['email'];
     phone = json['phone'];
     address = json['address'];
     image = json['image'];
     uId = json['uId'];
+    longitude = json['longitude'];
+    latitude = json['latitude'];
   }
 
   Map<String, dynamic> tomap() {
@@ -34,6 +40,8 @@ class UserModel {
       'address': address,
       'image': image,
       'uId': uId,
+      'latitude': latitude,
+      'longitude': longitude,
     };
   }
 }

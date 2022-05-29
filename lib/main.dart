@@ -11,6 +11,7 @@ import 'package:rosheta_project/Bloc/LoginStates/login_states.dart';
 import 'package:rosheta_project/Bloc/States/states.dart';
 import 'package:rosheta_project/Bloc/Trialcubit/trial_cubit.dart';
 import 'package:rosheta_project/Bloc/Trialcubit/trial_states.dart';
+import 'package:rosheta_project/Bloc/map/map_cubit.dart';
 import 'package:rosheta_project/Bloc/pharmacy/pharmacy_cubit.dart';
 import 'package:rosheta_project/Bloc/pharmacy/pharmacy_states.dart';
 import 'package:rosheta_project/Bloc/register/registercubit.dart';
@@ -25,6 +26,9 @@ import 'package:rosheta_project/modules/login/login.dart';
 import 'package:rosheta_project/modules/signUp/sign_up3.dart';
 import 'package:rosheta_project/modules/signUp/sign_uppharmacy.dart';
 import 'package:rosheta_project/modules/splash/splash.dart';
+import 'package:rosheta_project/repository/map_repo.dart';
+
+import 'Shared/Network/remote/places_webservices.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -62,6 +66,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) {
           return LoginCubit();
+        }),
+        BlocProvider(create: (context) {
+          return MapsCubit(MapsRepository(PlacesWebservices()));
         }),
         BlocProvider(create: (context) {
           return RegisterCubit();

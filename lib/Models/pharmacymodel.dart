@@ -7,6 +7,8 @@ class PharmacyModel {
   String? open;
   String? close;
   String? uId;
+  dynamic latitude;
+  dynamic longitude;
   dynamic drugsuid;
 
   PharmacyModel({
@@ -18,6 +20,8 @@ class PharmacyModel {
     required this.open,
     required this.close,
     required this.uId,
+    required this.longitude,
+    required this.latitude,
     required this.drugsuid,
   });
   PharmacyModel.fromjson(Map<String, dynamic> json) {
@@ -29,6 +33,8 @@ class PharmacyModel {
     open = json['open'];
     close = json['close'];
     uId = json['uId'];
+    longitude = json['longitude'];
+    latitude = json['latitude'];
     drugsuid = json['drugsuid'];
   }
 
@@ -43,6 +49,8 @@ class PharmacyModel {
       'close': close,
       'drugsuid': drugsuid,
       'uId': uId,
+      'latitude': latitude,
+      'longitude': longitude,
     };
   }
 }

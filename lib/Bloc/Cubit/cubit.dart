@@ -1,11 +1,9 @@
-import 'dart:io';
-import 'dart:math';
+
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:rosheta_project/Bloc/States/states.dart';
 import 'package:rosheta_project/Models/articlesmodel.dart';
 import 'package:rosheta_project/Models/drugsmodel.dart';
@@ -16,7 +14,8 @@ import 'package:rosheta_project/constant.dart';
 import 'package:rosheta_project/modules/User/usermain/userarticles.dart';
 import 'package:rosheta_project/modules/User/usermain/userhome.dart';
 import 'package:rosheta_project/modules/User/usermain/userprofile.dart';
-import 'package:rosheta_project/modules/login/login.dart';
+
+import '../../Shared/variable.dart';
 
 class UserCubit extends Cubit<UserStates> {
   UserCubit() : super(InitStates());
@@ -41,14 +40,14 @@ class UserCubit extends Cubit<UserStates> {
 
   int current = 0;
   List<BottomNavigationBarItem> navList = [
-    BottomNavigationBarItem(
+    const BottomNavigationBarItem(
         icon: Icon(
           Icons.home_outlined,
         ),
         label: 'Home'),
-    BottomNavigationBarItem(
+    const BottomNavigationBarItem(
         icon: Icon(Icons.medical_services_outlined), label: 'Articles'),
-    BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profile'),
+    const BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profile'),
   ];
   void changenav(index) {
     current = index;
@@ -56,9 +55,9 @@ class UserCubit extends Cubit<UserStates> {
   }
 
   List<Widget> screens = [
-    UserHome(),
-    UserArticles(),
-    UserProfile(),
+    const UserHome(),
+    const UserArticles(),
+    const UserProfile(),
   ];
   var scaffoldkey = GlobalKey<ScaffoldState>();
 
@@ -67,7 +66,7 @@ class UserCubit extends Cubit<UserStates> {
     emit(GetUserDataLoading());
     FirebaseFirestore.instance.collection('users').doc(uId).get().then((value) {
       print('get user data success');
-      userModel = UserModel.fromjson(value.data()!);
+      userModel = UserModel.fromJson(value.data()!);
       emit(GetUserDataSuccess());
     }).catchError((error) {
       print(error.toString());
@@ -167,10 +166,14 @@ class UserCubit extends Cubit<UserStates> {
     required String email,
     required String phone,
     required String address,
+    required double latitude,
+    required double longitude,
   }) {
     UserModel model = UserModel(
         name: name,
         email: email,
+        latitude:latitude ,
+        longitude:longitude ,
         phone: phone,
         uId: userModel!.uId,
         address: address,
@@ -191,6 +194,7 @@ class UserCubit extends Cubit<UserStates> {
     return FirebaseAuth.instance.signOut().then((value) {
       CashHelper.removeData().then((value) {
         uId = null;
+        position=null;
         emit(SignOutSuccessUser());
       });
     }).catchError((error) {});
