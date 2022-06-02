@@ -190,13 +190,15 @@ class UserCubit extends Cubit<UserStates> {
     });
   }
 
-  Future<void> signOut(context) {
-    return FirebaseAuth.instance.signOut().then((value) {
+  Future<void> signOut(context) async {
+    try{
+      await FirebaseAuth.instance.signOut();
       CashHelper.removeData().then((value) {
         uId = null;
         position=null;
         emit(SignOutSuccessUser());
       });
-    }).catchError((error) {});
+    }
+        catch(e){}
   }
 }

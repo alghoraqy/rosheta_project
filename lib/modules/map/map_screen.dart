@@ -1,10 +1,11 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
-import 'package:rosheta_project/Bloc/register/registercubit.dart';
-import 'package:rosheta_project/Bloc/register/registerstates.dart';
+
 import 'package:uuid/uuid.dart';
 import '../../Bloc/map/map_cubit.dart';
 import '../../Bloc/map/map_states.dart';
@@ -26,6 +27,7 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   List<PlaceSuggestion> places = [];
+  Placemark? placemark;
   FloatingSearchBarController controller = FloatingSearchBarController();
 
   Completer<GoogleMapController> _mapController = Completer();
@@ -76,6 +78,7 @@ class _MapScreenState extends State<MapScreen> {
     position = await LocationHelper.getCurrentLocation().whenComplete(() {
       setState(() {});
     });
+
   }
 
   Widget buildMap() {
@@ -102,10 +105,15 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 
+
+
   Future<void> _goToMyCurrentLocation() async {
     final GoogleMapController controller = await _mapController.future;
     controller.animateCamera(
         CameraUpdate.newCameraPosition(_myCurrentLocationCameraPosition));
+
+    placeMarks = await placemarkFromCoordinates(position!.latitude,position!.longitude);
+    print('${placeMarks[0].subAdministrativeArea}');
   }
 
   Widget buildFloatingSearchBar() {
