@@ -27,7 +27,6 @@ import 'package:rosheta_project/modules/signUp/sign_up3.dart';
 import 'package:rosheta_project/modules/signUp/sign_uppharmacy.dart';
 import 'package:rosheta_project/modules/splash/splash.dart';
 import 'package:rosheta_project/repository/map_repo.dart';
-
 import 'Shared/Network/remote/places_webservices.dart';
 
 void main(List<String> args) async {
@@ -55,7 +54,6 @@ void main(List<String> args) async {
     ),
   ));
 }
-////
 
 class MyApp extends StatelessWidget {
   Widget startwidget;
