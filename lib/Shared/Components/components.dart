@@ -1,4 +1,5 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -190,15 +191,20 @@ Widget femalecircle() {
 Widget drawitem({
   Color textcolor = Colors.black,
   required String text,
-  required IconData icon,
+   IconData? icon,
   required VoidCallback onpressed,
+  bool isImage =false,
+  String? image,
 }) {
   return MaterialButton(
     height: 20,
     padding: EdgeInsets.zero,
     onPressed: onpressed,
     child: ListTile(
-      leading: Icon(
+      leading:isImage == true ? Padding(
+        padding: const EdgeInsets.only(left: 4.0),
+        child: SvgPicture.asset(image!,color: HexColor('#022247',),width: 25,),
+      ): Icon(
         icon,
         size: 35,
         color: HexColor('#022247'),
@@ -926,6 +932,7 @@ Widget pharmacycard(
   required VoidCallback onpressed,
   required String imageroute,
   required String title,
+  required double distance,
   String branch = 'mansoura',
 }) {
   return Container(
@@ -951,35 +958,44 @@ Widget pharmacycard(
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(
+                  children: [
+                    Text(
+                      title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w500,
+                        color: HexColor('#022247'),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 2,
+                    ),
+                    Expanded(
+                      child: Text(
+                        '($branch branch)',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w300,
+                            color: HexColor('#022247')),
+                      ),
+                    )
+                  ],
+                ),
                 Text(
-                  title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w500,
-                    color: HexColor('#022247'),
-                  ),
-                ),
-                SizedBox(
-                  width: 2,
-                ),
-                Expanded(
-                  child: Text(
-                    '($branch branch)',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w300,
-                        color: HexColor('#022247')),
-                  ),
+                  '$distance km'
                 )
               ],
             ),
-          )
+          ),
+
         ],
       ),
     ),

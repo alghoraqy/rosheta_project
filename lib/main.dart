@@ -17,6 +17,7 @@ import 'package:rosheta_project/Bloc/pharmacy/pharmacy_states.dart';
 import 'package:rosheta_project/Bloc/register/registercubit.dart';
 import 'package:rosheta_project/Bloc/register/registerstates.dart';
 import 'package:rosheta_project/Shared/Network/Local/cash_helper.dart';
+import 'package:rosheta_project/Shared/variable.dart';
 import 'package:rosheta_project/constant.dart';
 import 'package:rosheta_project/modules/Pharmacy/Pharmacymain/pharmacy_editprofile.dart';
 import 'package:rosheta_project/modules/Pharmacy/Pharmacymaster/pharmacymaster.dart';
@@ -81,7 +82,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) {
           return PharmacyCubit()
             ..getpharmacydata()
-            ..getMydrugs();
+            ..getMydrugs()..getPharmaciesUsers();
         }),
         BlocProvider(create: (context) {
           return TrialCubit();

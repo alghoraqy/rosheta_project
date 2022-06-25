@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:rosheta_project/Bloc/States/states.dart';
 import 'package:rosheta_project/Models/articlesmodel.dart';
 import 'package:rosheta_project/Models/drugsmodel.dart';
@@ -14,7 +15,9 @@ import 'package:rosheta_project/constant.dart';
 import 'package:rosheta_project/modules/User/usermain/userarticles.dart';
 import 'package:rosheta_project/modules/User/usermain/userhome.dart';
 import 'package:rosheta_project/modules/User/usermain/userprofile.dart';
+import 'package:rosheta_project/modules/login/login.dart';
 
+import '../../Shared/Components/components.dart';
 import '../../Shared/variable.dart';
 
 class UserCubit extends Cubit<UserStates> {
@@ -193,12 +196,19 @@ class UserCubit extends Cubit<UserStates> {
   Future<void> signOut(context) async {
     try{
       await FirebaseAuth.instance.signOut();
+      navigateto(context,LoginScreen());
       CashHelper.removeData().then((value) {
         uId = null;
-        position=null;
+        address = "";
+        latitude = 0.0;
+        longitude = 0.0;
         emit(SignOutSuccessUser());
       });
+
     }
         catch(e){}
   }
+
+
+
 }

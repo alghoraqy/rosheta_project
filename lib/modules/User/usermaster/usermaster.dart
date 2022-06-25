@@ -13,10 +13,12 @@ import 'package:rosheta_project/Shared/Network/Local/cash_helper.dart';
 import 'package:rosheta_project/constant.dart';
 import 'package:rosheta_project/modules/User/contactus.dart';
 import 'package:rosheta_project/modules/User/upgrade.dart';
+import 'package:rosheta_project/modules/User/usermain/all_pharmacies.dart';
 import 'package:rosheta_project/modules/User/usermaster/notifications.dart';
 import 'package:rosheta_project/modules/User/yourorders.dart';
 import 'package:rosheta_project/modules/login/joinus.dart';
 import 'package:rosheta_project/modules/login/login.dart';
+import 'package:rosheta_project/modules/map/map_screen.dart';
 
 class UserMaster extends StatelessWidget {
   const UserMaster({Key? key}) : super(key: key);
@@ -128,6 +130,14 @@ class UserMaster extends StatelessWidget {
                                         icon: Icons.person,
                                         onpressed: () {
                                           navigateTo(context, YourOrders());
+                                        }),
+                                    drawitem(
+                                        text: 'Pharmacies Location',
+
+                                        isImage: true,
+                                        image: 'assets/images/stethoscope.svg',
+                                        onpressed: () {
+                                          navigateTo(context, AllPharmacies());
                                         }),
                                     drawitem(
                                         text: 'Language',
