@@ -191,9 +191,9 @@ Widget femalecircle() {
 Widget drawitem({
   Color textcolor = Colors.black,
   required String text,
-   IconData? icon,
+  IconData? icon,
   required VoidCallback onpressed,
-  bool isImage =false,
+  bool isImage = false,
   String? image,
 }) {
   return MaterialButton(
@@ -201,14 +201,22 @@ Widget drawitem({
     padding: EdgeInsets.zero,
     onPressed: onpressed,
     child: ListTile(
-      leading:isImage == true ? Padding(
-        padding: const EdgeInsets.only(left: 4.0),
-        child: SvgPicture.asset(image!,color: HexColor('#022247',),width: 25,),
-      ): Icon(
-        icon,
-        size: 35,
-        color: HexColor('#022247'),
-      ),
+      leading: isImage == true
+          ? Padding(
+              padding: const EdgeInsets.only(left: 4.0),
+              child: SvgPicture.asset(
+                image!,
+                color: HexColor(
+                  '#022247',
+                ),
+                width: 25,
+              ),
+            )
+          : Icon(
+              icon,
+              size: 35,
+              color: HexColor('#022247'),
+            ),
       title: Text(
         text,
         style: TextStyle(
@@ -517,7 +525,9 @@ Widget addresscompnent(context) {
           SizedBox(
             width: 3,
           ),
-          Expanded(flex: 1, child: locatonmap(context, hexcolor: '#48BC98',onPressed: (){}))
+          Expanded(
+              flex: 1,
+              child: locatonmap(context, hexcolor: '#48BC98', onPressed: () {}))
         ],
       ),
       SizedBox(
@@ -596,7 +606,8 @@ Widget addresscompnent(context) {
   );
 }
 
-Widget locatonmap(context, {required String hexcolor,required VoidCallback onPressed}) {
+Widget locatonmap(context,
+    {required String hexcolor, required VoidCallback onPressed}) {
   return Container(
     height: MediaQuery.of(context).size.height / 15,
     child: MaterialButton(
@@ -989,13 +1000,10 @@ Widget pharmacycard(
                     )
                   ],
                 ),
-                Text(
-                  '$distance km'
-                )
+                Text('$distance km')
               ],
             ),
           ),
-
         ],
       ),
     ),
@@ -2076,4 +2084,35 @@ class FormFieldItem extends StatelessWidget {
           )),
     );
   }
+}
+
+Widget scanButton(
+    {required String text,
+    required VoidCallback onPressed,
+    required IconData icon}) {
+  return Container(
+    width: 75,
+    child: MaterialButton(
+      padding: EdgeInsets.zero,
+      height: 60,
+      color: HexColor('#022247'),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      onPressed: onPressed,
+      textColor: Colors.white,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            size: 22,
+            color: Colors.white,
+          ),
+          Text(
+            text,
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w200),
+          )
+        ],
+      ),
+    ),
+  );
 }

@@ -43,6 +43,7 @@ dependencies:
   image_picker: ^0.8.5
   flutter_phoenix: ^1.0.0
   flutter_svg: ^1.1.0
+  google_ml_kit: ^0.11.0
   #firebase
   firebase_core: ^1.14.1
   firebase_auth: ^3.3.14

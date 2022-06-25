@@ -1,10 +1,12 @@
-
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_ml_kit/google_ml_kit.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:rosheta_project/Bloc/States/states.dart';
 import 'package:rosheta_project/Models/articlesmodel.dart';
 import 'package:rosheta_project/Models/drugsmodel.dart';
@@ -50,7 +52,8 @@ class UserCubit extends Cubit<UserStates> {
         label: 'Home'),
     const BottomNavigationBarItem(
         icon: Icon(Icons.medical_services_outlined), label: 'Articles'),
-    const BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profile'),
+    const BottomNavigationBarItem(
+        icon: Icon(Icons.person_outline), label: 'Profile'),
   ];
   void changenav(index) {
     current = index;
@@ -175,8 +178,8 @@ class UserCubit extends Cubit<UserStates> {
     UserModel model = UserModel(
         name: name,
         email: email,
-        latitude:latitude ,
-        longitude:longitude ,
+        latitude: latitude,
+        longitude: longitude,
         phone: phone,
         uId: userModel!.uId,
         address: address,
@@ -194,9 +197,9 @@ class UserCubit extends Cubit<UserStates> {
   }
 
   Future<void> signOut(context) async {
-    try{
+    try {
       await FirebaseAuth.instance.signOut();
-      navigateto(context,LoginScreen());
+      navigateto(context, LoginScreen());
       CashHelper.removeData().then((value) {
         uId = null;
         address = "";
@@ -204,11 +207,43 @@ class UserCubit extends Cubit<UserStates> {
         longitude = 0.0;
         emit(SignOutSuccessUser());
       });
-
-    }
-        catch(e){}
+    } catch (e) {}
   }
 
+  File? imagepicked;
 
+  Future<void> getimage({required ImageSource source}) async {
+    final pickedFile = await ImagePicker.platform.pickImage(source: source);
+    if (pickedFile != null) {
+      imagepicked = File(pickedFile.path);
+      getRecognisedText(imagepicked!);
+      emit(GetImagePickedSuccess());
+      print(scannedText);
+    } else {
+      print('nothing selected');
+      emit(GetImagePickedError());
+    }
+  }
 
+  String scannedText = '';
+
+  void getRecognisedText(File image) async {
+    final inputImage = InputImage.fromFilePath(image.path);
+    final textDetector = GoogleMlKit.vision.textRecognizer();
+    RecognizedText recognisedText = await textDetector.processImage(inputImage);
+    await textDetector.close();
+    scannedText = "";
+    for (TextBlock block in recognisedText.blocks) {
+      for (TextLine line in block.lines) {
+        scannedText = scannedText + line.text + "\n";
+      }
+      emit(GetTextSuccess());
+    }
+  }
+
+  Future<void> refreshscan() async {
+    imagepicked = null;
+    scannedText = '';
+    emit(TryAgain());
+  }
 }

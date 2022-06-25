@@ -18,6 +18,7 @@ class GetArticlesError extends UserStates {
 }
 
 class GetUserDataLoading extends UserStates {}
+
 class GetDistanceSuccess extends UserStates {}
 
 class GetUserDataSuccess extends UserStates {}
@@ -58,3 +59,11 @@ class UpdateUserDataError extends UserStates {}
 class UpdateUserDataLoading extends UserStates {}
 
 class SignOutSuccessUser extends UserStates {}
+
+class GetImagePickedSuccess extends UserStates {}
+
+class GetImagePickedError extends UserStates {}
+
+class GetTextSuccess extends UserStates {}
+
+class TryAgain extends UserStates {}

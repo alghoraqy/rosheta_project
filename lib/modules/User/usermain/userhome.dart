@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:rosheta_project/Bloc/Cubit/cubit.dart';
 import 'package:rosheta_project/Bloc/States/states.dart';
 import 'package:rosheta_project/Shared/Components/components.dart';
+import 'package:rosheta_project/modules/User/userhomescreens/scan.dart';
 import 'package:rosheta_project/modules/User/userhomescreens/search.dart';
 import 'package:rosheta_project/modules/User/usermain/articleview.dart';
 
@@ -93,7 +94,9 @@ class UserHome extends StatelessWidget {
                                         borderRadius:
                                             BorderRadius.circular(15)),
                                     color: HexColor('#022247'),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      navigateto(context, ScanScreen());
+                                    },
                                     child: Icon(
                                       Icons.camera_alt,
                                       color: Colors.white,
