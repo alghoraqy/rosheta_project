@@ -80,7 +80,8 @@ class SignUp2 extends StatelessWidget {
                                     flex: 1,
                                     child: locatonmap(context,
                                         hexcolor: '#48BC98', onPressed: () {
-                                      navigateto(context, const GetMyLocation());
+                                      navigateto(
+                                          context, const GetMyLocation());
                                     }))
                               ],
                             ),
@@ -174,15 +175,15 @@ class SignUp2 extends StatelessWidget {
                                   address: cubit.useraddresscontroller.text,
                                   phone: cubit.userphonecontroller.text,
                                   uId: cubit.uid!,
-                                  lat: latitude,
-                                  lng: longitude);
+                                  lat: 31.1689546,
+                                  lng: 31.6243835);
                             } else {
                               cubit.createpharmacy2(
                                   address: cubit.pharmacyaddresscontroller.text,
                                   phone: cubit.pharmacyphonecontroller.text,
                                   uId: cubit.uid!,
-                                  lat: latitude,
-                                  lng: longitude);
+                                  lat: 31.1689546,
+                                  lng: 31.6243835);
                             }
                           }
                           //   cubit.formkey2.currentState!.validate()? cubit.isuser?navigateto(context, SignUpUser()):navigateto(context, SignUpPharmacy()) :null;

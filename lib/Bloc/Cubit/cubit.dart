@@ -199,7 +199,6 @@ class UserCubit extends Cubit<UserStates> {
   Future<void> signOut(context) async {
     try {
       await FirebaseAuth.instance.signOut();
-      navigateto(context, LoginScreen());
       CashHelper.removeData().then((value) {
         uId = null;
         address = "";

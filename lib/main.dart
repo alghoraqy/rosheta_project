@@ -82,7 +82,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) {
           return PharmacyCubit()
             ..getpharmacydata()
-            ..getMydrugs()..getPharmaciesUsers();
+            ..getMydrugs()
+            ..getPharmaciesUsers();
         }),
         BlocProvider(create: (context) {
           return TrialCubit();
