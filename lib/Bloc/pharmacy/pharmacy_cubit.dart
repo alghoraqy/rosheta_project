@@ -1,10 +1,9 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:rosheta_project/Bloc/pharmacy/pharmacy_states.dart';
 import 'package:rosheta_project/Models/drugsmodel.dart';
 import 'package:rosheta_project/Models/pharmacymodel.dart';
@@ -18,6 +17,7 @@ import 'package:rosheta_project/modules/login/login.dart';
 
 class PharmacyCubit extends Cubit<PharmacyStates> {
   PharmacyCubit() : super(PharmacyInitialStates());
+
   static PharmacyCubit get(context) => BlocProvider.of(context);
 
   int currentIndex = 0;
@@ -35,6 +35,7 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
     {'name': 'Yes, I have', 'is_selected': true},
     {'name': 'No, I haven\'t', 'is_selected': false},
   ];
+
   void radioBottomCheck(index) {
     for (int i = 0; i < radio.length; i++) {
       if (radio[i]['is_selected'] == true) {
@@ -63,6 +64,7 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
   }
 
   PharmacyModel? pharmacyModel;
+
   void getpharmacydata() {
     emit(GetPharmacyDataLoading());
     FirebaseFirestore.instance
@@ -118,6 +120,7 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
 
   List<DrugsModel> myDrugs = [];
   List drugsid = [];
+
   Future<void> getMydrugs() {
     emit(GetMyDrugsLoading());
     return FirebaseFirestore.instance
@@ -125,9 +128,9 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
         .doc(uId)
         .collection('MyDrugs')
         .orderBy(
-          'uid',
-          descending: false,
-        )
+      'uid',
+      descending: false,
+    )
         .get()
         .then((value) {
       value.docs.forEach((element) {
@@ -192,6 +195,7 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
 
   TextEditingController updatedrugpricecontroller = TextEditingController();
   int updateindex = 0;
+
   void increaseupdate() {
     updateindex++;
     print('increase');
@@ -224,8 +228,8 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
         address: address,
         email: email,
         phone: phone,
-        longitude:latitude ,
-        latitude:latitude ,
+        longitude: latitude,
+        latitude: latitude,
         image: pharmacyModel!.image,
         open: open,
         close: close,
@@ -247,13 +251,34 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
     return FirebaseAuth.instance.signOut().then((value) {
       CashHelper.removeData().then((value) {
         uId = null;
-        position=null;
+        address = "";
+        latitude = 0.0;
+        longitude = 0.0;
         Navigator.pushAndRemoveUntil(context,
             MaterialPageRoute(builder: (context) {
-          return LoginScreen();
-        }), (route) => false);
+              return LoginScreen();
+            }), (route) => false);
         emit(SignOutSuccessPharmacy());
       });
     }).catchError((error) {});
   }
+
+  List<PharmacyModel> pharmacyUser = [];
+
+  void getPharmaciesUsers() {
+    emit(GetAllPharmaciesLoading());
+    if (pharmacyUser.isEmpty) {
+      FirebaseFirestore.instance.collection('pharmacy').get().then((value) {
+        value.docs.forEach((element) {
+          pharmacyUser.add(PharmacyModel.fromjson(element.data()));
+        });
+        emit(GetAllPharmaciesSuccess());
+      }).catchError((error) {
+        print(error.toString());
+        emit(GetAllPharmaciesError(error.toString()));
+      });
+    }
+  }
+
+
 }

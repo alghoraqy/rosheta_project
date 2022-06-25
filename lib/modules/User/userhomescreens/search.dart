@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:rosheta_project/Bloc/Cubit/cubit.dart';
 import 'package:rosheta_project/Bloc/States/states.dart';
@@ -237,13 +238,21 @@ class SearchForDrugs extends StatelessWidget {
                                       gridDelegate:
                                           SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 2,
-                                        childAspectRatio: 1.1,
+                                        childAspectRatio: .9,
                                         crossAxisSpacing: 5,
                                         mainAxisSpacing: 15,
                                       ),
                                       itemBuilder: (context, index) {
                                         return pharmacycard(
                                           context,
+                                          distance:
+                                          Geolocator.distanceBetween(
+                                              cubit.userModel!.latitude,
+                                              cubit.userModel!.longitude,
+                                              cubit
+                                                  .pharmacydruginData[index].latitude,
+                                              cubit
+                                                  .pharmacydruginData[index].longitude).round().toDouble(),
                                           onpressed: () {
                                             navigateto(
                                                 context,

@@ -42,6 +42,7 @@ dependencies:
   shared_preferences: ^2.0.13
   image_picker: ^0.8.5
   flutter_phoenix: ^1.0.0
+  flutter_svg: ^1.1.0
   #firebase
   firebase_core: ^1.14.1
   firebase_auth: ^3.3.14
@@ -55,6 +56,8 @@ dependencies:
   flutter_polyline_points: ^1.0.0
   dio: ^4.0.6
   geocoding: ^2.0.4
+  google_maps_pick_place: ^0.8.7
+  location: ^4.2.0
 
 dev_dependencies:
   flutter_test:

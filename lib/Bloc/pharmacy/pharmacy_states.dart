@@ -38,6 +38,15 @@ class GetMyDrugsError extends PharmacyStates {
   final String error;
   GetMyDrugsError(this.error);
 }
+class GetAllPharmaciesLoading extends PharmacyStates {}
+
+class GetAllPharmaciesSuccess extends PharmacyStates {}
+class GetDistanceSuccess extends PharmacyStates {}
+
+class GetAllPharmaciesError extends PharmacyStates {
+  final String error;
+  GetAllPharmaciesError(this.error);
+}
 
 class UpdateDrugsLoading extends PharmacyStates {}
 
@@ -47,6 +56,8 @@ class UpdateDrugsError extends PharmacyStates {
   final String error;
   UpdateDrugsError(this.error);
 }
+
+
 
 class PutuIdLoading extends PharmacyStates {}
 

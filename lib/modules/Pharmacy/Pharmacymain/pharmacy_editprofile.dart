@@ -7,7 +7,7 @@ import 'package:rosheta_project/Bloc/pharmacy/pharmacy_states.dart';
 import 'package:rosheta_project/Shared/Components/components.dart';
 import 'package:rosheta_project/Shared/Components/pharmacycomponent.dart';
 import 'package:rosheta_project/Shared/variable.dart';
-import 'package:rosheta_project/modules/map/map_screen.dart';
+import 'package:rosheta_project/modules/map/get_location_google_map.dart';
 
 class PharmacyEditProfile extends StatelessWidget {
   const PharmacyEditProfile({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class PharmacyEditProfile extends StatelessWidget {
         TextEditingController editphonecontroller = TextEditingController();
         TextEditingController editopencontroller = TextEditingController();
         TextEditingController editclosecontroller = TextEditingController();
-        TextEditingController editaddresscontroller = TextEditingController();
+
         TextEditingController editpasswordcontroller = TextEditingController();
         TextEditingController confirmeditpasswordcontroller =
             TextEditingController();
@@ -33,7 +33,7 @@ class PharmacyEditProfile extends StatelessWidget {
             PharmacyCubit.get(context).pharmacyModel!.email!;
         editphonecontroller.text =
             PharmacyCubit.get(context).pharmacyModel!.phone!;
-        editaddresscontroller.text =
+        editAddressPharmacyController.text =
             PharmacyCubit.get(context).pharmacyModel!.address!;
         editopencontroller.text =
             PharmacyCubit.get(context).pharmacyModel!.open!;
@@ -124,7 +124,7 @@ class PharmacyEditProfile extends StatelessWidget {
                                 flex: 4,
                                 child: Container(
                                   child: editprofileform(context,
-                                      controller: editaddresscontroller),
+                                      controller: editAddressPharmacyController),
                                 ),
                               ),
                               const SizedBox(
@@ -134,7 +134,7 @@ class PharmacyEditProfile extends StatelessWidget {
                                   flex: 1,
                                   child:
                                       locatonmap(context, hexcolor: '#35C2DD',onPressed: (){
-                                        navigateto(context, const MapScreen());
+                                        navigateto(context, const GetMyLocation());
                                       }))
                             ],
                           ),
@@ -279,11 +279,11 @@ class PharmacyEditProfile extends StatelessWidget {
                                     name: editnamecontroller.text,
                                     email: editemailcontroller.text,
                                     phone: editphonecontroller.text,
-                                    address: editaddresscontroller.text,
+                                    address: editAddressPharmacyController.text,
                                     open: editopencontroller.text,
                                     close: editclosecontroller.text,
-                                longitude: position!.longitude,
-                                latitude: position!.latitude);
+                                longitude: longitude,
+                                latitude: latitude);
                               }),
                             ),
                           ),

@@ -4,6 +4,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:rosheta_project/Bloc/pharmacy/pharmacy_cubit.dart';
 import 'package:rosheta_project/Bloc/pharmacy/pharmacy_states.dart';
 import 'package:rosheta_project/Shared/Components/components.dart';
+import 'package:rosheta_project/modules/map/map_screen.dart';
 
 class PharmacyHome extends StatelessWidget {
   const PharmacyHome({Key? key}) : super(key: key);
@@ -91,7 +92,8 @@ class PharmacyHome extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(15)),
                                       color: HexColor('#022247'),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                      },
                                       child: const Icon(
                                         Icons.camera_alt,
                                         color: Colors.white,

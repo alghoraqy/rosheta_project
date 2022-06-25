@@ -1,5 +1,7 @@
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:flutter/cupertino.dart';
 
-Position? position;
-List<Placemark> placeMarks=[];
+late String address;
+late double latitude;
+late double longitude;
+TextEditingController editaddresscontroller = TextEditingController();
+TextEditingController editAddressPharmacyController = TextEditingController();

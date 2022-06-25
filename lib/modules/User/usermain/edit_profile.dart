@@ -4,15 +4,15 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:rosheta_project/Bloc/Cubit/cubit.dart';
 import 'package:rosheta_project/Bloc/States/states.dart';
 import 'package:rosheta_project/Shared/Components/components.dart';
+import 'package:rosheta_project/modules/map/get_location_google_map.dart';
 
 import '../../../Shared/variable.dart';
-import '../../map/map_screen.dart';
 
 class EditProfile extends StatelessWidget {
   TextEditingController editnamecontroller = TextEditingController();
   TextEditingController editemailcontroller = TextEditingController();
   TextEditingController editphonecontroller = TextEditingController();
-  TextEditingController editaddresscontroller = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +96,7 @@ class EditProfile extends StatelessWidget {
                               ),
                               Expanded(
                                 flex: 1,
-                                child: locatonmap(context, hexcolor: '#35C2DD',onPressed: (){navigateto(context, MapScreen());}),
+                                child: locatonmap(context, hexcolor: '#35C2DD',onPressed: (){navigateto(context, const GetMyLocation());}),
                               )
                             ],
                           ),
@@ -126,8 +126,8 @@ class EditProfile extends StatelessWidget {
                                 email: editemailcontroller.text,
                                 phone: editphonecontroller.text,
                                 address: editaddresscontroller.text,
-                              latitude: position!.latitude,
-                              longitude:position!.longitude,
+                              latitude: latitude,
+                              longitude:longitude,
                             );
                           })
                         ],
