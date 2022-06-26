@@ -245,14 +245,17 @@ class SearchForDrugs extends StatelessWidget {
                                       itemBuilder: (context, index) {
                                         return pharmacycard(
                                           context,
-                                          distance:
-                                          Geolocator.distanceBetween(
-                                              cubit.userModel!.latitude,
-                                              cubit.userModel!.longitude,
-                                              cubit
-                                                  .pharmacydruginData[index].latitude,
-                                              cubit
-                                                  .pharmacydruginData[index].longitude).round().toDouble(),
+                                          distance: Geolocator.distanceBetween(
+                                                  cubit.userModel!.latitude,
+                                                  cubit.userModel!.longitude,
+                                                  cubit
+                                                      .pharmacydruginData[index]
+                                                      .latitude,
+                                                  cubit
+                                                      .pharmacydruginData[index]
+                                                      .longitude)
+                                              .round()
+                                              .toDouble(),
                                           onpressed: () {
                                             navigateto(
                                                 context,

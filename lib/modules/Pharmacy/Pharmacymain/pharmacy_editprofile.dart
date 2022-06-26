@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -124,7 +123,8 @@ class PharmacyEditProfile extends StatelessWidget {
                                 flex: 4,
                                 child: Container(
                                   child: editprofileform(context,
-                                      controller: editAddressPharmacyController),
+                                      controller:
+                                          editAddressPharmacyController),
                                 ),
                               ),
                               const SizedBox(
@@ -132,10 +132,10 @@ class PharmacyEditProfile extends StatelessWidget {
                               ),
                               Expanded(
                                   flex: 1,
-                                  child:
-                                      locatonmap(context, hexcolor: '#35C2DD',onPressed: (){
-                                        navigateto(context, const GetMyLocation());
-                                      }))
+                                  child: locatonmap(context,
+                                      hexcolor: '#35C2DD', onPressed: () {
+                                    navigateto(context, const GetMyLocation());
+                                  }))
                             ],
                           ),
                           SizedBox(
@@ -282,8 +282,8 @@ class PharmacyEditProfile extends StatelessWidget {
                                     address: editAddressPharmacyController.text,
                                     open: editopencontroller.text,
                                     close: editclosecontroller.text,
-                                longitude: longitude,
-                                latitude: latitude);
+                                    longitude: longitude,
+                                    latitude: latitude);
                               }),
                             ),
                           ),

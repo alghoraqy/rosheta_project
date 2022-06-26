@@ -1,4 +1,3 @@
-
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../Models/place.dart';
@@ -14,7 +13,7 @@ class MapsRepository {
   Future<List<PlaceSuggestion>> fetchSuggestions(
       String place, String sessionToken) async {
     final suggestions =
-    await placesWebservices.fetchSuggestions(place, sessionToken);
+        await placesWebservices.fetchSuggestions(place, sessionToken);
 
     return suggestions
         .map((suggestion) => PlaceSuggestion.fromJson(suggestion))
@@ -23,7 +22,7 @@ class MapsRepository {
 
   Future<Place> getPlaceLocation(String placeId, String sessionToken) async {
     final place =
-    await placesWebservices.getPlaceLocation(placeId, sessionToken);
+        await placesWebservices.getPlaceLocation(placeId, sessionToken);
     // var readyPlace = Place.fromJson(place);
     return Place.fromJson(place);
   }
@@ -31,7 +30,7 @@ class MapsRepository {
   Future<PlaceDirections> getDirections(
       LatLng origin, LatLng destination) async {
     final directions =
-    await placesWebservices.getDirections(origin, destination);
+        await placesWebservices.getDirections(origin, destination);
 
     return PlaceDirections.fromJson(directions);
   }

@@ -128,9 +128,9 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
         .doc(uId)
         .collection('MyDrugs')
         .orderBy(
-      'uid',
-      descending: false,
-    )
+          'uid',
+          descending: false,
+        )
         .get()
         .then((value) {
       value.docs.forEach((element) {
@@ -256,8 +256,8 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
         longitude = 0.0;
         Navigator.pushAndRemoveUntil(context,
             MaterialPageRoute(builder: (context) {
-              return LoginScreen();
-            }), (route) => false);
+          return LoginScreen();
+        }), (route) => false);
         emit(SignOutSuccessPharmacy());
       });
     }).catchError((error) {});
@@ -279,6 +279,4 @@ class PharmacyCubit extends Cubit<PharmacyStates> {
       });
     }
   }
-
-
 }

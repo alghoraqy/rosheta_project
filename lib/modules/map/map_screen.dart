@@ -10,10 +10,13 @@ import '../../Shared/variable.dart';
 class GoogleMapScreen extends StatefulWidget {
   final double destLatitude;
   final double destLongitude;
-   const GoogleMapScreen({Key? key,required this.destLatitude,required this.destLongitude}) : super(key: key);
+  const GoogleMapScreen(
+      {Key? key, required this.destLatitude, required this.destLongitude})
+      : super(key: key);
 
   @override
-  State<GoogleMapScreen> createState() => _GoogleMapScreenState(destLatitude:  destLatitude,destLongitude: destLongitude);
+  State<GoogleMapScreen> createState() => _GoogleMapScreenState(
+      destLatitude: destLatitude, destLongitude: destLongitude);
 }
 
 class _GoogleMapScreenState extends State<GoogleMapScreen> {
@@ -21,15 +24,15 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
   final double destLongitude;
   List<LatLng> polyLineCoordinates = [];
 
-
-  _GoogleMapScreenState({required this.destLatitude,required this.destLongitude});
-
+  _GoogleMapScreenState(
+      {required this.destLatitude, required this.destLongitude});
 
   void getPolyPoints() async {
     PolylinePoints polylinePoints = PolylinePoints();
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
         googleMapKey,
-        PointLatLng(UserCubit.get(context).userModel!.latitude, UserCubit.get(context).userModel!.longitude),
+        PointLatLng(UserCubit.get(context).userModel!.latitude,
+            UserCubit.get(context).userModel!.longitude),
         PointLatLng(destLatitude, destLongitude));
 
     if (result.points.isNotEmpty) {
@@ -38,9 +41,8 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
           LatLng(point.latitude, point.longitude),
         ),
       );
-      setState((){});
+      setState(() {});
     }
-
   }
 
   @override
@@ -58,14 +60,16 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
       body: GoogleMap(
         initialCameraPosition: CameraPosition(
           bearing: 0.0,
-          target: LatLng(UserCubit.get(context).userModel!.latitude, UserCubit.get(context).userModel!.longitude),
+          target: LatLng(UserCubit.get(context).userModel!.latitude,
+              UserCubit.get(context).userModel!.longitude),
           tilt: 0.0,
           zoom: 17,
         ),
         markers: {
           Marker(
               markerId: const MarkerId('source'),
-              position: LatLng(UserCubit.get(context).userModel!.latitude, UserCubit.get(context).userModel!.longitude)),
+              position: LatLng(UserCubit.get(context).userModel!.latitude,
+                  UserCubit.get(context).userModel!.longitude)),
           Marker(
               markerId: const MarkerId('destination'),
               position: LatLng(destLatitude, destLongitude)),
@@ -73,10 +77,9 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
         polylines: {
           Polyline(
               polylineId: const PolylineId('route'),
-              points:  polyLineCoordinates,
+              points: polyLineCoordinates,
               color: Colors.blue,
-              width: 6
-          ),
+              width: 6),
         },
       ),
     );

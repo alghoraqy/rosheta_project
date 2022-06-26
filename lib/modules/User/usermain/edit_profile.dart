@@ -13,7 +13,6 @@ class EditProfile extends StatelessWidget {
   TextEditingController editemailcontroller = TextEditingController();
   TextEditingController editphonecontroller = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserCubit, UserStates>(
@@ -96,7 +95,10 @@ class EditProfile extends StatelessWidget {
                               ),
                               Expanded(
                                 flex: 1,
-                                child: locatonmap(context, hexcolor: '#35C2DD',onPressed: (){navigateto(context, const GetMyLocation());}),
+                                child: locatonmap(context, hexcolor: '#35C2DD',
+                                    onPressed: () {
+                                  navigateto(context, const GetMyLocation());
+                                }),
                               )
                             ],
                           ),
@@ -122,12 +124,12 @@ class EditProfile extends StatelessWidget {
                               imageroute: 'assets/images/save.png',
                               onpressed: () {
                             cubit.updateUser(
-                                name: editnamecontroller.text,
-                                email: editemailcontroller.text,
-                                phone: editphonecontroller.text,
-                                address: editaddresscontroller.text,
+                              name: editnamecontroller.text,
+                              email: editemailcontroller.text,
+                              phone: editphonecontroller.text,
+                              address: editaddresscontroller.text,
                               latitude: latitude,
-                              longitude:longitude,
+                              longitude: longitude,
                             );
                           })
                         ],

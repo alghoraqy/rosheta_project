@@ -13,7 +13,6 @@ class GetMyLocation extends StatefulWidget {
 }
 
 class _GetMyLocationState extends State<GetMyLocation> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,9 +27,8 @@ class _GetMyLocationState extends State<GetMyLocation> {
             address = fullAddress.address.toString().replaceAll('،', '-');
             latitude = fullAddress.position!.latitude;
             longitude = fullAddress.position!.longitude;
-            editaddresscontroller.text=address;
-            editAddressPharmacyController.text=address;
-
+            editaddresscontroller.text = address;
+            editAddressPharmacyController.text = address;
           });
         },
       ),

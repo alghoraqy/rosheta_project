@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import '../../../Models/place_directions.dart';
 import '../colors.dart';
 

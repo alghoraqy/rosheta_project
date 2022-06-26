@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
+// import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rosheta_project/Bloc/States/states.dart';
 import 'package:rosheta_project/Models/articlesmodel.dart';
@@ -196,9 +196,21 @@ class UserCubit extends Cubit<UserStates> {
     });
   }
 
-  Future<void> signOut(context) async {
-    try {
-      await FirebaseAuth.instance.signOut();
+  // Future<void> signOut(context) async {
+  //   try {
+  //     await FirebaseAuth.instance.signOut();
+  //     CashHelper.removeData().then((value) {
+  //       uId = null;
+  // address = "";
+  // latitude = 0.0;
+  // longitude = 0.0;
+  //       emit(SignOutSuccessUser());
+  //     });
+  //   } catch (e) {}
+  // }
+
+  Future<void> signOut(context) {
+    return FirebaseAuth.instance.signOut().then((value) {
       CashHelper.removeData().then((value) {
         uId = null;
         address = "";
@@ -206,7 +218,7 @@ class UserCubit extends Cubit<UserStates> {
         longitude = 0.0;
         emit(SignOutSuccessUser());
       });
-    } catch (e) {}
+    }).catchError((error) {});
   }
 
   File? imagepicked;
@@ -227,17 +239,17 @@ class UserCubit extends Cubit<UserStates> {
   String scannedText = '';
 
   void getRecognisedText(File image) async {
-    final inputImage = InputImage.fromFilePath(image.path);
-    final textDetector = GoogleMlKit.vision.textRecognizer();
-    RecognizedText recognisedText = await textDetector.processImage(inputImage);
-    await textDetector.close();
-    scannedText = "";
-    for (TextBlock block in recognisedText.blocks) {
-      for (TextLine line in block.lines) {
-        scannedText = scannedText + line.text + "\n";
-      }
-      emit(GetTextSuccess());
-    }
+    // final inputImage = InputImage.fromFilePath(image.path);
+    // final textDetector = GoogleMlKit.vision.textRecognizer();
+    // RecognizedText recognisedText = await textDetector.processImage(inputImage);
+    // await textDetector.close();
+    // scannedText = "";
+    // for (TextBlock block in recognisedText.blocks) {
+    //   for (TextLine line in block.lines) {
+    //     scannedText = scannedText + line.text + "\n";
+    //   }
+    //   emit(GetTextSuccess());
+    // }
   }
 
   Future<void> refreshscan() async {

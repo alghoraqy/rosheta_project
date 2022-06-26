@@ -7,8 +7,6 @@ import 'package:meta/meta.dart';
 import '../../repository/map_repo.dart';
 import 'map_states.dart';
 
-
-
 class MapsCubit extends Cubit<MapsState> {
   final MapsRepository mapsRepository;
   MapsCubit(this.mapsRepository) : super(MapsInitial());

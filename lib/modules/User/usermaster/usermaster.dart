@@ -133,7 +133,6 @@ class UserMaster extends StatelessWidget {
                                         }),
                                     drawitem(
                                         text: 'Pharmacies Location',
-
                                         isImage: true,
                                         image: 'assets/images/stethoscope.svg',
                                         onpressed: () {
