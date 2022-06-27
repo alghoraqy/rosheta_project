@@ -282,8 +282,8 @@ class PharmacyEditProfile extends StatelessWidget {
                                     address: editAddressPharmacyController.text,
                                     open: editopencontroller.text,
                                     close: editclosecontroller.text,
-                                    longitude: longitude,
-                                    latitude: latitude);
+                                    longitude: longitude!,
+                                    latitude: latitude!);
                               }),
                             ),
                           ),

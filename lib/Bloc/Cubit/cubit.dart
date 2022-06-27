@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 // import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rosheta_project/Bloc/States/states.dart';
@@ -239,17 +240,18 @@ class UserCubit extends Cubit<UserStates> {
   String scannedText = '';
 
   void getRecognisedText(File image) async {
-    // final inputImage = InputImage.fromFilePath(image.path);
-    // final textDetector = GoogleMlKit.vision.textRecognizer();
-    // RecognizedText recognisedText = await textDetector.processImage(inputImage);
-    // await textDetector.close();
-    // scannedText = "";
-    // for (TextBlock block in recognisedText.blocks) {
-    //   for (TextLine line in block.lines) {
-    //     scannedText = scannedText + line.text + "\n";
-    //   }
-    //   emit(GetTextSuccess());
-    // }
+    final textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
+    final inputImage = InputImage.fromFilePath(image.path);
+    RecognizedText recognisedText =
+        await textRecognizer.processImage(inputImage);
+    await textRecognizer.close();
+    scannedText = "";
+    for (TextBlock block in recognisedText.blocks) {
+      for (TextLine line in block.lines) {
+        scannedText = scannedText + line.text + "\n";
+      }
+      emit(GetTextSuccess());
+    }
   }
 
   Future<void> refreshscan() async {

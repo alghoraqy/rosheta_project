@@ -175,15 +175,15 @@ class SignUp2 extends StatelessWidget {
                                   address: cubit.useraddresscontroller.text,
                                   phone: cubit.userphonecontroller.text,
                                   uId: cubit.uid!,
-                                  lat: 31.1689546,
-                                  lng: 31.6243835);
+                                  lat: latitude,
+                                  lng: longitude);
                             } else {
                               cubit.createpharmacy2(
                                   address: cubit.pharmacyaddresscontroller.text,
                                   phone: cubit.pharmacyphonecontroller.text,
                                   uId: cubit.uid!,
-                                  lat: 31.1689546,
-                                  lng: 31.6243835);
+                                  lat: latitude,
+                                  lng: longitude);
                             }
                           }
                           //   cubit.formkey2.currentState!.validate()? cubit.isuser?navigateto(context, SignUpUser()):navigateto(context, SignUpPharmacy()) :null;

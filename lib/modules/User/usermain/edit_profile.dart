@@ -128,8 +128,8 @@ class EditProfile extends StatelessWidget {
                               email: editemailcontroller.text,
                               phone: editphonecontroller.text,
                               address: editaddresscontroller.text,
-                              latitude: latitude,
-                              longitude: longitude,
+                              latitude: latitude!,
+                              longitude: longitude!,
                             );
                           })
                         ],

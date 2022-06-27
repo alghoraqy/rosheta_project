@@ -3,6 +3,7 @@ import 'package:google_maps_pick_place/models/address_model.dart';
 import 'package:google_maps_pick_place/view/main_map/map.dart';
 import 'package:rosheta_project/constant.dart';
 
+import '../../Bloc/register/registercubit.dart';
 import '../../Shared/variable.dart';
 
 class GetMyLocation extends StatefulWidget {
@@ -27,8 +28,11 @@ class _GetMyLocationState extends State<GetMyLocation> {
             address = fullAddress.address.toString().replaceAll('،', '-');
             latitude = fullAddress.position!.latitude;
             longitude = fullAddress.position!.longitude;
-            editaddresscontroller.text = address;
-            editAddressPharmacyController.text = address;
+            editaddresscontroller.text = address!;
+            editAddressPharmacyController.text = address!;
+            RegisterCubit.get(context).useraddresscontroller.text=address!;
+            RegisterCubit.get(context).pharmacyaddresscontroller.text=address!;
+
           });
         },
       ),
