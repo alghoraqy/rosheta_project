@@ -100,7 +100,19 @@ class SignUpUser extends StatelessWidget {
                             ),
                           ],
                         ),
-                        LoginButton(context, text: 'Next', onpressed: () {
+                        LoginButton(context,
+                            widget: states is Loading
+                                ? Center(
+                                    child: CircularProgressIndicator(
+                                        color: Colors.white),
+                                  )
+                                : Text(
+                                    'Next',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ), onpressed: () {
                           formkey3.currentState!.validate()
                               ? navigateto(context, SignUp3())
                               : null;

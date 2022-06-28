@@ -61,7 +61,14 @@ class JoinUs extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
                 children: [
-                  LoginButton(context, text: 'Login', onpressed: () {
+                  LoginButton(context,
+                      widget: Text(
+                        'Login',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ), onpressed: () {
                     navigateto(context, LoginScreen());
                   }),
                   SizedBox(

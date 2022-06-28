@@ -92,7 +92,14 @@ class LoginScreen extends StatelessWidget {
                         SizedBox(
                           height: MediaQuery.of(context).size.height / 40,
                         ),
-                        LoginButton(context, text: 'Login', onpressed: () {
+                        LoginButton(context,
+                            widget: Text(
+                              'Login',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ), onpressed: () {
                           cubit.formkey.currentState!.validate()
                               ? cubit.userLogin(context,
                                   email: cubit.emailcontroller.text,

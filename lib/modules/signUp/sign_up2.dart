@@ -168,7 +168,19 @@ class SignUp2 extends StatelessWidget {
                         SizedBox(
                           height: MediaQuery.of(context).size.height / 40,
                         ),
-                        LoginButton(context, text: 'Next', onpressed: () {
+                        LoginButton(context,
+                            widget: states is Loading
+                                ? Center(
+                                    child: CircularProgressIndicator(
+                                        color: Colors.white),
+                                  )
+                                : Text(
+                                    'Next',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ), onpressed: () {
                           if (formkey2.currentState!.validate()) {
                             if (cubit.isuser) {
                               cubit.createuser2(

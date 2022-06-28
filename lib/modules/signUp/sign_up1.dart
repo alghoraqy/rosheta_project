@@ -6,7 +6,6 @@ import 'package:rosheta_project/Bloc/register/registerstates.dart';
 import 'package:rosheta_project/Shared/Components/components.dart';
 import 'package:rosheta_project/Shared/Network/Local/cash_helper.dart';
 import 'package:rosheta_project/constant.dart';
-import 'package:rosheta_project/modules/signUp/onboarding.dart';
 import 'package:rosheta_project/modules/signUp/sign_up2.dart';
 
 class SignUp1 extends StatelessWidget {
@@ -108,7 +107,19 @@ class SignUp1 extends StatelessWidget {
                         SizedBox(
                           height: MediaQuery.of(context).size.height / 40,
                         ),
-                        LoginButton(context, text: 'Next', onpressed: () {
+                        LoginButton(context,
+                            widget: states is Loading
+                                ? Center(
+                                    child: CircularProgressIndicator(
+                                        color: Colors.white),
+                                  )
+                                : Text(
+                                    'Next',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ), onpressed: () {
                           formkey1.currentState!.validate()
                               ? cubit.isuser
                                   ? cubit.userregister(

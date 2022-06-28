@@ -259,7 +259,7 @@ Widget socialdrawitem(
 }
 
 Widget LoginButton(context,
-    {required String text, required VoidCallback onpressed}) {
+    {required Widget widget, required VoidCallback onpressed}) {
   return Container(
     width: MediaQuery.of(context).size.width,
     child: MaterialButton(
@@ -269,13 +269,7 @@ Widget LoginButton(context,
       color: HexColor('#48BC98'),
       textColor: Colors.white,
       onPressed: onpressed,
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
+      child: widget,
     ),
   );
 }
