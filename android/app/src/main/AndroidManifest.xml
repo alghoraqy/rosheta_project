@@ -13,7 +13,7 @@
         </intent>
     </queries>
    <application
-        android:label="rosheta_project"
+        android:label="Rosheta Scanner"
         android:icon="@mipmap/ic_launcher">
        <meta-data android:name="com.google.android.geo.API_KEY"
            android:value="AIzaSyBoJ329IrBvf1Yl-02TMvJ86EwHlqlGvhY"/>
