@@ -43,8 +43,6 @@ class CreateSuccessStates4 extends RegisterStates {
   CreateSuccessStates4(this.uId);
 }
 
-
-
 class GetAllDrugsSuccess extends RegisterStates {}
 
 class GetAllDrugsLoading extends RegisterStates {}
@@ -59,8 +57,6 @@ class PutDrugsLoading extends RegisterStates {}
 class PutDrugsSuccess extends RegisterStates {}
 
 class PutDrugsError extends RegisterStates {}
-
-
 
 class GetDrugUidSuccess extends RegisterStates {}
 
@@ -85,3 +81,7 @@ class UploadeProfileImageError extends RegisterStates {}
 class UpdateimageSuccess extends RegisterStates {}
 
 class UpdateimageError extends RegisterStates {}
+
+class Loading extends RegisterStates {}
+
+class UpdateProfileImageLoading extends RegisterStates {}

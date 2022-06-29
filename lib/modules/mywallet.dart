@@ -129,7 +129,15 @@ class MyWalletScreen extends StatelessWidget {
                         SizedBox(
                           height: MediaQuery.of(context).size.height / 6,
                         ),
-                        LoginButton(context, text: 'Pay Now', onpressed: () {}),
+                        LoginButton(context,
+                            widget: Text(
+                              'Pay Now',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            onpressed: () {}),
                       ],
                     ),
                   ),

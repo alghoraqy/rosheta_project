@@ -132,6 +132,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
     required String name,
     required String password,
   }) {
+    emit(Loading());
     return FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {
@@ -148,6 +149,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
     required String name,
     required String password,
   }) {
+    emit(Loading());
     return FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {
@@ -164,6 +166,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
     required String email,
     required String uId,
   }) {
+    emit(Loading());
     return FirebaseFirestore.instance.collection('users').doc(uId).set({
       'name': name,
       'email': email,
@@ -183,6 +186,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
     required String email,
     required String uId,
   }) {
+    emit(Loading());
     return FirebaseFirestore.instance.collection('pharmacy').doc(uId).set({
       'name': name,
       'email': email,
@@ -203,6 +207,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
     required dynamic lat,
     required dynamic lng,
   }) {
+    emit(Loading());
     return FirebaseFirestore.instance.collection('users').doc(uid).update({
       'address': address,
       'phone': phone,
@@ -222,6 +227,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
     required dynamic lat,
     required dynamic lng,
   }) {
+    emit(Loading());
     return FirebaseFirestore.instance.collection('pharmacy').doc(uid).update({
       'address': address,
       'phone': phone,
@@ -239,6 +245,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
     required String close,
     required String uId,
   }) {
+    emit(Loading());
     return FirebaseFirestore.instance.collection('pharmacy').doc(uid).update({
       'open': open,
       'close': close,
@@ -370,6 +377,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
       {required String collection,
       required String uid,
       required String image}) {
+    emit(UpdateProfileImageLoading());
     FirebaseFirestore.instance
         .collection(collection)
         .doc(uid)

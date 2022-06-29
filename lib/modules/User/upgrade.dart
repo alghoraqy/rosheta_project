@@ -145,7 +145,14 @@ class UpgradeScreen extends StatelessWidget {
                           height: 15,
                         ),
                         LoginButton(context,
-                            text: 'Upgrade Now', onpressed: () {})
+                            widget: Text(
+                              'Upgrade Now',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            onpressed: () {})
                       ],
                     ),
                   ),

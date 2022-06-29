@@ -99,31 +99,36 @@ class SignUp3 extends StatelessWidget {
                       Container(
                         width: MediaQuery.of(context).size.width,
                         child: MaterialButton(
-                          padding: EdgeInsets.zero,
-                          height: 55,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(13)),
-                          color: HexColor('#48BC98'),
-                          textColor: Colors.white,
-                          onPressed: () {
-                            cubit.isuser
-                                ? navigateto(context, UserMaster())
-                                : cubit.getAlldrugs();
-                          },
-                          child: states is UploadeProfileImageLoading
-                              ? Center(
-                                  child: CircularProgressIndicator(
-                                    color: Colors.white,
-                                  ),
-                                )
-                              : Text(
-                                  'Confirm',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                        ),
+                            padding: EdgeInsets.zero,
+                            height: 55,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(13)),
+                            color: HexColor('#48BC98'),
+                            textColor: Colors.white,
+                            onPressed: () {
+                              cubit.isuser
+                                  ? navigateto(context, UserMaster())
+                                  : cubit.getAlldrugs();
+                            },
+                            child: states is UploadeProfileImageLoading
+                                ? Center(
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                : states is UpdateProfileImageLoading
+                                    ? Center(
+                                        child: CircularProgressIndicator(
+                                          color: Colors.white,
+                                        ),
+                                      )
+                                    : Text(
+                                        'Confirm',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      )),
                       ),
                     ],
                   ),

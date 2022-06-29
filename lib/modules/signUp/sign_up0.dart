@@ -6,7 +6,6 @@ import 'package:rosheta_project/Bloc/LoginStates/login_states.dart';
 import 'package:rosheta_project/Bloc/register/registercubit.dart';
 import 'package:rosheta_project/Bloc/register/registerstates.dart';
 import 'package:rosheta_project/Shared/Components/components.dart';
-import 'package:rosheta_project/modules/signUp/onboarding.dart';
 import 'package:rosheta_project/modules/signUp/sign_up1.dart';
 
 class SignUp0 extends StatelessWidget {
@@ -55,9 +54,8 @@ class SignUp0 extends StatelessWidget {
                                 ? HexColor('#35C2DD').withOpacity(.3)
                                 : HexColor('#F8F8F8').withOpacity(.2),
                             text: 'User',
-                            hextextcolor: cubit.isuser
-                                ? '#35C2DD'
-                                : '#F8F8F8', onpressed: () {
+                            hextextcolor: cubit.isuser ? '#35C2DD' : '#F8F8F8',
+                            onpressed: () {
                           cubit.changeuser();
                         }),
                         patientcard(context,
@@ -66,9 +64,8 @@ class SignUp0 extends StatelessWidget {
                                 ? HexColor('#F8F8F8').withOpacity(.2)
                                 : HexColor('#35C2DD').withOpacity(.3),
                             text: 'Pharmacy',
-                            hextextcolor: cubit.isuser
-                                ? '#ffffff'
-                                : '#35C2DD', onpressed: () {
+                            hextextcolor: cubit.isuser ? '#ffffff' : '#35C2DD',
+                            onpressed: () {
                           cubit.changePharmacy();
                         }),
                       ],
@@ -76,34 +73,41 @@ class SignUp0 extends StatelessWidget {
                     SizedBox(
                       height: MediaQuery.of(context).size.height / 8.5,
                     ),
-                    LoginButton(context, text: 'Next', onpressed: () {
+                    LoginButton(context,
+                        widget: Text(
+                          'Next',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ), onpressed: () {
                       navigateto(context, SignUp1());
                     })
                   ],
                 ),
               ),
-               SizedBox(
-                          height: MediaQuery.of(context).size.height / 40,
-                        ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 40,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   indicatorOn(),
-                   SizedBox(
-                          width: MediaQuery.of(context).size.width / 90,
-                        ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 90,
+                  ),
                   indicatorOff(),
                   SizedBox(
-                          width: MediaQuery.of(context).size.width / 90,
-                        ),
+                    width: MediaQuery.of(context).size.width / 90,
+                  ),
                   indicatorOff(),
                   SizedBox(
-                          width: MediaQuery.of(context).size.width / 90,
-                        ),
+                    width: MediaQuery.of(context).size.width / 90,
+                  ),
                   indicatorOff(),
                   SizedBox(
-                          width: MediaQuery.of(context).size.width / 90,
-                        ),
+                    width: MediaQuery.of(context).size.width / 90,
+                  ),
                   indicatorOff(),
                 ],
               )
