@@ -994,7 +994,13 @@ Widget pharmacycard(
                     )
                   ],
                 ),
-                Text('$distance km')
+                Text('Distance : $distance m',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w300,
+                        color: HexColor('#022247')))
               ],
             ),
           ),
