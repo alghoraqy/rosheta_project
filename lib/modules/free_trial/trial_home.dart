@@ -73,7 +73,8 @@ class TrialHome extends StatelessWidget {
               Row(
                 children: [
                   articleitem(context,
-                      imageroute: 'assets/images/snake.png',
+                      imageroute:
+                          'https://firebasestorage.googleapis.com/v0/b/rosheta-scanner.appspot.com/o/pexels-donald-tong-23817.jpg?alt=media&token=55fbe2fc-3e4b-4f92-836f-bc9f65413f6a',
                       text: 'Snake Bit', onpressed: () {
                     navigateto(
                         context,
@@ -85,7 +86,8 @@ class TrialHome extends StatelessWidget {
                   }),
                   Spacer(),
                   articleitem(context,
-                      imageroute: 'assets/images/cuts.jpg',
+                      imageroute:
+                          'https://firebasestorage.googleapis.com/v0/b/rosheta-scanner.appspot.com/o/cuts.jpg?alt=media&token=2b8479a0-7899-4a66-a356-65521dc70fdf',
                       text: 'Cuts and Scrapes', onpressed: () {
                     navigateto(
                         context,

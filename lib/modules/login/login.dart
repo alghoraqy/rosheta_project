@@ -93,13 +93,18 @@ class LoginScreen extends StatelessWidget {
                           height: MediaQuery.of(context).size.height / 40,
                         ),
                         LoginButton(context,
-                            widget: Text(
-                              'Login',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ), onpressed: () {
+                            widget: states is LoadingLoginStates
+                                ? Center(
+                                    child: CircularProgressIndicator(
+                                        color: Colors.white),
+                                  )
+                                : Text(
+                                    'Login',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ), onpressed: () {
                           cubit.formkey.currentState!.validate()
                               ? cubit.userLogin(context,
                                   email: cubit.emailcontroller.text,

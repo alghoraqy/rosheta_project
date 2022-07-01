@@ -31,42 +31,51 @@ class TrialArticles extends StatelessWidget {
                   children: [
                     articleitem(context,
                         text: 'cuts and scropes',
-                        imageroute: 'assets/images/cuts.jpg', onpressed: () {
+                        imageroute:
+                            'https://firebasestorage.googleapis.com/v0/b/rosheta-scanner.appspot.com/o/cuts.jpg?alt=media&token=2b8479a0-7899-4a66-a356-65521dc70fdf',
+                        onpressed: () {
                       navigateto(
                           context,
                           TrialArticleView(
                             imageroute:
-                                'https://assets.aboutkidshealth.ca/AKHAssets/cuts_scrapes_children_first_aid.jpg?renditionid=21',
+                                'https://firebasestorage.googleapis.com/v0/b/rosheta-scanner.appspot.com/o/cuts.jpg?alt=media&token=2b8479a0-7899-4a66-a356-65521dc70fdf',
                             title: 'Cuts and Scropes',
                           ));
                     }),
                     articleitem(context,
                         text: 'cuts and scropes',
-                        imageroute: 'assets/images/cuts.jpg',
+                        imageroute:
+                            'https://firebasestorage.googleapis.com/v0/b/rosheta-scanner.appspot.com/o/cuts.jpg?alt=media&token=2b8479a0-7899-4a66-a356-65521dc70fdf',
                         onpressed: () {}),
                     articleitem(context,
                         text: 'cuts and scropes',
-                        imageroute: 'assets/images/cuts.jpg',
+                        imageroute:
+                            'https://firebasestorage.googleapis.com/v0/b/rosheta-scanner.appspot.com/o/cuts.jpg?alt=media&token=2b8479a0-7899-4a66-a356-65521dc70fdf',
                         onpressed: () {}),
                     articleitem(context,
                         text: 'Snake Bit',
-                        imageroute: 'assets/images/snake.png',
+                        imageroute:
+                            'https://firebasestorage.googleapis.com/v0/b/rosheta-scanner.appspot.com/o/pexels-donald-tong-23817.jpg?alt=media&token=55fbe2fc-3e4b-4f92-836f-bc9f65413f6a',
                         onpressed: () {}),
                     articleitem(context,
                         text: 'cuts and scropes',
-                        imageroute: 'assets/images/cuts.jpg',
+                        imageroute:
+                            'https://firebasestorage.googleapis.com/v0/b/rosheta-scanner.appspot.com/o/cuts.jpg?alt=media&token=2b8479a0-7899-4a66-a356-65521dc70fdf',
                         onpressed: () {}),
                     articleitem(context,
                         text: 'cuts and scropes',
-                        imageroute: 'assets/images/cuts.jpg',
+                        imageroute:
+                            'https://firebasestorage.googleapis.com/v0/b/rosheta-scanner.appspot.com/o/cuts.jpg?alt=media&token=2b8479a0-7899-4a66-a356-65521dc70fdf',
                         onpressed: () {}),
                     articleitem(context,
                         text: 'Snake Bit',
-                        imageroute: 'assets/images/snake.png',
+                        imageroute:
+                            'https://firebasestorage.googleapis.com/v0/b/rosheta-scanner.appspot.com/o/pexels-donald-tong-23817.jpg?alt=media&token=55fbe2fc-3e4b-4f92-836f-bc9f65413f6a',
                         onpressed: () {}),
                     articleitem(context,
                         text: 'cuts and scropes',
-                        imageroute: 'assets/images/cuts.jpg',
+                        imageroute:
+                            'https://firebasestorage.googleapis.com/v0/b/rosheta-scanner.appspot.com/o/cuts.jpg?alt=media&token=2b8479a0-7899-4a66-a356-65521dc70fdf',
                         onpressed: () {}),
                   ],
                 ),

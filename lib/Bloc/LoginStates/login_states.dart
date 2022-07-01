@@ -26,3 +26,5 @@ class LoginFilterError extends LoginStates {
   String error;
   LoginFilterError({required this.error});
 }
+
+class LoadingLoginStates extends LoginStates {}
